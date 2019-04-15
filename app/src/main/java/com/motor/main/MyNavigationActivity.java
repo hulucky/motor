@@ -43,7 +43,7 @@ public class MyNavigationActivity extends NavigationActivity{
     @Override
     public void onTestButtonClickListener() {
         Method.toActivity(MyNavigationActivity.this,ParamSetActivity.class);
-//        Toast.makeText(getApplicationContext(),"测试按钮",Toast.LENGTH_SHORT).show();
+//         Toast.makeText(getApplicationContext(),"测试按钮",Toast.LENGTH_SHORT).show();
     }
     // 数据管理按钮点击事件
     @Override
