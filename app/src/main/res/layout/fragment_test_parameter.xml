@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/x30"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:paddingLeft="@dimen/x5"
+            android:paddingRight="@dimen/x5"
+            android:paddingTop="@dimen/x15"
+            android:paddingBottom="@dimen/x30"
+            >
+            <TextView
+                android:id="@+id/tv_tittle_task"
+                style="@style/TextView_style0"
+                android:layout_marginLeft="@dimen/x5"
+                android:text="@string/task_inf"
+                android:textSize="16sp" />
+
+            <com.motor.view.MyListView
+                android:id="@+id/lv_task_inf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_bg_listview"
+                android:layout_marginLeft="@dimen/x10"
+                android:layout_marginRight="@dimen/x10"
+                android:layout_marginTop="@dimen/x5"
+                android:padding="1dp"
+                ></com.motor.view.MyListView>
+
+
+            <TextView
+                android:id="@+id/tv_tittle_dj"
+                style="@style/TextView_style0"
+                android:layout_marginLeft="@dimen/x5"
+                android:layout_marginTop="@dimen/x15"
+                android:text="@string/task_dj"
+                android:textSize="16sp" />
+
+           <com.motor.view.MyListView
+                android:id="@+id/lv_dj_inf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_bg_listview"
+                android:layout_marginLeft="@dimen/x10"
+                android:layout_marginRight="@dimen/x10"
+                android:layout_marginTop="@dimen/x5"
+                android:padding="1dp"
+                ></com.motor.view.MyListView>
+
+
+
+
+            <com.motor.view.MyListView
+                android:id="@+id/lv_input_inf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_bg_listview"
+                android:layout_marginLeft="@dimen/x10"
+                android:layout_marginRight="@dimen/x10"
+                android:layout_marginTop="@dimen/x5"
+                android:padding="1dp"
+                ></com.motor.view.MyListView>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</LinearLayout>

@@ -1,0 +1,558 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                style="@style/LinearLayout_style_testanalsy"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    style="@style/LinearLayout_style_testanalsy"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center_horizontal"
+                    >
+
+                    <TextView
+                        style="@style/TextView_style2"
+
+                        android:layout_width="180dp"
+                        android:layout_gravity="center_horizontal"
+                        android:gravity="center_horizontal"
+                        android:text="运行状态分析"
+                        android:textSize="20sp" />
+                </LinearLayout>
+
+                <LinearLayout style="@style/LinearLayout_style_testanalsy_block">
+
+                    <LinearLayout
+                        style="@style/LinearLayout_style_testanalsy"
+                        >
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
+
+                            <TextView
+                                style="@style/TextView_style1"
+                                android:text="有功功率损耗：" />
+
+                            <TextView
+                                android:id="@+id/et_detail_ygglsh"
+                                style="@style/TextView_style1"
+                                android:layout_width="80dp" />
+
+                            <TextView
+                                style="@style/TextView_style1"
+                                android:layout_width="40dp"
+
+                                android:gravity="start"
+                                android:text="kW" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
+
+                            <View style="@style/split_vetical" />
+
+                            <TextView
+                                style="@style/TextView_style1"
+                                android:text="综合功率损耗：" />
+
+                            <TextView
+                                android:id="@+id/et_detail_zhglsh"
+                                style="@style/TextView_style1"
+                                android:layout_width="80dp" />
+
+                            <TextView
+                                style="@style/TextView_style1"
+                                android:layout_width="40dp"
+
+                                android:gravity="start"
+                                android:text="kW" />
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                    <TextView style="@style/splite_line_state" />
+
+
+                    <LinearLayout
+                        style="@style/LinearLayout_style_testanalsy"
+                        >
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
+
+                            <TextView
+                                style="@style/TextView_style1"
+                                android:text="综合消耗功率：" />
+
+                            <TextView
+                                android:id="@+id/et_detail_zhxhgl"
+                                style="@style/TextView_style1"
+                                android:layout_width="80dp" />
+
+                            <TextView
+                                style="@style/TextView_style1"
+                                android:layout_width="40dp"
+
+                                android:gravity="start"
+                                android:text="kW" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
+
+                            <View style="@style/split_vetical" />
+
+                            <TextView
+                                style="@style/TextView_style1"
+                                android:text="额定综合效率：" />
+
+                            <TextView
+                                android:id="@+id/et_detail_edzhxl1"
+                                style="@style/TextView_style1"
+                                android:layout_width="80dp" />
+
+                            <TextView
+                                style="@style/TextView_style1"
+                                android:layout_width="40dp"
+
+                                android:gravity="start"
+                                android:text="%" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <TextView style="@style/splite_line_state" />
+
+                    <LinearLayout
+                        style="@style/LinearLayout_style_testanalsy"
+                        >
+
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2">
+
+                            <TextView
+                                style="@style/TextView_style1"
+                                android:text="额定综合消耗功率：" />
+
+                            <TextView
+                                android:id="@+id/et_detail_edzhxhgl"
+                                style="@style/TextView_style1"
+                                android:layout_width="80dp" />
+
+                            <TextView
+                                style="@style/TextView_style1"
+                                android:layout_width="40dp"
+
+                                android:gravity="start"
+                                android:text="kW" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
+
+                            <TextView
+                                style="@style/TextView_style1"
+                                android:text="负载系数：" />
+
+                            <TextView
+                                android:id="@+id/et_detail_fzxs"
+                                style="@style/TextView_style1"
+                                android:layout_width="80dp" />
+
+                            <TextView
+                                style="@style/TextView_style1"
+                                android:layout_width="40dp"
+
+                                android:gravity="start"
+                                android:text="" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <TextView style="@style/splite_line_state" />
+
+                    <LinearLayout
+                        style="@style/LinearLayout_style_testanalsy"
+                        >
+
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2">
+
+                            <TextView
+                                style="@style/TextView_style1"
+                                android:text="额定综合功率损耗：" />
+
+                            <TextView
+                                android:id="@+id/et_detail_edzhglsh"
+                                style="@style/TextView_style1"
+                                android:layout_width="80dp" />
+
+                            <TextView
+                                style="@style/TextView_style1"
+                                android:layout_width="40dp"
+
+                                android:gravity="start"
+                                android:text="kW" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/LinearLayout_style_testanalsy"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    style="@style/LinearLayout_style_testanalsy"
+                    android:gravity="center_horizontal"
+                    >
+
+                    <TextView
+                        style="@style/TextView_style2"
+                        android:layout_width="180dp"
+                        android:gravity="center_horizontal"
+                        android:text="运行状态判断"
+                        android:textSize="20sp" />
+                </LinearLayout>
+
+                <LinearLayout style="@style/LinearLayout_style_testanalsy_block">
+
+                    <LinearLayout
+                        style="@style/LinearLayout_style_testanalsy"
+                        >
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
+
+                            <TextView
+                                style="@style/TextView_style1"
+                                android:text="额定综合效率：" />
+
+                            <TextView
+                                android:id="@+id/et_detail_edzhxl"
+                                style="@style/TextView_style1"
+                                android:layout_width="80dp" />
+
+                            <TextView
+                                style="@style/TextView_style1"
+                                android:layout_width="40dp"
+
+                                android:gravity="start"
+                                android:text="%" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
+
+                            <View style="@style/split_vetical" />
+
+                            <TextView
+                                android:id="@+id/textView3"
+                                style="@style/TextView_style1"
+                                android:text="综合效率：" />
+
+                            <TextView
+                                android:id="@+id/et_detail_zhxl"
+                                style="@style/TextView_style1"
+                                android:layout_width="80dp" />
+
+                            <TextView
+                                style="@style/TextView_style1"
+                                android:layout_width="40dp"
+
+                                android:gravity="start"
+                                android:text="%" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <TextView style="@style/splite_line_state" />
+
+                    <LinearLayout
+                        style="@style/LinearLayout_style_testanalsy"
+                        >
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
+
+                            <TextView
+                                style="@style/TextView_style1"
+                                android:text="电机运行状态：" />
+
+                            <TextView
+                                android:id="@+id/et_detail_djyxzt"
+                                style="@style/TextView_style1"
+                                android:layout_width="120dp" />
+
+                            <TextView
+                                style="@style/TextView_style1"
+                                android:layout_width="40dp"
+
+                                android:gravity="start"
+                                android:text="" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"></LinearLayout>
+                    </LinearLayout>
+
+                    <TextView style="@style/splite_line_state" />
+
+                    <LinearLayout
+                        style="@style/LinearLayout_style_testanalsy"
+                        >
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2">
+
+                            <TextView
+                                style="@style/TextView_style1"
+                                android:text="电源电压与额定电压偏差：" />
+
+                            <TextView
+                                android:id="@+id/et_detail_dypc"
+                                style="@style/TextView_style1"
+                                android:layout_width="80dp" />
+
+                            <TextView
+                                style="@style/TextView_style1"
+                                android:layout_width="40dp"
+                                android:gravity="start"
+                                android:text="V" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
+
+
+                            <TextView
+                                style="@style/TextView_style1"
+                                android:text="电压偏差：" />
+
+                            <TextView
+                                android:id="@+id/et_detail_dypchl"
+                                style="@style/TextView_style1"
+                                android:layout_width="60dp"
+                                android:text="不合理" />
+
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <TextView style="@style/splite_line_state" />
+
+                    <LinearLayout
+                        style="@style/LinearLayout_style_testanalsy"
+                        >
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2">
+
+                            <TextView
+                                style="@style/TextView_style1"
+                                android:text="三相电压不平衡度：" />
+
+                            <TextView
+                                android:id="@+id/et_detail_sxbphd"
+                                style="@style/TextView_style1"
+                                android:layout_width="80dp" />
+
+                            <TextView
+                                style="@style/TextView_style1"
+                                android:layout_width="40dp"
+
+                                android:gravity="start"
+                                android:text="" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
+
+                            <TextView
+                                style="@style/TextView_style1"
+                                android:text="不平衡度：" />
+
+                            <TextView
+                                android:id="@+id/et_detail_bphdhl"
+                                style="@style/TextView_style1"
+                                android:layout_width="60dp"
+                                android:text="不合理" />
+
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <LinearLayout
+                style="@style/LinearLayout_style_testanalsy"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    style="@style/LinearLayout_style_testanalsy"
+                    android:gravity="center_horizontal"
+
+                    >
+
+                    <TextView
+                        style="@style/TextView_style2"
+
+                        android:layout_width="100dp"
+
+                        android:gravity="center_horizontal"
+                        android:text="无 功 补 偿"
+                        android:textSize="20sp" />
+                </LinearLayout>
+
+                <LinearLayout style="@style/LinearLayout_style_testanalsy_block">
+
+                    <LinearLayout
+                        style="@style/LinearLayout_style_testanalsy"
+                        >
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
+
+                            <TextView
+                                style="@style/TextView_style1"
+                                android:text="无功补偿容量：" />
+
+                            <TextView
+                                android:id="@+id/et_detail_wgbcrl"
+                                style="@style/TextView_style1"
+                                android:layout_width="70dp" />
+
+                            <TextView
+                                style="@style/TextView_style1"
+                                android:layout_width="40dp"
+
+                                android:gravity="start"
+                                android:text="Kvar" />
+
+                            <View style="@style/split_vetical" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
+
+                            <View style="@style/split_vetical" />
+
+                            <TextView
+                                style="@style/TextView_style1"
+                                android:text="无功补偿电容量：" />
+
+                            <TextView
+                                android:id="@+id/et_detail_wgbcdrl"
+                                style="@style/TextView_style1"
+                                android:layout_width="70dp" />
+
+                            <TextView
+                                style="@style/TextView_style1"
+                                android:layout_width="40dp"
+
+                                android:gravity="start"
+                                android:text="uf" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <TextView style="@style/splite_line_state" />
+
+                    <LinearLayout
+                        style="@style/LinearLayout_style_testanalsy"
+                        >
+
+                        <TextView
+                            style="@style/TextView_style1"
+                            android:text="目标功率因数：" />
+
+                        <TextView
+                            android:id="@+id/et_detail_mbglys"
+                            style="@style/TextView_style1"
+                            android:layout_width="80dp" />
+
+                        <TextView
+                            style="@style/TextView_style1"
+                            android:layout_width="40dp"
+
+                            android:gravity="start"
+                            android:text="" />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
+</LinearLayout>

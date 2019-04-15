@@ -1,0 +1,485 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:background="#c1d8fb">
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toTopOf="parent"
+                app:layout_constraintEnd_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <LinearLayout
+
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toTopOf="parent"
+                    app:layout_constraintEnd_toStartOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.sensor.view.SensorView
+                        android:id="@+id/gl1_test"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@color/white"
+                        app:CheckConnect="true"
+                        app:CheckTime="5000"
+                        app:DrawModel="variable"
+                        app:SensorType="GONG_LV_XIANG" />
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toTopOf="parent"
+                app:layout_constraintEnd_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <LinearLayout
+                    android:id="@+id/ll_show_sccs"
+                    style="@style/LinearLayout_style_testdata"
+                    android:orientation="vertical">
+
+                    <LinearLayout style="@style/LinearLayout_style1">
+
+                        <TextView
+
+                            style="@style/TextView_style_test_single"
+                            android:text="AB线电压：" />
+
+                        <TextView
+                            android:id="@+id/et_show_abdy"
+                            style="@style/TextView_style_test_single"
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            style="@style/TextView_style_test_single"
+                            android:layout_width="35dp"
+
+                            android:gravity="start"
+                            android:text="V" />
+
+                        <View style="@style/split_vetical" />
+
+
+                        <TextView
+
+                            style="@style/TextView_style_test_single"
+                            android:text="A 相电流：" />
+
+                        <TextView
+                            android:id="@+id/et_show_adl"
+                            style="@style/TextView_style_test_single"
+                            android:layout_width="80dp"
+
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            style="@style/TextView_style_test_single"
+                            android:layout_width="35dp"
+
+                            android:gravity="start"
+                            android:text="A" />
+                    </LinearLayout>
+
+                    <TextView style="@style/splite_line" />
+
+                    <LinearLayout style="@style/LinearLayout_style1">
+
+                        <TextView
+
+                            style="@style/TextView_style_test_single"
+                            android:text="BC线电压：" />
+
+                        <TextView
+                            android:id="@+id/et_show_bcdy"
+                            style="@style/TextView_style_test_single"
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            style="@style/TextView_style_test_single"
+                            android:layout_width="35dp"
+
+                            android:gravity="start"
+                            android:text="V" />
+
+                        <View style="@style/split_vetical" />
+
+
+                        <TextView
+
+                            style="@style/TextView_style_test_single"
+                            android:text="B 相电流：" />
+
+                        <TextView
+                            android:id="@+id/et_show_bdl"
+                            style="@style/TextView_style_test_single"
+                            android:layout_width="80dp"
+
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            style="@style/TextView_style_test_single"
+                            android:layout_width="35dp"
+
+                            android:gravity="start"
+                            android:text="A" />
+                    </LinearLayout>
+
+                    <TextView style="@style/splite_line" />
+
+                    <LinearLayout style="@style/LinearLayout_style1">
+
+                        <TextView
+
+                            style="@style/TextView_style_test_single"
+                            android:text="CA线电压：" />
+
+                        <TextView
+                            android:id="@+id/et_show_cady"
+                            style="@style/TextView_style_test_single"
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            style="@style/TextView_style_test_single"
+                            android:layout_width="35dp"
+
+                            android:gravity="start"
+                            android:text="V" />
+
+                        <View style="@style/split_vetical" />
+
+
+                        <TextView
+
+                            style="@style/TextView_style_test_single"
+                            android:text="C 相电流：" />
+
+                        <TextView
+                            android:id="@+id/et_show_cdl"
+                            style="@style/TextView_style_test_single"
+                            android:layout_width="80dp"
+
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            style="@style/TextView_style_test_single"
+                            android:layout_width="35dp"
+
+                            android:gravity="start"
+                            android:text="A" />
+                    </LinearLayout>
+
+                    <TextView style="@style/splite_line" />
+
+                    <LinearLayout style="@style/LinearLayout_style1">
+
+                        <TextView
+                            android:id="@+id/tx_xdy"
+                            style="@style/TextView_style_test_single"
+                            android:text="平均电压 ：" />
+
+                        <TextView
+                            android:id="@+id/et_show_pjdy"
+                            style="@style/TextView_style_test_single"
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            style="@style/TextView_style_test_single"
+                            android:layout_width="35dp"
+
+                            android:gravity="start"
+                            android:text="V" />
+
+                        <View style="@style/split_vetical" />
+
+
+                        <TextView
+                            android:id="@+id/tx_xdl"
+                            style="@style/TextView_style_test_single"
+                            android:text="平均电流：" />
+
+                        <TextView
+                            android:id="@+id/et_show_pjdl"
+                            style="@style/TextView_style_test_single"
+                            android:layout_width="80dp"
+
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            style="@style/TextView_style_test_single"
+                            android:layout_width="35dp"
+
+                            android:gravity="start"
+                            android:text="A" />
+                    </LinearLayout>
+
+                    <TextView style="@style/splite_line" />
+
+                    <LinearLayout style="@style/LinearLayout_style1">
+
+                        <TextView
+                            style="@style/TextView_style_test_single"
+                            android:text="有功功率 ：" />
+
+                        <TextView
+                            android:id="@+id/et_show_yggl"
+                            style="@style/TextView_style_test_single"
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            style="@style/TextView_style_test_single"
+                            android:layout_width="35dp"
+
+                            android:gravity="start"
+                            android:text="kW" />
+
+                        <View style="@style/split_vetical" />
+
+
+                        <TextView
+                            style="@style/TextView_style_test_single"
+                            android:text="负载系数：" />
+
+                        <TextView
+                            android:id="@+id/et_show_fzxs"
+                            style="@style/TextView_style_test_single"
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            style="@style/TextView_style_test_single"
+                            android:layout_width="35dp"
+
+                            android:gravity="start"
+                            android:text="" />
+                    </LinearLayout>
+
+                    <TextView style="@style/splite_line" />
+
+
+                    <LinearLayout style="@style/LinearLayout_style1">
+
+
+                        <TextView
+                            style="@style/TextView_style_test_single"
+                            android:text="无功功率 ：" />
+
+                        <TextView
+                            android:id="@+id/et_show_wggl"
+                            style="@style/TextView_style_test_single"
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            style="@style/TextView_style_test_single"
+                            android:layout_width="35dp"
+
+                            android:gravity="start"
+                            android:text="kvar" />
+
+                        <View style="@style/split_vetical" />
+
+
+                        <TextView
+                            style="@style/TextView_style_test_single"
+                            android:text="电机效率：" />
+
+                        <TextView
+                            android:id="@+id/et_show_djxl"
+                            style="@style/TextView_style_test_single"
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            style="@style/TextView_style_test_single"
+                            android:layout_width="35dp"
+
+                            android:gravity="start"
+                            android:text="%" />
+                    </LinearLayout>
+
+                    <TextView style="@style/splite_line" />
+
+
+                    <LinearLayout style="@style/LinearLayout_style1">
+
+                        <TextView
+                            style="@style/TextView_style_test_single"
+                            android:text="输出功率 ：" />
+
+                        <TextView
+                            android:id="@+id/et_show_scgl"
+                            style="@style/TextView_style_test_single"
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            style="@style/TextView_style_test_single"
+                            android:layout_width="35dp"
+
+                            android:gravity="start"
+                            android:text="kW" />
+
+                        <View style="@style/split_vetical" />
+
+
+                        <TextView
+                            style="@style/TextView_style_test_single"
+                            android:text="综合效率：" />
+
+                        <TextView
+                            android:id="@+id/et_show_zhxl1"
+                            style="@style/TextView_style_test_single"
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            style="@style/TextView_style_test_single"
+                            android:layout_width="35dp"
+
+                            android:gravity="start"
+                            android:text="%" />
+
+                    </LinearLayout>
+
+                    <TextView style="@style/splite_line" />
+
+
+                    <LinearLayout style="@style/LinearLayout_style1">
+
+                        <TextView
+                            style="@style/TextView_style_test_single"
+                            android:text="视在功率 ：" />
+
+                        <TextView
+                            android:id="@+id/et_show_szgl"
+                            style="@style/TextView_style_test_single"
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            style="@style/TextView_style_test_single"
+                            android:layout_width="35dp"
+
+                            android:gravity="start"
+                            android:text="kVA" />
+
+                        <View style="@style/split_vetical" />
+
+
+                        <TextView
+                            style="@style/TextView_style_test_single"
+                            android:text="电网频率：" />
+
+                        <TextView
+                            android:id="@+id/et_show_dwpl"
+                            style="@style/TextView_style_test_single"
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            style="@style/TextView_style_test_single"
+                            android:layout_width="35dp"
+
+                            android:gravity="start"
+                            android:text="Hz" />
+                    </LinearLayout>
+
+                    <TextView style="@style/splite_line" />
+
+                    <LinearLayout style="@style/LinearLayout_style1">
+
+                        <TextView
+                            style="@style/TextView_style_test_single"
+                            android:text="功率因数 ：" />
+
+                        <TextView
+                            android:id="@+id/et_show_glys"
+                            style="@style/TextView_style_test_single"
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            style="@style/TextView_style_test_single"
+                            android:layout_width="35dp"
+
+                            android:gravity="start"
+                            android:text="" />
+
+                        <View style="@style/split_vetical" />
+
+
+                        <TextView
+                            style="@style/TextView_style_test_single"
+                            android:text="运行状态：" />
+
+                        <TextView
+                            android:id="@+id/et_show_yxzt"
+                            style="@style/TextView_style_test_single"
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="left"
+                            android:text="非经济运行" />
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

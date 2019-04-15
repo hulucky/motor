@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.motor.view.MyNoScrollViewPager
+        android:id="@+id/fr_detailcurve"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+
+        android:background="@drawable/shape_show_test_data"
+        android:overScrollMode="never"
+        android:scrollbars="none"></com.motor.view.MyNoScrollViewPager>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_gravity="center"
+
+            android:background="@color/papayawhip"
+            android:divider="@drawable/bg_divider"
+            android:orientation="horizontal"
+            android:showDividers="middle">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:text=" 序号"
+                android:textColor="#888888"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:text="平均电压                 V"
+                android:textColor="#888888"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:text="平均电流         A"
+                android:textColor="#888888"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:text="有功功率        kW"
+                android:textColor="#888888"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:text="电机效率      %"
+                android:textColor="#888888"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:text="效率           %"
+                android:textColor="#888888"
+                android:visibility="gone"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="3"
+                android:gravity="center"
+                android:text="保存时间"
+                android:textColor="#888888"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+
+        <ListView
+            android:id="@+id/lv_testdata_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:listSelector="@drawable/listviewselector"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:background="@color/blanchedalmond"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_testdetail_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="47dp"
+            android:layout_weight="1"
+            android:background="@color/orangered"
+            android:text="删除"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+
+
+            >
+
+        </Button>
+
+        <Button
+            android:id="@+id/btn_testdetail_print"
+            android:layout_width="wrap_content"
+            android:layout_height="47dp"
+            android:layout_weight="1"
+            android:background="#fd8607"
+            android:text="打印"
+            android:textColor="@color/white"
+            android:visibility="gone"
+            android:textSize="18sp">
+
+        </Button>
+
+        <Button
+            android:id="@+id/btn_testdetail_curve"
+            android:layout_width="wrap_content"
+            android:layout_height="47dp"
+            android:layout_weight="1"
+            android:background="#4990fc"
+            android:text="绘制曲线"
+            android:textColor="@color/white"
+            android:visibility="gone"
+            android:textSize="18sp">
+
+        </Button>
+
+
+        <Button
+            android:id="@+id/btn_testdetail_report"
+            android:layout_width="wrap_content"
+            android:layout_height="47dp"
+            android:layout_weight="1"
+            android:background="#00008B"
+            android:text="生成报告"
+            android:textColor="@color/white"
+            android:visibility="gone"
+            android:textSize="18sp">
+
+        </Button>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+
+        android:background="@color/blanchedalmond"
+        android:orientation="horizontal">
+
+    </LinearLayout>
+</LinearLayout>
