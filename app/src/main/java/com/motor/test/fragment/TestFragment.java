@@ -37,8 +37,8 @@ import butterknife.OnClick;
 import butterknife.Unbinder;
 import es.dmoral.toasty.Toasty;
 
+//测试界面
 public class TestFragment extends Fragment {
-
     @BindView(R.id.fr_main)
     MyNoScrollViewPager flmain;
     @BindView(R.id.giv_gif)
@@ -80,7 +80,6 @@ public class TestFragment extends Fragment {
         list_fragments.add(mcurvehamonicfragment);//4
         motherfragment = new TestOtherFragment();
         list_fragments.add(motherfragment);//5
-
 
     }
 

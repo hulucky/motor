@@ -538,17 +538,17 @@ public class TestActivity extends AppCompatActivity {
         switch (comData.recData[2]) {
 
 
-            case 100:
+            case 100://电压电流
                 getUIData(comData);
                 SetFiveOne(3);
                 break;
-            case 78:
+            case 78://谐波
                 getHamData(comData);
                 SetFiveOne(3);
                 break;
         }
     }
-
+    //谐波
     private void getHamData(ComBean comData) {
         double[] mham = new double[32];
 
@@ -584,6 +584,7 @@ public class TestActivity extends AppCompatActivity {
         }
     }
 
+    //电压电流
     private void getUIData(ComBean comData) {
         double QblcU = 500d;
         double QblcI = 500d;

@@ -45,6 +45,7 @@ import es.dmoral.toasty.Toasty;
 import static android.text.TextUtils.isEmpty;
 import static com.motor.Tools.Method.IsEmpty;
 
+//参数设置activity,也即创建任务界面
 public class ParamSetActivity extends AppCompatActivity {
 
     @BindView(R.id.toolbar)
@@ -480,7 +481,7 @@ public class ParamSetActivity extends AppCompatActivity {
             mTask.setDjeddy1(etParamSetEddy.getText().toString());
             mTask.setDjeddl1(etParamSetEddl.getText().toString());
             mTask.setDjedgl1(etParamSetEdgl.getText().toString());
-            mTask.setDjedxl1(etParamSetEdxl.getText().toString());
+                mTask.setDjedxl1(etParamSetEdxl.getText().toString());
             mTask.setDjkzgl1(etParamSetKzgl.getText().toString());
             mTask.setDjkzdl1(etParamSetKzdl.getText().toString());
             mTask.setDjjs1(etParamSetJs.getText().toString());

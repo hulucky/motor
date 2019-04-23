@@ -20,6 +20,7 @@ import com.greendao.manager.MotorTxtToDb;
 import com.nrs.utils.tools.CrashHandler;
 import com.motor.administrator.DATAbase.R;
 import com.motor.administrator.DATAbase.greendao.TaskEntity;
+import com.tencent.bugly.Bugly;
 import com.xzkydz.function.app.KyApp;
 import com.xzkydz.function.style.AppStyle;
 import com.xzkydz.function.utils.SharedPreferencesUtils;
@@ -94,7 +95,6 @@ public class MyApp extends KyApp {
     }
 
     @Override
-
     public void onCreate() {
         super.onCreate();
 
@@ -104,6 +104,7 @@ public class MyApp extends KyApp {
         mInstance = MyApp.this;
         CrashHandler crashHandler = CrashHandler.getInstance();
         crashHandler.init(this);
+        Bugly.init(getApplicationContext(), "d6df5275c0", false);
     }
 
     @Override

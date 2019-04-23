@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.greendao.manager.motorData;
 import com.motor.administrator.DATAbase.R;
@@ -21,6 +22,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
+//测试界面的  运行状态  fragment
 public class TestStateAnalysefragment extends Fragment {
 
 
@@ -68,6 +70,7 @@ public class TestStateAnalysefragment extends Fragment {
     DecimalFormat df3 = new DecimalFormat("####0.000");
 
     DecimalFormat df1 = new DecimalFormat("####0.0");
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -113,27 +116,28 @@ public class TestStateAnalysefragment extends Fragment {
         unbinder.unbind();
     }
 
-    public void refresh()
-    {
+    public void refresh() {
 
         try {
             motorData mData = mActivity.mdata.getMotordata();
+            //查看数据
+            Toast.makeText(mActivity, mData.toString(), Toast.LENGTH_SHORT).show();
 
-            etDetailYgglsh.setText(df2.format(mData.getYgglsh()/1000));
-            etDetailZhglsh.setText(df2.format(mData.getZhglsh()/1000));
-            etDetailZhxhgl.setText(df2.format(mData.getZhxhgl()/1000));
+            etDetailYgglsh.setText(df2.format(mData.getYgglsh() / 1000));
+            etDetailZhglsh.setText(df2.format(mData.getZhglsh() / 1000));
+            etDetailZhxhgl.setText(df2.format(mData.getZhxhgl() / 1000));
             etDetailEdzhxl1.setText(df2.format(mData.getEdzhxl()));
             etDetailEdzhxhgl.setText(df2.format(mData.getEdzhxhgl()));
-            etDetailFzxs.setText(df2.format(mData.getFzxs()/1000));
+            etDetailFzxs.setText(df2.format(mData.getFzxs() / 1000));
             etDetailEdzhglsh.setText(df2.format(mData.getEdzhglsh()));
             etDetailEdzhxl.setText(df2.format(mData.getEdzhxl()));
             etDetailZhxl.setText(df2.format(mData.getZhxl()));
             etDetailDjyxzt.setText(mData.getstrDjyxzt());
-            etDetailDypc.setText(df2.format(mData.getDypc()));
+            etDetailDypc.setText(df2.format(mData.getDypc()));//电源电压与额定电压偏差
             // etDetailDypchl.setText(df2.format(mData.getDypchl()));
             etDetailSxbphd.setText(df2.format(mData.getSxbphd()));
             //  etDetailBphdhl.setText(df2.format(mData.getBphdhl()));
-            double pjxdy =(mData.getPjdy()) * Math.sqrt(3);
+            double pjxdy = (mData.getPjdy()) * Math.sqrt(3);
 
 //        etdypc.setText(df2.format(Math.abs(pjxdy - Double.parseDouble(mData.getEddy()))) + "");
 

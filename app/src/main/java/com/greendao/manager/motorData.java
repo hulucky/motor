@@ -3,6 +3,7 @@ package com.greendao.manager;
 import com.motor.administrator.DATAbase.greendao.TaskEntity;
 
 import java.text.DecimalFormat;
+import java.util.Arrays;
 
 import static java.lang.Math.acos;
 import static java.lang.Math.max;
@@ -324,7 +325,7 @@ public class motorData {
         } else {
             wgbcrl = 0.00f;
         }
-        if (dwpl != 0) {
+        if (dwpl != 0) {//电网频率
             wgbcdrl = Math.round(wgbcrl * 1000000000 / 2 / Math.PI / dwpl / eddy / eddy);
         } else {
             wgbcdrl = 0.00f;
@@ -1132,5 +1133,113 @@ public class motorData {
 
     public void setMethods(String csff) {
         this.method = csff;
+    }
+
+    @Override
+    public String toString() {
+        return "motorData{" +
+                "pjdy=" + pjdy +
+                ", pjdl=" + pjdl +
+                ", yggl=" + yggl +
+                ", wggl=" + wggl +
+                ", scgl=" + scgl +
+                ", glys=" + glys +
+                ", ygdn=" + ygdn +
+                ", wgdn=" + wgdn +
+                ", dwpl=" + dwpl +
+                ", szgl=" + szgl +
+                ", fzxs=" + fzxs +
+                ", zhxl=" + zhxl +
+                ", UAB=" + UAB +
+                ", UBC=" + UBC +
+                ", UCA=" + UCA +
+                ", pjxdy=" + pjxdy +
+                ", UA=" + UA +
+                ", UB=" + UB +
+                ", UC=" + UC +
+                ", IA=" + IA +
+                ", IB=" + IB +
+                ", IC=" + IC +
+                ", Ayggl=" + Ayggl +
+                ", Byggl=" + Byggl +
+                ", Cyggl=" + Cyggl +
+                ", Awggl=" + Awggl +
+                ", Bwggl=" + Bwggl +
+                ", Cwggl=" + Cwggl +
+                ", Aszgl=" + Aszgl +
+                ", Bszgl=" + Bszgl +
+                ", Cszgl=" + Cszgl +
+                ", Aglys=" + Aglys +
+                ", Bglys=" + Bglys +
+                ", Cglys=" + Cglys +
+                ", phUAB=" + phUAB +
+                ", phUBC=" + phUBC +
+                ", phUCA=" + phUCA +
+                ", phUIA=" + phUIA +
+                ", phUIB=" + phUIB +
+                ", phUIC=" + phUIC +
+                ", zhglsh=" + zhglsh +
+                ", kzwggl=" + kzwggl +
+                ", edfzwggl=" + edfzwggl +
+                ", ygglsh=" + ygglsh +
+                ", edfzglsh=" + edfzglsh +
+                ", zhxhgl=" + zhxhgl +
+                ", edzhxhgl=" + edzhxhgl +
+                ", edzhglsh=" + edzhglsh +
+                ", edzhxl=" + edzhxl +
+                ", wgbcrl=" + wgbcrl +
+                ", wgbcdrl=" + wgbcdrl +
+                ", eddy=" + eddy +
+                ", eddl=" + eddl +
+                ", edxl=" + edxl +
+                ", edgl=" + edgl +
+                ", kzgl=" + kzgl +
+                ", kzdl=" + kzdl +
+                ", edglys=" + edglys +
+                ", wgjjdl=" + wgjjdl +
+                ", djyxzt=" + djyxzt +
+                ", dypc=" + dypc +
+                ", sxbphd=" + sxbphd +
+                ", mbglys=" + mbglys +
+                ", wd=" + wd +
+                ", sd=" + sd +
+                ", dqy=" + dqy +
+                ", date=" + date +
+                ", savedate=" + savedate +
+                ", js=" + js +
+                ", lxdl=" + lxdl +
+                ", KUA=" + KUA +
+                ", KUB=" + KUB +
+                ", KUC=" + KUC +
+                ", KIA=" + KIA +
+                ", KIB=" + KIB +
+                ", KIC=" + KIC +
+                ", HCUA=" + HCUA +
+                ", HCUB=" + HCUB +
+                ", HCUC=" + HCUC +
+                ", HCIA=" + HCIA +
+                ", HCIB=" + HCIB +
+                ", HCIC=" + HCIC +
+                ", by1=" + by1 +
+                ", by2=" + by2 +
+                ", by3=" + by3 +
+                ", by4=" + by4 +
+                ", by5=" + by5 +
+                ", by6=" + by6 +
+                ", by7=" + by7 +
+                ", by8=" + by8 +
+                ", by9=" + by9 +
+                ", by10=" + by10 +
+                ", dybb=" + dybb +
+                ", dlbb=" + dlbb +
+                ", method='" + method + '\'' +
+                ", xl=" + xl +
+                ", harmUA=" + Arrays.toString(harmUA) +
+                ", harmUB=" + Arrays.toString(harmUB) +
+                ", harmUC=" + Arrays.toString(harmUC) +
+                ", harmIA=" + Arrays.toString(harmIA) +
+                ", harmIB=" + Arrays.toString(harmIB) +
+                ", harmIC=" + Arrays.toString(harmIC) +
+                '}';
     }
 }
