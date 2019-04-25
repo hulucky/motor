@@ -1,12 +1,11 @@
 package com.greendao.manager;
 
-import com.motor.administrator.DATAbase.greendao.TaskEntity;
+import android.util.Log;
 
 import java.text.DecimalFormat;
 import java.util.Arrays;
 
 import static java.lang.Math.acos;
-import static java.lang.Math.max;
 import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
 import static java.lang.Math.tan;
@@ -126,6 +125,7 @@ public class motorData {
     private double dybb = 1d;//电压变比
     private double dlbb = 1d;//电流变比\
     private String method = "";//测试方法 0=单瓦，1=双瓦，2=三瓦
+
     public double getPjxdy() {
         return pjxdy;
     }
@@ -153,20 +153,20 @@ public class motorData {
     }
 
     public int getMethod() {
-        int res=0;
+        int res = 0;
         switch (method) {
             case "单瓦法":
 
-                res=0;
-            break;
+                res = 0;
+                break;
             case "双瓦法":
 
-                res= 1;
-            break;
+                res = 1;
+                break;
             case "三瓦法":
 
-                res= 2;
-            break;
+                res = 2;
+                break;
         }
         return res;
     }
@@ -175,16 +175,14 @@ public class motorData {
 
         switch (intmethod) {
             case 0:
-
-           method ="单瓦法" ;
-            break;
+                method = "单瓦法";
+                break;
             case 1:
-
-                method ="双瓦法";
-            break;
-            case 2:method="三瓦法";
-
-            break;
+                method = "双瓦法";
+                break;
+            case 2:
+                method = "三瓦法";
+                break;
         }
 
     }
@@ -214,43 +212,44 @@ public class motorData {
 
 
         //
-        if (method .equals( "单瓦法") ){
+        if (method.equals("单瓦法")) {
             pjdy = Math.max(UA, Math.max(UB, UC));
             pjdl = Math.max(IA, Math.max(IB, IC));
             pjxdy = Math.max(UAB, Math.max(UBC, UCA));
-            szgl=Float.parseFloat(df2.format(pjdy*pjdl*3));
-            yggl=Float.parseFloat(df2.format(szgl*glys));
-            wggl=Float.parseFloat(df2.format(Math.sqrt(Math.pow(szgl,2)-Math.pow(yggl,2))));
-        } else if (method .equals( "双瓦法")) {
+            szgl = Float.parseFloat(df2.format(pjdy * pjdl * 3));
+            yggl = Float.parseFloat(df2.format(szgl * glys));
+            wggl = Float.parseFloat(df2.format(Math.sqrt(Math.pow(szgl, 2) - Math.pow(yggl, 2))));
+        } else if (method.equals("双瓦法")) {
             pjdy = (UA + UB + UC) / 3;
             pjdl = (IA + IC) / 2;
             pjxdy = (UAB + UBC + UCA) / 3;
-            szgl=Float.parseFloat(df2.format((UA*IA+UC*IC)*1.5));
-            yggl=Float.parseFloat(df2.format(szgl*glys));
-            wggl=Float.parseFloat(df2.format(Math.sqrt(Math.pow(szgl,2)-Math.pow(yggl,2))));
-        } else if (method .equals( "三瓦法")) {
+            szgl = Float.parseFloat(df2.format((UA * IA + UC * IC) * 1.5));
+            yggl = Float.parseFloat(df2.format(szgl * glys));
+            wggl = Float.parseFloat(df2.format(Math.sqrt(Math.pow(szgl, 2) - Math.pow(yggl, 2))));
+        } else if (method.equals("三瓦法")) {
             pjdy = (UA + UB + UC) / 3;
             pjdl = (IA + IB + IC) / 3;
 
             pjxdy = (UAB + UBC + UCA) / 3;
-            szgl=Float.parseFloat(df2.format(UA*IA+UB*IB+UC*IC));
-            yggl=Float.parseFloat(df2.format(szgl*glys));
-            wggl=Float.parseFloat(df2.format(Math.sqrt(Math.pow(szgl,2)-Math.pow(yggl,2))));
+            szgl = Float.parseFloat(df2.format(UA * IA + UB * IB + UC * IC));
+            yggl = Float.parseFloat(df2.format(szgl * glys));
+            wggl = Float.parseFloat(df2.format(Math.sqrt(Math.pow(szgl, 2) - Math.pow(yggl, 2))));
         }
-        szgl=szgl/1000;
-        yggl=yggl/1000;
-        wggl=wggl/1000;
+        szgl = szgl / 1000;
+        yggl = yggl / 1000;
+        wggl = wggl / 1000;
 
 
         double tmpA = Double.parseDouble(df2.format((1 / (edxl / 100) - 1) * edgl - kzgl));
         double tmpB = Double.parseDouble(df2.format(tmpA * (yggl - kzgl)));
         double tmpC = Double.parseDouble(df2.format(pow(edgl, 2) / 4 + tmpB));
-        //负载率
+        //负载系数
         if (edxl == 0 || tmpA == 0 || tmpC < 0) {
             fzxs = 0;
         } else {
             fzxs = Double.parseDouble(df6.format((sqrt(tmpC) - edgl / 2) / tmpA));
         }
+        Log.i("ddf", "edxl: " + edxl + "  edgl" + edgl + "  kzgl" + kzgl + "  yggl" + yggl + "  fzxs" + fzxs);
         //输出功率
         scgl = Double.parseDouble(df4.format(fzxs * edgl));
         //有功损耗
@@ -275,6 +274,7 @@ public class motorData {
         //}
         if ((3 * eddy * eddy * kzdl * kzdl / 1000000 - kzgl * kzgl) > 0) {
             kzwggl = Double.parseDouble(df2.format(sqrt((3 * eddy * eddy * kzdl * kzdl / 1000000 - kzgl * kzgl))));
+            Log.i("dda", "kzwggl: " + kzwggl);
         } else {
             kzwggl = 0.00f;
         }

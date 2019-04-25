@@ -33,7 +33,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
                 android:background="#55555c"
-                android:orientation="vertical"></LinearLayout>
+                android:orientation="vertical"/>
 
 
         </LinearLayout>

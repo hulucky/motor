@@ -10,8 +10,8 @@ import android.graphics.Paint.FontMetrics;
 import android.graphics.Path;
 import android.graphics.PathEffect;
 import android.graphics.Point;
+import android.util.Log;
 import android.view.View;
-
 
 import com.greendao.manager.motorData;
 
@@ -123,6 +123,7 @@ public class DrawViewThi extends View {
     float YDScale = 10f;// YD坐标最大扩展系数
     Boolean MaxOrMinIsSet = false;// 是否预设最大最小值
 
+
     public DrawViewThi(Context context) {
         super(context);
     }
@@ -135,15 +136,16 @@ public class DrawViewThi extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-
+        //曲线类型，0为三相 1为单相 2为矢量3为谐波
         switch (CurveType) {
-            case 0:
+            case 0://三相
                 Drawthi(canvas);
                 break;
-            case 1:
+            case 1://单相
                 Drawsin(canvas);
+                Log.i("ddd", "DrawViewThi-----onDraw:被执行 ");
                 break;
-            case 2:
+            case 2://矢量
                 Drawvec(canvas);
                 break;
             case 3:
@@ -154,6 +156,7 @@ public class DrawViewThi extends View {
         }
     }
 
+    //三相波形
     private void Drawthi(Canvas canvas) {
         Paint p = new Paint();
         // 基础点
@@ -182,7 +185,7 @@ public class DrawViewThi extends View {
         canvas.drawLine(mx, my + 10 * Yd, mx + CurveWidth, my + 10 * Yd, p);
         canvas.drawLine(mx, my + 11 * Yd, mx + CurveWidth, my + 11 * Yd, p);
         // 坐标轴文本
-
+        Log.i("ddd", "UA: " + UA + "  UB: " + UB + "  UC: " + UC + "坐标轴文字");
         // 辅助文字
         canvas.drawText("电压波形", mx + CurveWidth / 6, my + CurveHeight / 2, p);
         canvas.drawText("电流波形", mx + CurveWidth / 6, my + CurveHeight, p);
@@ -255,6 +258,7 @@ public class DrawViewThi extends View {
 
     }
 
+    //单相波形
     private void Drawsin(Canvas canvas) {
         Paint p = new Paint();
         // 基础点
@@ -274,7 +278,7 @@ public class DrawViewThi extends View {
         canvas.drawLine(mx, my + 4 * Yd, mx + CurveWidth, my + 4 * Yd, p);
         canvas.drawLine(mx, my + 7 * Yd, mx + CurveWidth, my + 7 * Yd, p);
         // 辅助文字
-
+        Log.i("ddd", "UA: " + UA + "  UB: " + UB + "  UC: " + UC);
         canvas.drawText("A相电压：" + df3.format(UA) + "V,电流：" + df3.format(IA)
                         + "A,相位角：" + df3.format(phUIA) + "°", mx + CurveWidth / 6,
                 (float) (my + 2.7 * Yd), p);
@@ -374,17 +378,18 @@ public class DrawViewThi extends View {
 
     }
 
+    //矢量曲线
     private void Drawvec(Canvas canvas) {
         Paint p = new Paint();
         // 基础点
-CurveWidth=500;
+        CurveWidth = 500;
         CurveHeight = 500;
         mpoint.x = (int) (CurveWidth / 2);
 
         mpoint.y = (int) (CurveHeight / 2);
-        int mx = mpoint.x;
-        int my = mpoint.y;
-        float R = (float) (CurveHeight * 0.45);
+        int mx = mpoint.x;//250
+        int my = mpoint.y;//250
+        float R = (float) (CurveHeight * 0.45);//225 半径
         p.setStyle(Paint.Style.STROKE);
         p.setColor(Color.WHITE);
         canvas.drawCircle(mx, my, R, p);
@@ -398,16 +403,19 @@ CurveWidth=500;
 
         FontMetrics a = p.getFontMetrics();
         float fsize = Math.abs(a.ascent) + Math.abs(a.descent) + Math.abs(a.leading);
-        DrawArcAndText(canvas, p, mpoint, R, 0, "UA", AColor, (int) fsize);
-        DrawArcAndText(canvas, p, mpoint, (float) (0.8 * R), phUIA, "IA", AColor, (int) fsize);
+//        Log.i("sss", "            phUIA: " + phUIA + " phUIB: " + phUIB + " phUIC " + phUIC + " phUAB " + phUAB + " phUBC " + phUBC+" phUCA "+phUCA);
+        DrawArcAndText(canvas, p, mpoint, R, 0, "UA", AColor, (int) fsize);//R半径
+        DrawArcAndText(canvas, p, mpoint, (float) (0.8 * R), phUIA / 2f, "IA", AColor, (int) fsize);
         if (TestMethod != 0) {
-            if (TestMethod != 1) {
+            if (TestMethod != 1) {//三瓦法
 
-                DrawArcAndText(canvas, p, mpoint, (float) (0.8 * R), phUAB + phUIB, "IB", BColor, (int) fsize);
+                DrawArcAndText(canvas, p, mpoint, (float) (0.8 * R), (phUAB + phUIB) / 2f, "IB", BColor, (int) fsize);
             }
-            DrawArcAndText(canvas, p, mpoint, R, phUAB, "UB", BColor, (int) fsize);
-            DrawArcAndText(canvas, p, mpoint, R, phUAB + phUBC, "UC", CColor, (int) fsize);
-            DrawArcAndText(canvas, p, mpoint, (float) (0.8 * R), phUAB + phUBC + phUIC, "IC", CColor, (int) fsize);
+            //双瓦法
+            DrawArcAndText(canvas, p, mpoint, R, phUAB / 2f, "UB", BColor, (int) fsize);
+            DrawArcAndText(canvas, p, mpoint, R, (phUAB + phUBC) / 2f, "UC", CColor, (int) fsize);
+//            Log.i("add", "phUAB + phUBC: " + (phUAB + phUBC));
+            DrawArcAndText(canvas, p, mpoint, (float) (0.8 * R), (phUAB + phUBC + phUIC) / 2f, "IC", CColor, (int) fsize);
         }
         PathEffect effects = new DashPathEffect(new float[]{5, 5, 5, 5}, 1);
         p.setPathEffect(effects);
@@ -426,10 +434,13 @@ CurveWidth=500;
 
     }
 
+    //画弧写文字 mp:圆心
     private void DrawArcAndText(Canvas canvas, Paint p, Point mp, float radius, float angle, String mtext, int mcolor, int mSize) {
-        p.setColor(mcolor);
-        Point[] mUAarr = CordTools.GetArrowBy2Vertex(mpoint, new Point((int) (mp.x + radius * Math.cos(angle * 2 * Math.PI / 180)), (int) (mp.y - radius * Math.sin(angle * 2 * Math.PI / 180))), radius * 0.1);//箭头数组
+        p.setColor(mcolor);//黄色
+        Point[] mUAarr = CordTools.GetArrowBy2Vertex(mpoint, new Point((int) (mp.x + radius * Math.cos(angle * 2 * Math.PI / 180)),
+                (int) (mp.y - radius * Math.sin(angle * 2 * Math.PI / 180))), radius * 0.1);//箭头数组
         Path ptUA = new Path();
+//        Log.i("zzz", "mUAarr: " + Arrays.toString(mUAarr));
         ptUA.moveTo(mUAarr[0].x, mUAarr[0].y);
         ptUA.lineTo(mUAarr[1].x, mUAarr[1].y);
         ptUA.lineTo(mUAarr[2].x, mUAarr[2].y);
@@ -439,13 +450,14 @@ CurveWidth=500;
         canvas.drawPath(ptUA, p);
 
 
-        Point mUaText = CordTools.GetTextLocation(4, "UA", new Point((int) (mp.x + radius * 1.1 * Math.cos(angle * 2 * Math.PI / 180)), (int) (mp.y - radius * 1.1 * Math.sin(angle * 2 * Math.PI / 180))), mSize, 0, 0, 1);
+        Point mUaText = CordTools.GetTextLocation(4, "UA", new Point((int) (mp.x + radius * 1.1 * Math.cos(angle * 2 * Math.PI / 180)),
+                (int) (mp.y - radius * 1.1 * Math.sin(angle * 2 * Math.PI / 180))), mSize, 0, 0, 1);
         canvas.drawText(mtext, mUaText.x, mUaText.y, p);
     }
 
     private void Drawham(Canvas canvas) {
-        CurveWidth=600;
-        CurveHeight=330;
+        CurveWidth = 600;
+        CurveHeight = 330;
         Paint p = new Paint();
         double[] tmpHar = new double[32];
         FontMetrics a = p.getFontMetrics();
@@ -490,7 +502,7 @@ CurveWidth=500;
             if (i == TopI) {
                 Point tmpText = CordTools.GetTextLocation(2, df2.format(TopHar), new Point((int) (CurveWidth / 10 + 5), (int) (CurveHeight / 10 - 5)), (int) fsize, 0, 0, 1);
 
-                canvas.drawText(df2.format(TopHar),  tmpText.x, tmpText.y,p);
+                canvas.drawText(df2.format(TopHar), tmpText.x, tmpText.y, p);
 
 
             }
@@ -498,7 +510,7 @@ CurveWidth=500;
         }
         PathEffect effects = new DashPathEffect(new float[]{5, 5, 5, 5}, 1);
         p.setPathEffect(effects);
-        canvas.drawLine( CurveWidth / 10, CurveHeight / 10, 8 * CurveWidth / 10, CurveHeight / 10,p);
+        canvas.drawLine(CurveWidth / 10, CurveHeight / 10, 8 * CurveWidth / 10, CurveHeight / 10, p);
     }
 
     /*

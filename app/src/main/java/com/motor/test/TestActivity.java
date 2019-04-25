@@ -10,11 +10,9 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.format.Time;
-import android.view.LayoutInflater;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
 
 import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.greendao.dbUtils.GreateTaskUtils;
@@ -37,9 +35,9 @@ import com.xzkydz.helper.ComControl;
 import com.xzkydz.helper.SerialHelper;
 import com.xzkydz.util.DataType;
 
-import java.security.PublicKey;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
@@ -338,19 +336,19 @@ public class TestActivity extends AppCompatActivity {
 
         try {
             mData.setMethods(mtask.getCsff());
-            mData.setEddl(Double.parseDouble(mtask.getDjeddl1()));
-            mData.setEddy(Double.parseDouble(mtask.getDjeddy1()));
-            mData.setEdgl(Double.parseDouble(mtask.getDjedgl1()));
+            mData.setEddl(Double.parseDouble(mtask.getDjeddl1()));//额定电流
+            mData.setEddy(Double.parseDouble(mtask.getDjeddy1()));//额定电压
+            mData.setEdgl(Double.parseDouble(mtask.getDjedgl1()));//额定功率
             //   mData.setEdglys(Double.parseDouble(mtask.getEdglys()));
 
-            mData.setEdxl(Double.parseDouble(mtask.getDjedxl1()));
-            mData.setKzdl(Double.parseDouble(mtask.getDjkzdl1()));
-            mData.setKzgl(Double.parseDouble(mtask.getDjkzgl1()));
-            mData.setJs(Integer.parseInt(mtask.getDjjs1()));
-            mData.setWgjjdl(Double.parseDouble(mtask.getDjwgjjdl1()));
-            mData.setMbglys(0.95d);
+            mData.setEdxl(Double.parseDouble(mtask.getDjedxl1()));//额定效率
+            mData.setKzdl(Double.parseDouble(mtask.getDjkzdl1()));//空载电流
+            mData.setKzgl(Double.parseDouble(mtask.getDjkzgl1()));//空载功率
+            mData.setJs(Integer.parseInt(mtask.getDjjs1()));//级数
+            mData.setWgjjdl(Double.parseDouble(mtask.getDjwgjjdl1()));//无功经济当量
+            mData.setMbglys(0.95d);//目标功率因数
 
-            mData.setMethods(mtask.getCsff());
+            mData.setMethods(mtask.getCsff());//测试方法
 
 
         } catch (NumberFormatException e) {
@@ -429,9 +427,9 @@ public class TestActivity extends AppCompatActivity {
             if (showerror > 0) {
                 showerror--;
             }
-            if ( showerror == 0) {
+            if (showerror == 0) {
                 showerror = 5;
-                if(IsConfiged == 2 ) {
+                if (IsConfiged == 2) {
                     Toasty.error(TestActivity.this, "传感器配置错误！", 1).show();
                 }
 //                try {
@@ -449,8 +447,8 @@ public class TestActivity extends AppCompatActivity {
     };
 
     public void clearelec() {
-        mData.setYgdn(0);
-        mData.setWgdn(0);
+        mData.setYgdn(0);//有功电能
+        mData.setWgdn(0);//无功电能
     }
 
 
@@ -535,19 +533,23 @@ public class TestActivity extends AppCompatActivity {
             }
             IsConfiged = 1;
         }
+        Log.i("qqq", "comData: " + Arrays.toString(comData.recData));
         switch (comData.recData[2]) {
 
 
-            case 100://电压电流
+            case 100://电压电流 1.6秒发一次
                 getUIData(comData);
+//                Log.i("qqq", "电压电流comData: " + Arrays.toString(comData.recData));
+//                Log.i("qqq", "电压电流comData: " + Arrays.toString(comData.recData));
                 SetFiveOne(3);
                 break;
-            case 78://谐波
+            case 78://谐波 时刻在发送
                 getHamData(comData);
                 SetFiveOne(3);
                 break;
         }
     }
+
     //谐波
     private void getHamData(ComBean comData) {
         double[] mham = new double[32];
@@ -662,55 +664,77 @@ public class TestActivity extends AppCompatActivity {
             i += 2;
             mData.setBglys((float) ((MyFunction.twoByte2double_(comData.recData, i) / 10000)));
             i += 2;
-            mData.setCglys((float) ((MyFunction.twoByte2double_(comData.recData, i) / 10000)));
+            mData.setCglys((float) ((MyFunction.twoByte2double_(comData.recData, i) / 10000)));//C项功率因数
             i += 2;
-            mData.setKUA((float) ((MyFunction.twoBytesToInt(comData.recData, i) / 10000)));
+            mData.setKUA((float) ((MyFunction.twoBytesToInt(comData.recData, i) / 10000)));//A项电压K值
             i += 2;
-            mData.setKUB((float) ((MyFunction.twoBytesToInt(comData.recData, i) / 10000)));
+            mData.setKUB((float) ((MyFunction.twoBytesToInt(comData.recData, i) / 10000)));//B项电压K值
             i += 2;
-            mData.setKUC((float) ((MyFunction.twoBytesToInt(comData.recData, i) / 10000)));
+            mData.setKUC((float) ((MyFunction.twoBytesToInt(comData.recData, i) / 10000)));//C项电压K值
             i += 2;
-            mData.setKIA((float) ((MyFunction.twoBytesToInt(comData.recData, i) / 10000)));
+            mData.setKIA((float) ((MyFunction.twoBytesToInt(comData.recData, i) / 10000)));//A项电流K值
             i += 2;
-            mData.setKIB((float) ((MyFunction.twoBytesToInt(comData.recData, i) / 10000)));
+            mData.setKIB((float) ((MyFunction.twoBytesToInt(comData.recData, i) / 10000)));//B项电流K值
             i += 2;
-            mData.setKIC((float) ((MyFunction.twoBytesToInt(comData.recData, i) / 10000)));
+            mData.setKIC((float) ((MyFunction.twoBytesToInt(comData.recData, i) / 10000)));//C项电流K值
             i += 2;
-            mData.setHCUA((float) ((MyFunction.twoBytesToInt(comData.recData, i) / 10000) * 100));
+//            mData.setHCUA((float) ((MyFunction.twoBytesToInt(comData.recData, i) / 10000) * 100));//A项电压谐波分量
+            mData.setHCUA((float) ((MyFunction.twoBytesToInt(comData.recData, i) / 10000)));//A项电压谐波分量
             i += 2;
-            mData.setHCUB((float) ((MyFunction.twoBytesToInt(comData.recData, i) / 10000) * 100));
+            mData.setHCUB((float) ((MyFunction.twoBytesToInt(comData.recData, i) / 10000)));//B项电压谐波分量
             i += 2;
-            mData.setHCUC((float) ((MyFunction.twoBytesToInt(comData.recData, i) / 10000) * 100));
+            mData.setHCUC((float) ((MyFunction.twoBytesToInt(comData.recData, i) / 10000)));//C项电压谐波分量
             i += 2;
-            mData.setHCIA((float) ((MyFunction.twoBytesToInt(comData.recData, i) / 10000) * 100));
+            mData.setHCIA((float) ((MyFunction.twoBytesToInt(comData.recData, i) / 10000)));//A项电流谐波分量
             i += 2;
-            mData.setHCIB((float) ((MyFunction.twoBytesToInt(comData.recData, i) / 10000) * 100));
+            mData.setHCIB((float) ((MyFunction.twoBytesToInt(comData.recData, i) / 10000)));//B项电流谐波分量
             i += 2;
-            mData.setHCIC((float) ((MyFunction.twoBytesToInt(comData.recData, i) / 100)));
+            mData.setHCIC((float) ((MyFunction.twoBytesToInt(comData.recData, i) / 10000)));//C项电流谐波分量
             i += 2;
-            mData.setPhUAB((float) MyFunction.HexToInt(MyFunction.ByteArrToHex(
-                    comData.recData, i, i + 1)) / 100);
+            //AB项电压相位角
+            double phUAB = (double) (MyFunction.HexToInt(MyFunction.ByteArrToHex(
+                    comData.recData, i, i + 1)) / 100f * 180f / Math.PI);
+//            Log.i("sss", "UABfloat:  " + UABfloat);
+            mData.setPhUAB(phUAB);
+            i += 1;
+            //BC项电压相位角
+            double phUBC = (float) MyFunction.HexToInt(MyFunction.ByteArrToHex(
+                    comData.recData, i, i + 1)) / 100f * 180f / Math.PI;
+//            Log.i("sss", "phUBC: " + phUBC);
+            mData.setPhUBC(phUBC);
+            i += 1;
+            //CA项电压相位角
+            double phUCA = (float) MyFunction.HexToInt(MyFunction.ByteArrToHex(
+                    comData.recData, i, i + 1)) / 100f * 180f / Math.PI;
+//            Log.i("sss", "phUCA: " + phUCA);
+            mData.setPhUCA(phUCA);
+            i += 1;
+            //A项电压电流相位角
+            double phUIA = (float) MyFunction.HexToInt(MyFunction.ByteArrToHex(
+                    comData.recData, i, i + 1)) / 100f * 180f / Math.PI;
+//            Log.i("sss", "phUIA: " + phUIA);
+            mData.setPhUIA(phUIA);
+            i += 1;
+            //B项电压电流相位角
+            double phUIB = (float) MyFunction.HexToInt(MyFunction.ByteArrToHex(
+                    comData.recData, i, i + 1)) / 100f * 180f / Math.PI;
+//            Log.i("sss", "phUIB: " + phUIB);
+            mData.setPhUIB(phUIB);
+            i += 1;
+            //C项电压电流相位角
+            double phUIC = (float) MyFunction.HexToInt(MyFunction.ByteArrToHex(
+                    comData.recData, i, i + 1)) / 100f * 180f / Math.PI;
+//            Log.i("sss", "phUIC: " + phUIC);
+            mData.setPhUIC(phUIC);
+//            Log.i("sss", "原生数据====phUIA: " + phUIA + " phUIB: " + phUIB + " phUIC " + phUIC + " phUAB " + phUAB + " phUBC " + phUBC+" phUCA "+phUCA);
 
-            i += 1;
-            mData.setPhUBC((float) MyFunction.HexToInt(MyFunction.ByteArrToHex(
-                    comData.recData, i, i + 1)) / 100);
-            i += 1;
-            mData.setPhUCA((float) MyFunction.HexToInt(MyFunction.ByteArrToHex(
-                    comData.recData, i, i + 1)) / 100);
-            i += 1;
-            mData.setPhUIA((float) MyFunction.HexToInt(MyFunction.ByteArrToHex(
-                    comData.recData, i, i + 1)) / 100);
-            i += 1;
-            mData.setPhUIB((float) MyFunction.HexToInt(MyFunction.ByteArrToHex(
-                    comData.recData, i, i + 1)) / 100);
-            i += 1;
-            mData.setPhUIC((float) MyFunction.HexToInt(MyFunction.ByteArrToHex(
-                    comData.recData, i, i + 1)) / 100);
+//            mData.setPhUIC((float) MyFunction.HexToInt(MyFunction.ByteArrToHex(
+//                    comData.recData, i, i + 1)) / 100 );
 
 
             //640-800
             //  electricquantity = ((MyFunction.twoBytesToInt(comData.recData, i) / 100));
-
+            Log.i("ddw", "mData: "+mData.toString());
             mpower = MyFunction.twoBytesToInt(comData.recData, 100);
             msingal = comData.recData[102] < 0 ? 256 + comData.recData[102] : comData.recData[102];
 

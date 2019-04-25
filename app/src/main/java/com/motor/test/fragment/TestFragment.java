@@ -21,8 +21,8 @@ import com.motor.administrator.DATAbase.greendao.TaskEntity;
 import com.motor.app.MyApp;
 import com.motor.test.TestActivity;
 import com.motor.test.fragment.childfragment.TestCurveHamonicfragment;
-import com.motor.test.fragment.childfragment.TestCurveWavefragment;
 import com.motor.test.fragment.childfragment.TestCurveVectorfragment;
+import com.motor.test.fragment.childfragment.TestCurveWavefragment;
 import com.motor.test.fragment.childfragment.TestDatafragment;
 import com.motor.test.fragment.childfragment.TestOtherFragment;
 import com.motor.test.fragment.childfragment.TestStateAnalysefragment;
@@ -49,12 +49,12 @@ public class TestFragment extends Fragment {
     TaskEntity mTask;
     MyApp myApp;
     Unbinder unbinder;
-    public static TestDatafragment mdatafragment;
-    static TestStateAnalysefragment manalysefragment;
-    static TestCurveVectorfragment mcurvevectorfragment;
-    public TestCurveWavefragment mcurvewavefragment;
-    public TestOtherFragment motherfragment;
-    TestCurveHamonicfragment mcurvehamonicfragment;
+    public static TestDatafragment mdatafragment;//测试数据
+    static TestStateAnalysefragment manalysefragment;//运行状态
+    static TestCurveVectorfragment mcurvevectorfragment;//矢量曲线
+    public TestCurveWavefragment mcurvewavefragment;//波形曲线
+    public TestOtherFragment motherfragment;//更多参数
+    TestCurveHamonicfragment mcurvehamonicfragment;//谐波曲线
     List<Fragment> list_fragments;
     TestActivity mActivity;
 
@@ -128,19 +128,19 @@ public class TestFragment extends Fragment {
 
     public void refresh() {
 //        mshowfragment.refresh();
-        manalysefragment.refresh();
-        mdatafragment.refresh();
-        motherfragment.refresh();
+        manalysefragment.refresh();//运行状态
+        mdatafragment.refresh();//测试数据
+        motherfragment.refresh();//更多参数
         motorData mData = mActivity.mdata.getMotordata();
         switch (flmain.getCurrentItem()) {
             case 2:
-                mcurvevectorfragment.Draw(mData);
+                mcurvevectorfragment.Draw(mData);//矢量曲线
                 break;
             case 3:
-                mcurvewavefragment.Draw(mData);
+                mcurvewavefragment.Draw(mData);//波形曲线
                 break;
             case 4:
-                mcurvehamonicfragment.Draw(mData);
+                mcurvehamonicfragment.Draw(mData);//谐波曲线
                 break;
 
         }

@@ -8,31 +8,18 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.greendao.manager.motorData;
-import com.motor.Adapter.TestPagerAdapter;
-import com.motor.Adapter.TestPressAdapter;
 import com.motor.Tools.DrawViewThi;
-import com.motor.Tools.Method;
 import com.motor.administrator.DATAbase.R;
-import com.motor.bean.PressBean;
 import com.motor.test.TestActivity;
-import com.motor.view.MyListView;
-
-import junit.framework.Test;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.List;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import butterknife.Unbinder;
-
+//矢量曲线
 public class TestCurveVectorfragment extends Fragment {
 
 

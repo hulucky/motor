@@ -5,11 +5,11 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.greendao.manager.motorData;
 import com.motor.administrator.DATAbase.R;
@@ -53,9 +53,9 @@ public class TestStateAnalysefragment extends Fragment {
     @BindView(R.id.et_detail_dypchl)
     TextView etDetailDypchl;
     @BindView(R.id.et_detail_sxbphd)
-    TextView etDetailSxbphd;
+    TextView etDetailSxbphd;//三相电压不平衡度
     @BindView(R.id.et_detail_bphdhl)
-    TextView etDetailBphdhl;
+    TextView etDetailBphdhl;//不平衡度
     @BindView(R.id.et_detail_wgbcrl)
     TextView etDetailWgbcrl;
     @BindView(R.id.et_detail_wgbcdrl)
@@ -121,19 +121,25 @@ public class TestStateAnalysefragment extends Fragment {
         try {
             motorData mData = mActivity.mdata.getMotordata();
             //查看数据
-            Toast.makeText(mActivity, mData.toString(), Toast.LENGTH_SHORT).show();
+            Log.i("aaa", "mData=="+mData.toString());
 
-            etDetailYgglsh.setText(df2.format(mData.getYgglsh() / 1000));
-            etDetailZhglsh.setText(df2.format(mData.getZhglsh() / 1000));
-            etDetailZhxhgl.setText(df2.format(mData.getZhxhgl() / 1000));
+//            etDetailYgglsh.setText(df2.format(mData.getYgglsh() / 1000));
+            etDetailYgglsh.setText(df2.format(mData.getYgglsh()));
+//            etDetailZhglsh.setText(df2.format(mData.getZhglsh() / 1000));
+            etDetailZhglsh.setText(df2.format(mData.getZhglsh()));
+//            etDetailZhxhgl.setText(df2.format(mData.getZhxhgl() / 1000));
+            etDetailZhxhgl.setText(df2.format(mData.getZhxhgl()));
+
             etDetailEdzhxl1.setText(df2.format(mData.getEdzhxl()));
             etDetailEdzhxhgl.setText(df2.format(mData.getEdzhxhgl()));
-            etDetailFzxs.setText(df2.format(mData.getFzxs() / 1000));
+//            etDetailFzxs.setText(df2.format(mData.getFzxs() / 1000));//负载系数
+            etDetailFzxs.setText(df3.format(mData.getFzxs()));//负载系数
             etDetailEdzhglsh.setText(df2.format(mData.getEdzhglsh()));
             etDetailEdzhxl.setText(df2.format(mData.getEdzhxl()));
             etDetailZhxl.setText(df2.format(mData.getZhxl()));
             etDetailDjyxzt.setText(mData.getstrDjyxzt());
-            etDetailDypc.setText(df2.format(mData.getDypc()));//电源电压与额定电压偏差
+//            etDetailDypc.setText(df2.format(mData.getDypc()));//电源电压与额定电压偏差
+            etDetailDypc.setText(df2.format(Math.abs(mData.getPjxdy()-mData.getEddy())));//电源电压与额定电压偏差
             // etDetailDypchl.setText(df2.format(mData.getDypchl()));
             etDetailSxbphd.setText(df2.format(mData.getSxbphd()));
             //  etDetailBphdhl.setText(df2.format(mData.getBphdhl()));

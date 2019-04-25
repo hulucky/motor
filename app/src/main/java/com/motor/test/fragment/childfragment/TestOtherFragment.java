@@ -19,6 +19,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
+//更多参数
 public class TestOtherFragment extends Fragment {
     @BindView(R.id.et_other_kzwggl)
     TextView etOtherKzwggl;
@@ -87,12 +88,15 @@ public class TestOtherFragment extends Fragment {
         mActivity.clearelec();
     }
 
-    public void refresh(){
+    public void refresh() {
         try {
             motorData mData = mActivity.mdata.getMotordata();
 
-            etOtherEdfzwggl.setText(df2.format(mData.getEdfzwggl() / 1000));
-            etOtherKzwggl.setText(df2.format(mData.getKzwggl() / 1000));
+//            etOtherEdfzwggl.setText(df2.format(mData.getEdfzwggl() / 1000));
+            etOtherEdfzwggl.setText(df2.format(mData.getEdfzwggl()));
+//            etOtherKzwggl.setText(df2.format(mData.getKzwggl() / 1000));
+            etOtherKzwggl.setText(df2.format(mData.getKzwggl()));
+
             etOtherYgdn.setText(df2.format(mData.getYgdn()));
             etOtherWgdl.setText(df2.format(mData.getWgdn()));
             etOtherKia.setText(df2.format(mData.getKIA()));
@@ -108,9 +112,7 @@ public class TestOtherFragment extends Fragment {
             etOtherThdUA.setText(df2.format(mData.getHCUA()));
             etOtherThdUC.setText(df2.format(mData.getHCUC()));
 
-
-
-        }catch (Exception e)
-        {}
+        } catch (Exception e) {
+        }
     }
 }

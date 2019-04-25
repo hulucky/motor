@@ -30,7 +30,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
                 android:background="@color/black_hint"
-                android:orientation="vertical"></LinearLayout>
+                android:orientation="vertical"/>
 
 
 
@@ -41,7 +41,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
                 android:background="@color/black_hint"
-                android:orientation="vertical"></LinearLayout>
+                android:orientation="vertical"/>
 
 
         </LinearLayout>

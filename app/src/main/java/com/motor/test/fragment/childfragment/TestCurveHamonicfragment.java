@@ -27,11 +27,11 @@ import butterknife.BindViews;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
+//谐波曲线
 public class TestCurveHamonicfragment extends Fragment {
 
     @BindView(R.id.rg_ham)
     RadioGroup rgham;
-
     @BindView(R.id.hamonic)
     LinearLayout hamonic;
     @BindViews({R.id.et_hamonic_0, R.id.et_hamonic_1, R.id.et_hamonic_2, R.id.et_hamonic_3, R.id.et_hamonic_4, R.id.et_hamonic_5, R.id.et_hamonic_6, R.id.et_hamonic_7, R.id.et_hamonic_8, R.id.et_hamonic_9, R.id.et_hamonic_10, R.id.et_hamonic_11, R.id.et_hamonic_12, R.id.et_hamonic_13, R.id.et_hamonic_14, R.id.et_hamonic_15, R.id.et_hamonic_16, R.id.et_hamonic_17, R.id.et_hamonic_18, R.id.et_hamonic_19, R.id.et_hamonic_20, R.id.et_hamonic_21, R.id.et_hamonic_22, R.id.et_hamonic_23, R.id.et_hamonic_24, R.id.et_hamonic_25, R.id.et_hamonic_26, R.id.et_hamonic_27, R.id.et_hamonic_28, R.id.et_hamonic_29, R.id.et_hamonic_30, R.id.et_hamonic_31})
