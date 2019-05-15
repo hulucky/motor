@@ -6,6 +6,7 @@ import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,12 +15,13 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import com.greendao.manager.motorData;
+import com.greendao.manager.MotorData;
 import com.motor.Tools.DrawViewThi;
 import com.motor.administrator.DATAbase.R;
 import com.motor.test.TestActivity;
 
 import java.text.DecimalFormat;
+import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
@@ -90,7 +92,7 @@ public class TestCurveHamonicfragment extends Fragment {
                 } else {
                     Harno = 0;
                 }
-
+                Log.i("ham", "rb.getText().toString(): " + rb.getText().toString());
             }
         });
         return view;
@@ -130,8 +132,7 @@ public class TestCurveHamonicfragment extends Fragment {
         unbinder.unbind();
     }
 
-    public void Draw(motorData mdata) {
-
+    public void Draw(MotorData mdata) {
         try {
             LinearLayout layout3 = (LinearLayout) view.findViewById(R.id.hamonic);
             layout3.removeAllViews();
@@ -147,6 +148,7 @@ public class TestCurveHamonicfragment extends Fragment {
             layout3.addView(view3);
 
             double[] tmphamnic = new double[32];
+            Log.i("ham", "Harno: " + Harno);
             switch (Harno) {
                 case 0:
                     tmphamnic = mdata.getHarmUA();
@@ -167,6 +169,7 @@ public class TestCurveHamonicfragment extends Fragment {
                     tmphamnic = mdata.getHarmIC();
                     break;
             }
+            Log.i("ham", "tmphamnic: " + Arrays.toString(tmphamnic));
             for (int i = 0; i < 32; i++) {
                 tvHamnic.get(i).setText(df2.format(tmphamnic[i]));
             }

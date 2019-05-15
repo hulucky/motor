@@ -6,15 +6,11 @@
     android:orientation="vertical">
 
     <ScrollView
-
-
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
         android:background="#c1d8fb">
 
         <LinearLayout
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
@@ -24,20 +20,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-
             <LinearLayout
-
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
                 android:orientation="horizontal"
                 app:layout_constraintBottom_toTopOf="parent"
                 app:layout_constraintEnd_toStartOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
-
                 <LinearLayout
-
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -54,10 +45,10 @@
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:layout_marginLeft="20dp"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="5dp"
                         android:background="@color/white"
                         app:CheckConnect="true"
-                        app:CheckTime="5000"
+                        app:CheckTime="3000"
                         app:DrawModel="variable"
                         app:SensorType="GONG_LV_XIANG" />
 
@@ -423,7 +414,7 @@
                         <TextView
                             android:id="@+id/et_show_dwpl"
                             style="@style/TextView_style_test_single"
-                            android:layout_width="80dp"
+                            android:layout_width="79dp"
                             android:layout_height="wrap_content" />
 
                         <TextView
@@ -465,20 +456,63 @@
                         <TextView
                             android:id="@+id/et_show_yxzt"
                             style="@style/TextView_style_test_single"
-                            android:layout_width="120dp"
+                            android:layout_width="80dp"
                             android:layout_height="wrap_content"
                             android:gravity="left"
                             android:text="非经济运行" />
 
+                        <TextView
+                            style="@style/TextView_style_test_single"
+                            android:layout_width="35dp"
+                            android:gravity="start"
+                            android:text="  " />
 
                     </LinearLayout>
 
+                    <TextView style="@style/splite_line" />
 
+                    <LinearLayout style="@style/LinearLayout_style1">
+
+                        <TextView
+                            style="@style/TextView_style_test_single"
+                            android:text="零序电流 ：" />
+
+                        <TextView
+                            android:id="@+id/et_show_lxdl"
+                            style="@style/TextView_style_test_single"
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            style="@style/TextView_style_test_single"
+                            android:layout_width="35dp"
+                            android:gravity="start"
+                            android:text="" />
+
+                        <View style="@style/split_vetical" />
+
+                        <TextView
+                            style="@style/TextView_style_test_single"
+                            android:text="                   " />
+
+                        <TextView
+                            style="@style/TextView_style_test_single"
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content"
+                            android:text=" " />
+
+                        <TextView
+                            style="@style/TextView_style_test_single"
+                            android:layout_width="35dp"
+                            android:gravity="start"
+                            android:text="  " />
+                    </LinearLayout>
                 </LinearLayout>
 
 
             </LinearLayout>
         </LinearLayout>
+
     </ScrollView>
 
 

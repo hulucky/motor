@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-import com.greendao.manager.motorData;
+import com.greendao.manager.MotorData;
 import com.motor.Tools.DrawViewThi;
 import com.motor.administrator.DATAbase.R;
 import com.motor.test.TestActivity;
@@ -86,12 +86,9 @@ public class TestCurveVectorfragment extends Fragment {
         unbinder.unbind();
     }
 
-    public void Draw(motorData mdata) {
+    public void Draw(MotorData mdata) {
 
         try {
-
-
-
             LinearLayout layout2 = (LinearLayout) view.findViewById(R.id.vector);
             layout2.removeAllViews();
             final DrawViewThi view2 = new DrawViewThi(this.getActivity());

@@ -5,16 +5,20 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.greendao.manager.motorData;
+import com.greendao.manager.MotorData;
 import com.motor.Adapter.TestShowAdapter;
 import com.motor.administrator.DATAbase.R;
+import com.motor.app.MyApp;
 import com.motor.test.TestActivity;
 import com.sensor.SensorData;
+import com.sensor.SensorInf;
 import com.sensor.view.SensorView;
 
 import java.text.DecimalFormat;
@@ -23,15 +27,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
+
 public class TestDatafragment extends Fragment {
 
-
-    @BindView(R.id.gl1_test)
-    SensorView sgl1;
-
-    TestShowAdapter adp1;
-    TestActivity mActivity;
-    Unbinder unbinder;
     @BindView(R.id.et_show_abdy)
     TextView etShowAbdy;
     @BindView(R.id.et_show_adl)
@@ -72,20 +70,30 @@ public class TestDatafragment extends Fragment {
     TextView etShowGlys;
     @BindView(R.id.et_show_yxzt)
     TextView etShowYxzt;
+    @BindView(R.id.et_show_lxdl)
+    TextView etShowLxdl;
+
+    @BindView(R.id.gl1_test)
+    SensorView sensorView;
+
+    TestShowAdapter adp1;
+    TestActivity mActivity;
+    Unbinder unbinder;
     DecimalFormat df2 = new DecimalFormat("####0.00");
-
     DecimalFormat df3 = new DecimalFormat("####0.000");
-
     DecimalFormat df1 = new DecimalFormat("####0.0");
+    private View view;
+
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_test_data, null);
+        view = inflater.inflate(R.layout.fragment_test_data, null);
         mActivity = (TestActivity) getParentFragment().getActivity();
         unbinder = ButterKnife.bind(this, view);
         view.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
         adp1 = new TestShowAdapter(mActivity, mActivity.mdata, 0);
+//        sensorView = view.findViewById(R.id.gl1_test);
 
         return view;
     }
@@ -93,8 +101,24 @@ public class TestDatafragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        //设置断开监听时间
+        sensorView.setOnStatusChangeListener(new MyOnStatusChanger());
+    }
 
-
+    private class MyOnStatusChanger implements SensorView.OnStatusChangeListener {
+        @Override
+        public void status(View view, int i, int i1) {
+            int id = view.getId();
+            if (i1 == SensorInf.SEARCHING) {
+                switch (id) {
+                    case R.id.gl1_test:
+                        Log.d("qas", "setOnStatusChangeListener: ================================================中断");
+//                        Toast.makeText(getContext(), "功率箱断开！", Toast.LENGTH_SHORT).show();
+                        MyApp.isConnected = false;
+                        break;
+                }
+            }
+        }
     }
 
     private void SetSensorState(SensorView msv, float mpower, float msignal, int minf) {
@@ -110,12 +134,15 @@ public class TestDatafragment extends Fragment {
 
     public void SetSensor(String str, float mpower, float msignal, int minf) {
         try {
-
-            SetSensorState(sgl1, mpower, msignal, minf);
-
-
+            SetSensorState(sensorView, mpower, msignal, minf);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    public void setPowerSignal(SensorData sensorData) {
+        if (sensorView != null) {
+            sensorView.setData(sensorData);
         }
     }
 
@@ -125,9 +152,17 @@ public class TestDatafragment extends Fragment {
         unbinder.unbind();
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (sensorView != null) {
+            sensorView.destroy();
+        }
+    }
+
     public void refresh() {
         try {
-            motorData mData = mActivity.mdata.getMotordata();
+            MotorData mData = mActivity.mdata.getMotordata();
             etShowAbdy.setText(df2.format(mData.getUAB()));
             etShowAdl.setText(df2.format(mData.getIA()));
 //        dj2List.add(getTSGridItem("BC线电压",  mdata.getDj2csff().equals("单瓦法")?"-- V":df1.format(mdata.getUbc2())+ " V", "B相电流", !mdata.getDj2csff().equals("三瓦法")?"-- A":df1.format(mdata.getIb2())+ " A"));
@@ -144,12 +179,13 @@ public class TestDatafragment extends Fragment {
             etShowFzxs.setText(df3.format(mData.getfzxs()));
             etShowWggl.setText(df2.format(mData.getWggl()));
             etShowDjxl.setText(df2.format(mData.getXl()));
-            etShowScgl.setText(df2.format(mData.getScgl()));
+            etShowScgl.setText(df2.format(mData.getScgl()));//输出功率
             etShowZhxl1.setText(df2.format(mData.getZhxl()));
             etShowSzgl.setText(df2.format(mData.getSzgl()));
             etShowDwpl.setText(df2.format(mData.getDwpl()));
             etShowGlys.setText(df3.format(mData.getGlys()));
             etShowYxzt.setText((mData.getstrDjyxzt()));
+            etShowLxdl.setText(df2.format(mData.getLxdl()));
         } catch (Exception e) {
             e.printStackTrace();
         }

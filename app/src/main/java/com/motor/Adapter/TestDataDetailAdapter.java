@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import com.greendao.dbUtils.GreateTaskUtils;
 import com.greendao.manager.DataTFJ;
-import com.greendao.manager.motorData;
+import com.greendao.manager.MotorData;
 import com.motor.Tools.MyFunction;
 import com.motor.administrator.DATAbase.R;
 import com.motor.administrator.DATAbase.greendao.TaskEntity;
@@ -559,7 +559,7 @@ public class TestDataDetailAdapter extends BaseAdapter {
 
 
         TaskEntity mtask = mdata.GetHisTask();
-        motorData mmotordata = new motorData();
+        MotorData mmotordata = new MotorData();
         try {
             mmotordata.setEddl(Double.parseDouble(mtask.getDjeddl1()));
             mmotordata.setEddy(Double.parseDouble(mtask.getDjeddy1()));

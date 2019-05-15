@@ -76,9 +76,8 @@
                 android:id="@+id/hamonic"
                 android:layout_width="400dp"
                 android:layout_height="150dp"
-
                 android:background="#55555c"
-                android:orientation="vertical"></LinearLayout>
+                android:orientation="vertical" />
 
             <LinearLayout
 

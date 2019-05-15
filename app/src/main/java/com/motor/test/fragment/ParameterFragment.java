@@ -21,15 +21,14 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
+//参数fragment
 public class ParameterFragment extends Fragment implements GridAdapter.Callback{
-
     @BindView(R.id.tv_tittle_dj)
     TextView tvTittleDj;
     @BindView(R.id.lv_task_inf)
     MyListView lvTaskInf;
     @BindView(R.id.lv_dj_inf)
     MyListView lvDjInf;
-
     @BindView(R.id.lv_input_inf)
     MyListView lvInputInf;
     Unbinder unbinder;
@@ -62,7 +61,7 @@ public class ParameterFragment extends Fragment implements GridAdapter.Callback{
         lvTaskInf.setAdapter(taskInfAdapter);
 
         lvDjInf.setAdapter(djInfAdapter);
-
+        //第三段listView
         lvInputInf.setAdapter(inputInfAdapter);
     }
 

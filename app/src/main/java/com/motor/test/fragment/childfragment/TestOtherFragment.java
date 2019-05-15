@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.greendao.manager.motorData;
+import com.greendao.manager.MotorData;
 import com.motor.administrator.DATAbase.R;
 import com.motor.test.TestActivity;
 
@@ -90,7 +90,7 @@ public class TestOtherFragment extends Fragment {
 
     public void refresh() {
         try {
-            motorData mData = mActivity.mdata.getMotordata();
+            MotorData mData = mActivity.mdata.getMotordata();
 
 //            etOtherEdfzwggl.setText(df2.format(mData.getEdfzwggl() / 1000));
             etOtherEdfzwggl.setText(df2.format(mData.getEdfzwggl()));

@@ -29,9 +29,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.greendao.manager.DataTFJ;
+import com.greendao.manager.MotorData;
 import com.greendao.manager.TaskEntityDao;
 import com.greendao.manager.TaskResEnityDao;
-import com.greendao.manager.motorData;
 import com.motor.Adapter.TestShowPagerAdapter;
 
 import com.motor.administrator.DATAbase.R;
@@ -69,6 +69,7 @@ import jxl.write.WritableImage;
 import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
 
+//数据fragment
 public class DataFragment extends Fragment {
 
     @BindView(R.id.fr_detailcurve)
@@ -81,7 +82,6 @@ public class DataFragment extends Fragment {
     Button btnreport;
     @BindView(R.id.btn_testdetail_print)
     Button btnprint;
-
     @BindView(R.id.lv_testdata_list)
     ListView lv_list;
 
@@ -173,8 +173,7 @@ public class DataFragment extends Fragment {
         Long taskId = mTask.getId();
         TaskResEnityDao mdao = MyApp.getDaoInstant().getTaskResEnityDao();
         mreslist = mdao.queryBuilder().where(TaskResEnityDao.Properties.TaskId.eq(taskId)).list();
-        for (TaskResEnity mres : mreslist
-                ) {
+        for (TaskResEnity mres : mreslist) {
             ListBean mbean = new ListBean();
             mbean.setId(mres.getId());
             mbean.setStr0(df1.format(mres.getPjxdy()));
@@ -202,7 +201,7 @@ public class DataFragment extends Fragment {
 
     public void GetData() {
         try {
-            if(mTask==null) {
+            if (mTask == null) {
                 mTask = MyApp.getInstance().getTaskEnity();
             }
             InitList();
@@ -507,7 +506,7 @@ public class DataFragment extends Fragment {
                             + date
                             + ".xls"), workbook);// copy
             WritableSheet ws4 = writableWorkbook.getSheet(4);
-            motorData mData = mDataList.get(0).getMotordata();
+            MotorData mData = mDataList.get(0).getMotordata();
 
 
             WritableCell wc;
@@ -573,13 +572,13 @@ public class DataFragment extends Fragment {
             l.setString(df2.format(mData.getPjdl()));
             wc = ws4.getWritableCell(5, 22);
             l = (Label) wc;
-            l.setString(df2.format(mData.getAyggl()/1000));
+            l.setString(df2.format(mData.getAyggl() / 1000));
             wc = ws4.getWritableCell(5, 23);
             l = (Label) wc;
-            l.setString(df2.format(mData.getByggl()/1000));
+            l.setString(df2.format(mData.getByggl() / 1000));
             wc = ws4.getWritableCell(5, 24);
             l = (Label) wc;
-            l.setString(df2.format(mData.getCyggl()/1000));
+            l.setString(df2.format(mData.getCyggl() / 1000));
             wc = ws4.getWritableCell(5, 25);
             l = (Label) wc;
             l.setString(df2.format(mData.getUAB()));

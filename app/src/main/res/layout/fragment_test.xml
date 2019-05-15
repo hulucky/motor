@@ -8,21 +8,16 @@
         android:id="@+id/giv_gif"
         android:layout_width="match_parent"
         android:layout_height="260dp"
-        android:scaleType="fitXY"
-      />
-
-
-
-
+        android:scaleType="fitXY" />
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginBottom="60dp"
         android:layout_weight="1"
         android:background="#082045"
         android:orientation="horizontal"
-        android:layout_marginBottom="60dp"
         android:paddingBottom="@dimen/spacing_normal"
         android:paddingLeft="@dimen/spacing_normal"
         android:paddingRight="0dp"
@@ -36,14 +31,13 @@
             android:layout_weight="1"
             android:background="@drawable/shape_show_test_data"
             android:overScrollMode="never"
-            android:scrollbars="none">
-        </com.motor.view.MyNoScrollViewPager>
+            android:scrollbars="none"></com.motor.view.MyNoScrollViewPager>
 
 
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent">
-       
+
             <RadioGroup
                 android:id="@+id/ll"
                 android:layout_width="wrap_content"
@@ -53,8 +47,8 @@
 
                 <RadioButton
                     android:id="@+id/rbn_test_cgq"
-                    android:checked="true"
                     style="@style/RadioButtonTest"
+                    android:checked="true"
                     android:text="测试数据" />
 
                 <RadioButton
@@ -65,22 +59,25 @@
                 <RadioButton
                     android:id="@+id/rbn_test_fs"
                     style="@style/RadioButtonTest"
-                    android:text="波形曲线" />
+                    android:text="波形曲线"
+                    android:visibility="gone" />
 
                 <RadioButton
                     android:id="@+id/rbn_test_ylcj"
                     style="@style/RadioButtonTest"
-                    android:text="矢量曲线" />
+                    android:text="矢量曲线"
+                    android:visibility="gone" />
 
                 <RadioButton
                     android:id="@+id/rbn_test_gk"
                     style="@style/RadioButtonTest"
-                    android:text="谐波曲线" />
+                    android:text="谐波曲线"
+                    android:visibility="gone" />
+
                 <RadioButton
                     android:id="@+id/rbn_test_other"
                     style="@style/RadioButtonTest"
                     android:text="更多参数" />
-
 
 
             </RadioGroup>
@@ -89,8 +86,8 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/spacing_normal"
                 android:layout_alignParentBottom="true"
+                android:layout_marginLeft="@dimen/spacing_normal"
                 android:orientation="vertical">
 
                 <CheckBox
@@ -101,8 +98,8 @@
                 <Button
                     android:id="@+id/btn_test_save"
                     style="@style/CheckBoxTest"
-                    android:background="@drawable/selector_bg_test_button"
                     android:layout_marginTop="@dimen/spacing_normal"
+                    android:background="@drawable/selector_bg_test_button"
                     android:text="保存" />
             </LinearLayout>
         </RelativeLayout>

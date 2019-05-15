@@ -13,7 +13,7 @@ import android.graphics.Point;
 import android.util.Log;
 import android.view.View;
 
-import com.greendao.manager.motorData;
+import com.greendao.manager.MotorData;
 
 import java.text.DecimalFormat;
 
@@ -148,7 +148,7 @@ public class DrawViewThi extends View {
             case 2://矢量
                 Drawvec(canvas);
                 break;
-            case 3:
+            case 3://谐波曲线
                 Drawham(canvas);
                 break;
             default:
@@ -455,6 +455,7 @@ public class DrawViewThi extends View {
         canvas.drawText(mtext, mUaText.x, mUaText.y, p);
     }
 
+    //谐波曲线
     private void Drawham(Canvas canvas) {
         CurveWidth = 600;
         CurveHeight = 330;
@@ -1084,7 +1085,7 @@ public class DrawViewThi extends View {
         TestMethod = testMethod;
     }
 
-    public void setData(motorData mdata) {
+    public void setData(MotorData mdata) {
         UA = (float) mdata.getUA();
         UB = (float) mdata.getUB();
         UC = (float) mdata.getUC();

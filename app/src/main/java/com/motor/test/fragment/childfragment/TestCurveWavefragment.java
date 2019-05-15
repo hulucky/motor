@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-import com.greendao.manager.motorData;
+import com.greendao.manager.MotorData;
 import com.motor.Tools.DrawViewThi;
 import com.motor.administrator.DATAbase.R;
 import com.motor.test.TestActivity;
@@ -66,7 +66,7 @@ public class TestCurveWavefragment extends Fragment {
         unbinder.unbind();
     }
 
-    public void Draw(motorData mdata) {
+    public void Draw(MotorData mdata) {
         try {
             LinearLayout layout = (LinearLayout) mview.findViewById(R.id.three);
             layout.removeAllViews();

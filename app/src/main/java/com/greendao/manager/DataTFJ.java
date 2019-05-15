@@ -1,6 +1,8 @@
 package com.greendao.manager;
 
 
+import android.util.Log;
+
 import com.motor.administrator.DATAbase.greendao.TaskEntity;
 import com.motor.administrator.DATAbase.greendao.TaskResEnity;
 import com.motor.app.MyApp;
@@ -14,15 +16,15 @@ public class DataTFJ {
     private TaskEntity mHisTask;
     private TaskResEnity mRes;
 
-    public motorData getMotordata() {
+    public MotorData getMotordata() {
         return mmdata;
     }
 
-    public void setMotordata(motorData mmdata) {
+    public void setMotordata(MotorData mmdata) {
         this.mmdata = mmdata;
     }
 
-    private motorData mmdata;
+    private MotorData mmdata;
     private float fdjgl1;
     private float fdjgl2;
     private float fdjxl1;
@@ -147,17 +149,18 @@ public class DataTFJ {
         dj1csff = mHisTask.getDjcsff1();
 
 
-
         dj1qblc = mHisTask.getDjqblc1();
         mmdata.setMethods(mtask.getCsff());
         mmdata.setEddl(Double.parseDouble(mtask.getDjeddl1()));
         mmdata.setEddy(Double.parseDouble(mtask.getDjeddy1()));
-        mmdata.setEdgl(Double.parseDouble(mtask.getDjedgl1())*1000);
+//        mmdata.setEdgl(Double.parseDouble(mtask.getDjedgl1()) * 1000);
+        mmdata.setEdgl(Double.parseDouble(mtask.getDjedgl1()));
         //   mmdata.setEdglys(Double.parseDouble(mtask.getEdglys()));
 
         mmdata.setEdxl(Double.parseDouble(mtask.getDjedxl1()));
         mmdata.setKzdl(Double.parseDouble(mtask.getDjkzdl1()));
-        mmdata.setKzgl(Double.parseDouble(mtask.getDjkzgl1())*1000);
+//        mmdata.setKzgl(Double.parseDouble(mtask.getDjkzgl1()) * 1000);
+        mmdata.setKzgl(Double.parseDouble(mtask.getDjkzgl1()));
         mmdata.setJs(Integer.parseInt(mtask.getDjjs1()));
         mmdata.setWgjjdl(Double.parseDouble(mtask.getDjwgjjdl1()));
         mmdata.setMbglys(0.95d);
@@ -198,9 +201,8 @@ public class DataTFJ {
         if (mff == null) {
             mff = mres.getCsff();
         }
-        if(mmdata==null)
-        {
-            mmdata=new motorData();
+        if (mmdata == null) {
+            mmdata = new MotorData();
         }
         mmdata.setPjdy(mres.getPjdy());
         mmdata.setPjdl(mres.getPjdl());
@@ -298,7 +300,6 @@ public class DataTFJ {
         mmdata.setDlbb(mres.getDlbb());
         mmdata.setMethod(mres.getMethod());
         mmdata.setXl(mres.getXl());
-
 
 
 //        mSczs = mres.getMSczs();
@@ -496,15 +497,12 @@ public class DataTFJ {
 
     public void CopyRes(TaskResEnity mRes) {
         mRes.setTaskId(mHisTask.getId());
-
         mRes.setCsff(mff);
         saveMotor(mRes);
     }
 
 
-    private void saveMotor(TaskResEnity mRes)
-    {
-
+    private void saveMotor(TaskResEnity mRes) {
         mRes.setPjdy(mmdata.getPjdy());
         mRes.setPjdl(mmdata.getPjdl());
         mRes.setYggl(mmdata.getYggl());
@@ -601,9 +599,6 @@ public class DataTFJ {
         mRes.setDlbb(mmdata.getDlbb());
         mRes.setMethod(mmdata.getMethod());
         mRes.setXl(mmdata.getXl());
-
-
-
     }
 
     public TaskResEnity GetRes() {
@@ -621,142 +616,98 @@ public class DataTFJ {
     }
 
     public boolean Refresh() {
-        try {
-
-
-            // ��������ѹ��lnP=12.062-4039.558/(�¶�+235.379)
-            // P=e^(12.062-4039.558/(�¶�+235.379)) MPa(MPa=1000hPa=100000Pa)
-            mBhzqy =Float.parseFloat(df1.format( (float) Math.exp(12.062 - 4039.558 / (mWd + 235.379)) * 100*1000));
-            // //0.00000001455208*t^4-0.00000151077638*t^3+0.00011599438358*t^2+0.00098088830675*t-0.17248452012436
-            // mBhzqy= (float)
-            // ((float)0.00000001455208*mWd*mWd*mWd*mWd-0.00000151077638*mWd*mWd*mWd+0.00011599438358*mWd*mWd+0.00098088830675*mWd-0.17248452012436);
-            // //7.07406-��1657.46/(T+227.02)��
-            // mBhzqy=(float) Math.exp(7.07406-(1657.46/(mWd+227.02)));
-            // �����ܶ�=0.003484����������ѹ������-0.3779�����ʪ�ȡ���������ѹ(Pa)���£�273������¶ȣ� ǧ�� /������
-            mKqmd =Float.parseFloat(df2.format( (float) (0.003484 * (mDqy * 100 - 0.3779 * mSd / 100
-                    * mBhzqy ) / (273 + mWd))));
-
-            switch (mff) {
-                // �籭����
-                // ����=ƽ�����١������� ������/��
-                // ���㶯ѹ=0.5*�����ܶ�*ƽ������*ƽ������
-                case "风杯法":// ���㷨
-
-                    mCfddy = Float.parseFloat(df1.format((float) (0.5 * mKqmd * mPjfs * mPjfs)));
-                    mFl =Float.parseFloat(df1.format( mPjfs * mCfmj));
-
-
-                    break;
-                case "静压全压法":// ��ѹȫѹ��
-                    // ƽ������ =��(2*���㶯ѹ/�����ܶ�)*Ƥ�й�ϵ��
-                    // ����=ƽ�����١������� ������/�루������=��ѹ�Ĳ�ѹ�����
-                    mCfddy = mDy;
-                    if (mKqmd != 0) {
-                        mPjfs =Float.parseFloat(df1.format( (float) (Math.sqrt(2 * mCfddy / mKqmd) * mPtgxs)));
-                        mFl =Float.parseFloat(df1.format( mPjfs * mCfmj));
-                    }
-                    break;
-                case "静压差法":// ��ѹ�
-                    // ����=0.99*��ѹ���1*��ѹ���2*��((2*��ѹ��)/(�����ܶ�*������ѹ���2��^2-����ѹ���1��^2��))
-                    // ���㶯ѹ=0.5*�����ܶ�*ƽ������*ƽ������
-                    // ƽ������=����/������
-                    if (mKqmd != 0 && mCymjd != mCymjx) {
-                        mFl = Float.parseFloat(df1.format((float) (0.99 * mCymjx * mCymjd * Math.sqrt(2 * mJyc
-                                / (mKqmd * (mCymjd * mCymjd - mCymjx * mCymjx))))));
-                        mPjfs = Float.parseFloat(df1.format(mFl / mCfmj));
-                        mCfddy = Float.parseFloat(df1.format( (float) (0.5 * mKqmd * mPjfs * mPjfs)));
-                    }
-                    break;
-                default:
-                    break;
-
-            }
-            // �Ṧ��=������ʡ����Ч�ʡ�����Ч�� ǧ��
-
-            mZgl1 = Float.parseFloat(df1.format( fdjgl1 * fdjxl1 / 100 * dj1cdxl));
-
-            mZgl2 = Float.parseFloat(df1.format( fdjgl2 * fdjxl2 / 100 * dj2cdxl));
-            // ��ɢ�����ڵĶ�ѹ=0.5*�����ܶ�*������/��ɢ���������*������/��ɢ���������
-            if (mKsckmj != 0) {
-                mKsckdy = Float.parseFloat(df1.format( (float) (0.5 * mKqmd * (mFl / mKsckmj) * (mFl / mKsckmj))));
-            }
-            // ͨ�緽ʽ
-            if (mventi) {
-                // ���ʽͨ�����
-                // �����ѹ=��Ծ�ѹ-���㶯ѹ.
-                // ���ȫѹ=�����ѹ+��ɢ�����ڵĶ�ѹ. ��
-                // �������Ч��=��ѹЧ��
-                mFjjy = mJy - mCfddy;
-                mFjqy = mFjjy + mKsckdy;
-                // ��ѹ����=�����ѹ��������1000 ǧ��
-                mJygl =  Float.parseFloat(df1.format((float) (mFjjy * mFl / 1000)));
-                // ȫѹ����=���ȫѹ��������1000 ǧ��
-                mQygl = Float.parseFloat(df1.format( (float) (mFjqy * mFl / 1000)));
-
-                if ((mZgl1 + mZgl2) != 0) {
-                    // ��ѹЧ��=��ѹ���ʡ£��Ṧ��1���Ṧ��2����100%
-                    mJyxl = Float.parseFloat(df1.format( mJygl / (mZgl1 + mZgl2) * 100));
-
-                    // ȫѹЧ��=ȫѹ���ʡ£��Ṧ��1���Ṧ��2����100%
-                    mQyxl = Float.parseFloat(df1.format( mQygl / (mZgl1 + mZgl2) * 100));
-                }
-
-                mFjyxxl = mJyxl;
-            } else {
-                // ѹ��ʽͨ�����
-                // �����ѹ=��Ծ�ѹ ��
-                // ���ȫѹ=�����ѹ�����㶯ѹ
-                // �������Ч��=ȫѹЧ��
-                mFjjy = mJy;
-                mFjqy = mFjjy + mCfddy;
-                // ��ѹ����=�����ѹ��������1000 ǧ��
-                mJygl = Float.parseFloat(df1.format( (float) (mFjjy * mFl / 1000)));
-                // ȫѹ����=���ȫѹ��������1000 ǧ��
-                mQygl = Float.parseFloat(df1.format( (float) (mFjqy * mFl / 1000)));
-
-                if ((mZgl1 + mZgl2) != 0) {
-                    // ��ѹЧ��=��ѹ���ʡ£��Ṧ��1���Ṧ��2����100%
-                    mJyxl = Float.parseFloat(df1.format( mJygl / (mZgl1 + mZgl2) * 100));
-
-                    // ȫѹЧ��=ȫѹ���ʡ£��Ṧ��1���Ṧ��2����100%
-                    mQyxl = Float.parseFloat(df1.format( mQygl / (mZgl1 + mZgl2) * 100));
-                }
-
-                mFjyxxl = mQyxl;
-            }
-
-            // �����ܺ�=1�£�3.6���������Ч�ʣ� ǧ��ʱ/����������
-            if (mFjyxxl != 0) {
-                mGxnh = Float.parseFloat(df1.format( (float) (1 / (3.6 * mFjyxxl / 100))));
-            }
-            // ת��ϵ��
-            if (mKqmd != 0) {
-                mcKqmdzhxs = Float.parseFloat(df1.format( (float) (1.2 / mKqmd)));
-            }
-            //
-            if (mSczs != 0) {
-                mcZszhxs = Float.parseFloat(df1.format( (float) mEdzs / mSczs));
-            }
-            // ת�������
-            // ����
-            mgFl = Float.parseFloat(df1.format( (float) (mcZszhxs * mFl)));
-            //
-            mgZgl1 = Float.parseFloat(df1.format( mcKqmdzhxs * mcZszhxs * mcZszhxs * mcZszhxs * mZgl1));
-            mgZgl2 = Float.parseFloat(df1.format( mcKqmdzhxs * mcZszhxs * mcZszhxs * mcZszhxs * mZgl2));
-            mgFjjy = Float.parseFloat(df1.format( (float) (mcKqmdzhxs * mcZszhxs * mcZszhxs * mFjjy)));
-            mgJygl = Float.parseFloat(df1.format( mcKqmdzhxs * mcZszhxs * mcZszhxs * mcZszhxs * mJygl));
-
-            mgFjqy = Float.parseFloat(df1.format( (float) (mcKqmdzhxs * mcZszhxs * mcZszhxs * mFjqy)));
-            mgQygl = Float.parseFloat(df1.format( mcKqmdzhxs * mcZszhxs * mcZszhxs * mcZszhxs * mQygl));
-            if ((mgZgl1 + mgZgl2) != 0) {
-                mgJyxl = Float.parseFloat(df1.format( mgJygl / (mgZgl1 + mgZgl2) * 100));
-                mgQyxl = Float.parseFloat(df1.format( mgQygl / (mgZgl1 + mgZgl2) * 100));
-            }
-
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
+        Log.i("ffg", "Refresh: ");
+//        try {
+//            mBhzqy = Float.parseFloat(df1.format((float) Math.exp(12.062 - 4039.558 / (mWd + 235.379)) * 100 * 1000));
+//            mKqmd = Float.parseFloat(df2.format((float) (0.003484 * (mDqy * 100 - 0.3779 * mSd / 100
+//                    * mBhzqy) / (273 + mWd))));
+//
+//            switch (mff) {
+//
+//                case "风杯法":// ���㷨
+//                    mCfddy = Float.parseFloat(df1.format((float) (0.5 * mKqmd * mPjfs * mPjfs)));
+//                    mFl = Float.parseFloat(df1.format(mPjfs * mCfmj));
+//                    break;
+//                case "静压全压法":// ��ѹȫѹ��
+//                    mCfddy = mDy;
+//                    if (mKqmd != 0) {
+//                        mPjfs = Float.parseFloat(df1.format((float) (Math.sqrt(2 * mCfddy / mKqmd) * mPtgxs)));
+//                        mFl = Float.parseFloat(df1.format(mPjfs * mCfmj));
+//                    }
+//                    break;
+//                case "静压差法":// ��ѹ�
+//                    if (mKqmd != 0 && mCymjd != mCymjx) {
+//                        mFl = Float.parseFloat(df1.format((float) (0.99 * mCymjx * mCymjd * Math.sqrt(2 * mJyc
+//                                / (mKqmd * (mCymjd * mCymjd - mCymjx * mCymjx))))));
+//                        mPjfs = Float.parseFloat(df1.format(mFl / mCfmj));
+//                        mCfddy = Float.parseFloat(df1.format((float) (0.5 * mKqmd * mPjfs * mPjfs)));
+//                    }
+//                    break;
+//                default:
+//                    break;
+//
+//            }
+//            mZgl1 = Float.parseFloat(df1.format(fdjgl1 * fdjxl1 / 100 * dj1cdxl));
+//
+//            mZgl2 = Float.parseFloat(df1.format(fdjgl2 * fdjxl2 / 100 * dj2cdxl));
+//            if (mKsckmj != 0) {
+//                mKsckdy = Float.parseFloat(df1.format((float) (0.5 * mKqmd * (mFl / mKsckmj) * (mFl / mKsckmj))));
+//            }
+//            if (mventi) {
+//                mFjjy = mJy - mCfddy;
+//                mFjqy = mFjjy + mKsckdy;
+//                // ��ѹ����=�����ѹ��������1000 ǧ��
+//                mJygl = Float.parseFloat(df1.format((float) (mFjjy * mFl / 1000)));
+//                // ȫѹ����=���ȫѹ��������1000 ǧ��
+//                mQygl = Float.parseFloat(df1.format((float) (mFjqy * mFl / 1000)));
+//
+//                if ((mZgl1 + mZgl2) != 0) {
+//                    // ��ѹЧ��=��ѹ���ʡ£��Ṧ��1���Ṧ��2����100%
+//                    mJyxl = Float.parseFloat(df1.format(mJygl / (mZgl1 + mZgl2) * 100));
+//                    mQyxl = Float.parseFloat(df1.format(mQygl / (mZgl1 + mZgl2) * 100));
+//                }
+//                mFjyxxl = mJyxl;
+//            } else {
+//                mFjjy = mJy;
+//                mFjqy = mFjjy + mCfddy;
+//                mJygl = Float.parseFloat(df1.format((float) (mFjjy * mFl / 1000)));
+//                mQygl = Float.parseFloat(df1.format((float) (mFjqy * mFl / 1000)));
+//                if ((mZgl1 + mZgl2) != 0) {
+//                    mJyxl = Float.parseFloat(df1.format(mJygl / (mZgl1 + mZgl2) * 100));
+//                    mQyxl = Float.parseFloat(df1.format(mQygl / (mZgl1 + mZgl2) * 100));
+//                }
+//                mFjyxxl = mQyxl;
+//            }
+//            if (mFjyxxl != 0) {
+//                mGxnh = Float.parseFloat(df1.format((float) (1 / (3.6 * mFjyxxl / 100))));
+//            }
+//            // ת��ϵ��
+//            if (mKqmd != 0) {
+//                mcKqmdzhxs = Float.parseFloat(df1.format((float) (1.2 / mKqmd)));
+//            }
+//            //
+//            if (mSczs != 0) {
+//                mcZszhxs = Float.parseFloat(df1.format((float) mEdzs / mSczs));
+//            }
+//            mgFl = Float.parseFloat(df1.format((float) (mcZszhxs * mFl)));
+//            //
+//            mgZgl1 = Float.parseFloat(df1.format(mcKqmdzhxs * mcZszhxs * mcZszhxs * mcZszhxs * mZgl1));
+//            mgZgl2 = Float.parseFloat(df1.format(mcKqmdzhxs * mcZszhxs * mcZszhxs * mcZszhxs * mZgl2));
+//            mgFjjy = Float.parseFloat(df1.format((float) (mcKqmdzhxs * mcZszhxs * mcZszhxs * mFjjy)));
+//            mgJygl = Float.parseFloat(df1.format(mcKqmdzhxs * mcZszhxs * mcZszhxs * mcZszhxs * mJygl));
+//
+//            mgFjqy = Float.parseFloat(df1.format((float) (mcKqmdzhxs * mcZszhxs * mcZszhxs * mFjqy)));
+//            mgQygl = Float.parseFloat(df1.format(mcKqmdzhxs * mcZszhxs * mcZszhxs * mcZszhxs * mQygl));
+//            if ((mgZgl1 + mgZgl2) != 0) {
+//                mgJyxl = Float.parseFloat(df1.format(mgJygl / (mgZgl1 + mgZgl2) * 100));
+//                mgQyxl = Float.parseFloat(df1.format(mgQygl / (mgZgl1 + mgZgl2) * 100));
+//            }
+//
+//            return true;
+//        } catch (Exception e) {
+//            return false;
+//        }
+        return false;
     }
 
     public float getmBhzqy() {

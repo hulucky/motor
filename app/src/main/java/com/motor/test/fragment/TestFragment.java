@@ -14,7 +14,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.Toast;
 
-import com.greendao.manager.motorData;
+import com.greendao.manager.MotorData;
 import com.motor.Adapter.TestShowPagerAdapter;
 import com.motor.administrator.DATAbase.R;
 import com.motor.administrator.DATAbase.greendao.TaskEntity;
@@ -27,6 +27,7 @@ import com.motor.test.fragment.childfragment.TestDatafragment;
 import com.motor.test.fragment.childfragment.TestOtherFragment;
 import com.motor.test.fragment.childfragment.TestStateAnalysefragment;
 import com.motor.view.MyNoScrollViewPager;
+import com.sensor.SensorData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +44,6 @@ public class TestFragment extends Fragment {
     MyNoScrollViewPager flmain;
     @BindView(R.id.giv_gif)
     pl.droidsonroids.gif.GifImageView gifImageView;
-
     @BindView(R.id.cb_test_lock)
     CheckBox ckLock;
     TaskEntity mTask;
@@ -93,6 +93,7 @@ public class TestFragment extends Fragment {
         btnTestSave = (Button) view.findViewById(R.id.btn_test_save);
         mActivity = (TestActivity) getActivity();
         flmain.setNoScroll(true);
+        flmain.setOffscreenPageLimit(4);
         if (list_fragments != null) {
             TestShowPagerAdapter msgAdapter = new TestShowPagerAdapter(getChildFragmentManager(), list_fragments);
             flmain.setAdapter(msgAdapter);
@@ -131,20 +132,23 @@ public class TestFragment extends Fragment {
         manalysefragment.refresh();//运行状态
         mdatafragment.refresh();//测试数据
         motherfragment.refresh();//更多参数
-        motorData mData = mActivity.mdata.getMotordata();
-        switch (flmain.getCurrentItem()) {
-            case 2:
-                mcurvevectorfragment.Draw(mData);//矢量曲线
-                break;
-            case 3:
-                mcurvewavefragment.Draw(mData);//波形曲线
-                break;
-            case 4:
-                mcurvehamonicfragment.Draw(mData);//谐波曲线
-                break;
+        MotorData mData = mActivity.mdata.getMotordata();
+        if (flmain != null) {
+            switch (flmain.getCurrentItem()) {
+                case 2:
+//                    mcurvevectorfragment.Draw(mData);//矢量曲线
+                    break;
+                case 3:
+//                    mcurvewavefragment.Draw(mData);//波形曲线
+                    break;
+                case 4:
+//                    mcurvehamonicfragment.Draw(mData);//谐波曲线
+                    break;
+                default:
+                    break;
 
+            }
         }
-
 
     }
 
@@ -174,7 +178,7 @@ public class TestFragment extends Fragment {
                 case R.id.rbn_test_gk://谐波曲线
                     flmain.setCurrentItem(4, false);
                     break;
-                case R.id.btn_test_save:
+                case R.id.btn_test_save://保存
                     btnTestSave.setEnabled(false);
                     CountDownTimer timer = new CountDownTimer(3000 + 500, 1000) {
                         @Override
@@ -184,7 +188,6 @@ public class TestFragment extends Fragment {
                                 btnTestSave.setText(String.valueOf(millisUntilFinished / 1000));
                             }
                         }
-
                         @Override
                         public void onFinish() {
                             //非空判断
@@ -235,6 +238,10 @@ public class TestFragment extends Fragment {
 
     public void setSensor(int mpower, int msingal) {
         mdatafragment.SetSensor("功率", mpower, msingal, 1);
+    }
+
+    public void setSensor_(SensorData sensor_) {
+        mdatafragment.setPowerSignal(sensor_);
     }
 
     public void refreshdisconnect() {

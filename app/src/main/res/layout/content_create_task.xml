@@ -8,18 +8,12 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <LinearLayout
-
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="clip_horizontal"
         android:orientation="vertical">
 
-
-
-
-
-
-
+        <!--电机型号-->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -29,7 +23,6 @@
             android:orientation="horizontal">
 
             <LinearLayout
-
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -37,7 +30,6 @@
                 android:orientation="horizontal">
 
                 <TextView
-
                     style="@style/TextViewName"
                     android:text="电机型号：" />
 
@@ -48,7 +40,6 @@
                     android:clickable="false" />
 
                 <TextView
-
                     style="@style/TextViewUnit"
                     android:text="" />
 
@@ -58,6 +49,7 @@
 
         </LinearLayout>
 
+        <!--钳表量程-->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -102,13 +94,10 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
-
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
-
                     android:orientation="horizontal">
-
                     <TextView
                         android:id="@+id/tv_param_motor_csff1"
                         style="@style/TextViewName"
@@ -120,13 +109,17 @@
                         android:entries="@array/motortest_type" />
 
                     <TextView
-
                         style="@style/TextViewUnit"
                         android:layout_marginLeft="5dp"
                         android:text="  " />
+
                 </LinearLayout>
+
             </LinearLayout>
+
         </LinearLayout>
+
+        <!--电压电流变比-->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -136,7 +129,6 @@
             android:orientation="horizontal">
 
             <LinearLayout
-
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -144,10 +136,8 @@
                 android:orientation="horizontal">
 
                 <TextView
-
                     style="@style/TextViewName"
                     android:text="电压变比: " />
-
 
                 <EditText
                     android:id="@+id/et_param_dybb1"
@@ -174,7 +164,6 @@
             </LinearLayout>
 
             <LinearLayout
-
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -182,10 +171,8 @@
                 android:orientation="horizontal">
 
                 <TextView
-
                     style="@style/TextViewName"
                     android:text="电流变比: " />
-
 
                 <EditText
                     android:id="@+id/et_param_dlbb1"
@@ -205,14 +192,13 @@
                     android:text="1" />
 
                 <TextView
-
                     android:id="@+id/tv_param_dlbb"
                     style="@style/TextViewUnit"
                     android:layout_marginLeft="5dp"
                     android:text="1.0" />
             </LinearLayout>
-        </LinearLayout>
 
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -229,11 +215,6 @@
                 android:layout_weight="1"
                 android:src="@drawable/cs_line_02" />
         </LinearLayout>
-
-
-
-
-
 
         <LinearLayout
             android:id="@+id/ly_param_set"
@@ -294,8 +275,7 @@
 
                     <EditText
                         android:id="@+id/et_param_set_eddl"
-                        style="@style/EdittextInput"
-                       />
+                        style="@style/EdittextInput" />
 
                     <TextView
 
@@ -330,8 +310,7 @@
 
                     <EditText
                         android:id="@+id/et_param_set_edgl"
-                        style="@style/EdittextInput"
-                        />
+                        style="@style/EdittextInput" />
 
                     <TextView
 
@@ -464,7 +443,7 @@
 
                         style="@style/TextViewUnit"
                         android:layout_marginLeft="5dp"
-                        android:text="@string/kW" />
+                        android:text="" />
 
 
                 </LinearLayout>
@@ -492,12 +471,10 @@
 
                         style="@style/TextViewUnit"
                         android:layout_marginLeft="5dp"
-                        android:text="@string/kW" />
+                        android:text="" />
 
                 </LinearLayout>
             </LinearLayout>
-
-
 
 
             <LinearLayout
@@ -508,5 +485,7 @@
                 android:layout_weight="1"
                 android:orientation="horizontal"></LinearLayout>
         </LinearLayout>
+
     </LinearLayout>
+
 </android.support.v4.widget.NestedScrollView>

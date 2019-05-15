@@ -18,8 +18,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.greendao.manager.DataTFJ;
-import com.greendao.manager.motorData;
+import com.greendao.manager.MotorData;
 import com.jaeger.library.StatusBarUtil;
+import com.motor.Tools.SerialControlMy;
 import com.sensor.SensorData;
 import com.sensor.view.SensorView;
 import com.motor.Tools.MyFunction;
@@ -88,8 +89,8 @@ public class SensorActivity extends AppCompatActivity {
     private boolean IsStart;
     //</editor-fold>
     private Handler handler;
-    SerialControl ComA;
-    private motorData mData;
+    SerialControlMy ComA;
+    private MotorData mData;
     private int mpower;
     private int msingal;
 
@@ -113,7 +114,7 @@ public class SensorActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);  //决定左上角的图标是否可以点击
         StatusBarUtil.setColor(this, getResources().getColor(R.color.tittleBar), 0);
         mdata = new DataTFJ();
-        mData=new motorData();
+        mData=new MotorData();
         handler = new Handler();
 
         mFsList = new float[16];
@@ -134,7 +135,7 @@ public class SensorActivity extends AppCompatActivity {
         super.onStart();
         // DataType.DATA_OK_PARSE : 返回整的串口数据包
         // DataType.DATA_NO_PARSE : 返回不进行校验的数据，不按完整数据包返回。
-        ComA = new SerialControl(SensorActivity.this, DataType.DATA_OK_PARSE);
+        ComA = new SerialControlMy(SensorActivity.this, DataType.DATA_OK_PARSE);
         ComA.setiDelay(100);  // 设置读取串口的时间间隔
         ComControl.OpenComPort(ComA); // 打开串口
         // 定义刷新UI线程，从SerialControl 类中读取需要刷新的数据。

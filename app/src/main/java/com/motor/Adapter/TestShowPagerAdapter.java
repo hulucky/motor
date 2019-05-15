@@ -14,8 +14,6 @@ public class TestShowPagerAdapter extends FragmentPagerAdapter {
         super(fm);
         this.mFragments = mFragments;
     }
-
-
     @Override
     public Fragment getItem(int position) {
         return mFragments.get(position);

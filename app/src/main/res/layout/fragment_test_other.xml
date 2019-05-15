@@ -169,352 +169,360 @@
                             android:textSize="14sp" />
                     </LinearLayout>
 
-                    <TextView
-                        style="@style/splite_line_state"
-                        android:layout_marginTop="@dimen/x20" />
+                    <!--隐藏谐波分量及波形因数-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="gone">
 
-                    <LinearLayout style="@style/LinearLayout_style_testother">
+                        <TextView
+                            style="@style/splite_line_state"
+                            android:layout_marginTop="@dimen/x20" />
 
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center_horizontal">
+                        <LinearLayout style="@style/LinearLayout_style_testother">
 
-                            <TextView
-                                style="@style/TextView_style1"
-                                android:text="谐波分量" />
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center_horizontal">
+
+                                <TextView
+                                    style="@style/TextView_style1"
+                                    android:text="谐波分量" />
+
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1">
+
+                                <View style="@style/split_vetical" />
+
+                                <TextView
+                                    style="@style/TextView_style1"
+                                    android:layout_marginLeft="60dp"
+                                    android:text="波形因数" />
+
+
+                            </LinearLayout>
 
 
                         </LinearLayout>
 
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1">
+                        <TextView style="@style/splite_line_state" />
 
-                            <View style="@style/split_vetical" />
+                        <LinearLayout style="@style/LinearLayout_style_testother">
 
-                            <TextView
-                                style="@style/TextView_style1"
-                                android:layout_marginLeft="60dp"
-                                android:text="波形因数" />
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1">
+
+                                <TextView
+                                    style="@style/TextView_style1"
+                                    android:text="A相电压：" />
+
+                                <TextView
+                                    android:id="@+id/et_other_thdUA"
+                                    style="@style/TextView_style1"
+                                    android:layout_width="80dp" />
+
+                                <TextView
+                                    style="@style/TextView_style1"
+                                    android:layout_width="40dp"
+
+                                    android:gravity="start"
+                                    android:text="%" />
+
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+
+                                android:layout_weight="1">
+
+                                <View style="@style/split_vetical" />
+
+                                <TextView
+                                    style="@style/TextView_style1"
+                                    android:layout_marginLeft="5dp"
+                                    android:text="A相电压：" />
+
+                                <TextView
+                                    android:id="@+id/et_other_kua"
+                                    style="@style/TextView_style1"
+                                    android:layout_width="80dp" />
+
+
+                            </LinearLayout>
 
 
                         </LinearLayout>
 
+                        <TextView style="@style/splite_line_state" />
 
+                        <LinearLayout style="@style/LinearLayout_style_testother">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1">
+
+                                <TextView
+                                    style="@style/TextView_style1"
+                                    android:text="B相电压：" />
+
+                                <TextView
+                                    android:id="@+id/et_other_thdUB"
+                                    style="@style/TextView_style1"
+                                    android:layout_width="80dp" />
+
+                                <TextView
+                                    style="@style/TextView_style1"
+                                    android:layout_width="40dp"
+
+                                    android:gravity="start"
+                                    android:text="%" />
+
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1">
+
+                                <View style="@style/split_vetical" />
+
+                                <TextView
+                                    style="@style/TextView_style1"
+                                    android:layout_marginLeft="5dp"
+                                    android:text="B相电压：" />
+
+                                <TextView
+                                    android:id="@+id/et_other_kub"
+                                    style="@style/TextView_style1"
+                                    android:layout_width="80dp" />
+
+
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+                        <TextView style="@style/splite_line_state" />
+
+                        <LinearLayout style="@style/LinearLayout_style_testother">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1">
+
+                                <TextView
+                                    style="@style/TextView_style1"
+                                    android:text="C相电压：" />
+
+                                <TextView
+                                    android:id="@+id/et_other_thdUC"
+                                    style="@style/TextView_style1"
+                                    android:layout_width="80dp" />
+
+                                <TextView
+                                    style="@style/TextView_style1"
+                                    android:layout_width="40dp"
+
+                                    android:gravity="start"
+                                    android:text="%" />
+
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1">
+
+                                <View style="@style/split_vetical" />
+
+                                <TextView
+                                    style="@style/TextView_style1"
+                                    android:layout_marginLeft="5dp"
+                                    android:text="C相电压：" />
+
+                                <TextView
+                                    android:id="@+id/et_other_kuc"
+                                    style="@style/TextView_style1"
+                                    android:layout_width="80dp" />
+
+
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+                        <TextView style="@style/splite_line_state" />
+
+                        <LinearLayout style="@style/LinearLayout_style_testother">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1">
+
+                                <TextView
+                                    style="@style/TextView_style1"
+                                    android:text="A相电流：" />
+
+                                <TextView
+                                    android:id="@+id/et_other_thdIA"
+                                    style="@style/TextView_style1"
+                                    android:layout_width="80dp" />
+
+                                <TextView
+                                    style="@style/TextView_style1"
+                                    android:layout_width="40dp"
+
+                                    android:gravity="start"
+                                    android:text="%" />
+
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1">
+
+                                <View style="@style/split_vetical" />
+
+                                <TextView
+                                    style="@style/TextView_style1"
+                                    android:layout_marginLeft="5dp"
+                                    android:text="A相电流：" />
+
+                                <TextView
+                                    android:id="@+id/et_other_kia"
+                                    style="@style/TextView_style1"
+                                    android:layout_width="84dp" />
+
+
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+                        <TextView style="@style/splite_line_state" />
+
+
+                        <LinearLayout style="@style/LinearLayout_style_testother">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1">
+
+                                <TextView
+                                    style="@style/TextView_style1"
+                                    android:text="B相电流：" />
+
+                                <TextView
+                                    android:id="@+id/et_other_thdIB"
+                                    style="@style/TextView_style1"
+                                    android:layout_width="80dp" />
+
+                                <TextView
+                                    style="@style/TextView_style1"
+                                    android:layout_width="40dp"
+
+                                    android:gravity="start"
+                                    android:text="%" />
+
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1">
+
+                                <View style="@style/split_vetical" />
+
+                                <TextView
+                                    style="@style/TextView_style1"
+                                    android:layout_marginLeft="5dp"
+                                    android:text="B相电流：" />
+
+                                <TextView
+                                    android:id="@+id/et_other_kib"
+                                    style="@style/TextView_style1"
+                                    android:layout_width="80dp" />
+
+
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+                        <TextView style="@style/splite_line_state" />
+
+                        <LinearLayout style="@style/LinearLayout_style_testother">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1">
+
+                                <TextView
+                                    style="@style/TextView_style1"
+                                    android:text="C相电流：" />
+
+                                <TextView
+                                    android:id="@+id/et_other_thdIC"
+                                    style="@style/TextView_style1"
+                                    android:layout_width="80dp" />
+
+                                <TextView
+                                    style="@style/TextView_style1"
+                                    android:layout_width="40dp"
+
+                                    android:gravity="start"
+                                    android:text="%" />
+
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1">
+
+                                <View style="@style/split_vetical" />
+
+                                <TextView
+                                    style="@style/TextView_style1"
+                                    android:layout_marginLeft="5dp"
+                                    android:text="C相电流：" />
+
+                                <TextView
+                                    android:id="@+id/et_other_kic"
+                                    style="@style/TextView_style1"
+                                    android:layout_width="80dp" />
+
+
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+                        <TextView style="@style/splite_line_state" />
                     </LinearLayout>
-
-                    <TextView style="@style/splite_line_state" />
-
-                    <LinearLayout style="@style/LinearLayout_style_testother">
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1">
-
-                            <TextView
-                                style="@style/TextView_style1"
-                                android:text="A相电压：" />
-
-                            <TextView
-                                android:id="@+id/et_other_thdUA"
-                                style="@style/TextView_style1"
-                                android:layout_width="80dp" />
-
-                            <TextView
-                                style="@style/TextView_style1"
-                                android:layout_width="40dp"
-
-                                android:gravity="start"
-                                android:text="%" />
-
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-
-                            android:layout_weight="1">
-
-                            <View style="@style/split_vetical" />
-
-                            <TextView
-                                style="@style/TextView_style1"
-                                android:layout_marginLeft="5dp"
-                                android:text="A相电压：" />
-
-                            <TextView
-                                android:id="@+id/et_other_kua"
-                                style="@style/TextView_style1"
-                                android:layout_width="80dp" />
-
-
-                        </LinearLayout>
-
-
-                    </LinearLayout>
-
-                    <TextView style="@style/splite_line_state" />
-
-                    <LinearLayout style="@style/LinearLayout_style_testother">
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1">
-
-                            <TextView
-                                style="@style/TextView_style1"
-                                android:text="B相电压：" />
-
-                            <TextView
-                                android:id="@+id/et_other_thdUB"
-                                style="@style/TextView_style1"
-                                android:layout_width="80dp" />
-
-                            <TextView
-                                style="@style/TextView_style1"
-                                android:layout_width="40dp"
-
-                                android:gravity="start"
-                                android:text="%" />
-
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1">
-
-                            <View style="@style/split_vetical" />
-
-                            <TextView
-                                style="@style/TextView_style1"
-                                android:layout_marginLeft="5dp"
-                                android:text="B相电压：" />
-
-                            <TextView
-                                android:id="@+id/et_other_kub"
-                                style="@style/TextView_style1"
-                                android:layout_width="80dp" />
-
-
-                        </LinearLayout>
-
-
-                    </LinearLayout>
-
-                    <TextView style="@style/splite_line_state" />
-
-                    <LinearLayout style="@style/LinearLayout_style_testother">
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1">
-
-                            <TextView
-                                style="@style/TextView_style1"
-                                android:text="C相电压：" />
-
-                            <TextView
-                                android:id="@+id/et_other_thdUC"
-                                style="@style/TextView_style1"
-                                android:layout_width="80dp" />
-
-                            <TextView
-                                style="@style/TextView_style1"
-                                android:layout_width="40dp"
-
-                                android:gravity="start"
-                                android:text="%" />
-
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1">
-
-                            <View style="@style/split_vetical" />
-
-                            <TextView
-                                style="@style/TextView_style1"
-                                android:layout_marginLeft="5dp"
-                                android:text="C相电压：" />
-
-                            <TextView
-                                android:id="@+id/et_other_kuc"
-                                style="@style/TextView_style1"
-                                android:layout_width="80dp" />
-
-
-                        </LinearLayout>
-
-
-                    </LinearLayout>
-
-                    <TextView style="@style/splite_line_state" />
-
-                    <LinearLayout style="@style/LinearLayout_style_testother">
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1">
-
-                            <TextView
-                                style="@style/TextView_style1"
-                                android:text="A相电流：" />
-
-                            <TextView
-                                android:id="@+id/et_other_thdIA"
-                                style="@style/TextView_style1"
-                                android:layout_width="80dp" />
-
-                            <TextView
-                                style="@style/TextView_style1"
-                                android:layout_width="40dp"
-
-                                android:gravity="start"
-                                android:text="%" />
-
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1">
-
-                            <View style="@style/split_vetical" />
-
-                            <TextView
-                                style="@style/TextView_style1"
-                                android:layout_marginLeft="5dp"
-                                android:text="A相电流：" />
-
-                            <TextView
-                                android:id="@+id/et_other_kia"
-                                style="@style/TextView_style1"
-                                android:layout_width="84dp" />
-
-
-                        </LinearLayout>
-
-
-                    </LinearLayout>
-
-                    <TextView style="@style/splite_line_state" />
-
-
-                    <LinearLayout style="@style/LinearLayout_style_testother">
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1">
-
-                            <TextView
-                                style="@style/TextView_style1"
-                                android:text="B相电流：" />
-
-                            <TextView
-                                android:id="@+id/et_other_thdIB"
-                                style="@style/TextView_style1"
-                                android:layout_width="80dp" />
-
-                            <TextView
-                                style="@style/TextView_style1"
-                                android:layout_width="40dp"
-
-                                android:gravity="start"
-                                android:text="%" />
-
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1">
-
-                            <View style="@style/split_vetical" />
-
-                            <TextView
-                                style="@style/TextView_style1"
-                                android:layout_marginLeft="5dp"
-                                android:text="B相电流：" />
-
-                            <TextView
-                                android:id="@+id/et_other_kib"
-                                style="@style/TextView_style1"
-                                android:layout_width="80dp" />
-
-
-                        </LinearLayout>
-
-
-                    </LinearLayout>
-
-                    <TextView style="@style/splite_line_state" />
-
-                    <LinearLayout style="@style/LinearLayout_style_testother">
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1">
-
-                            <TextView
-                                style="@style/TextView_style1"
-                                android:text="C相电流：" />
-
-                            <TextView
-                                android:id="@+id/et_other_thdIC"
-                                style="@style/TextView_style1"
-                                android:layout_width="80dp" />
-
-                            <TextView
-                                style="@style/TextView_style1"
-                                android:layout_width="40dp"
-
-                                android:gravity="start"
-                                android:text="%" />
-
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1">
-
-                            <View style="@style/split_vetical" />
-
-                            <TextView
-                                style="@style/TextView_style1"
-                                android:layout_marginLeft="5dp"
-                                android:text="C相电流：" />
-
-                            <TextView
-                                android:id="@+id/et_other_kic"
-                                style="@style/TextView_style1"
-                                android:layout_width="80dp" />
-
-
-                        </LinearLayout>
-
-
-                    </LinearLayout>
-
-                    <TextView style="@style/splite_line_state" />
 
 
                 </LinearLayout>

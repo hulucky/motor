@@ -16,11 +16,15 @@ import android.widget.TextView;
 
 import com.greendao.manager.DaoMaster;
 import com.greendao.manager.DaoSession;
+import com.greendao.manager.MotorData;
 import com.greendao.manager.MotorTxtToDb;
+import com.motor.administrator.DATAbase.greendao.MotorBean;
+import com.motor.bean.MotorrBean;
 import com.nrs.utils.tools.CrashHandler;
 import com.motor.administrator.DATAbase.R;
 import com.motor.administrator.DATAbase.greendao.TaskEntity;
 import com.tencent.bugly.Bugly;
+import com.xzkydz.bean.ComBean;
 import com.xzkydz.function.app.KyApp;
 import com.xzkydz.function.style.AppStyle;
 import com.xzkydz.function.utils.SharedPreferencesUtils;
@@ -30,6 +34,12 @@ public class MyApp extends KyApp {
     private static DaoSession daoSession;
     private static TaskEntity taskEntity = new TaskEntity(); //测试任务
     private static Boolean isSetMotor1;
+    public static ComBean comBeanUI;//电压电流实体类
+    public static ComBean comBeanHAM;//谐波实体类
+    public static ComBean comBeanMotor;//电机实体类
+    public static MotorrBean motorBean;//电机实体类
+
+    public static boolean isConnected;//传感器是否连接
 
     public static String getSnapName() {
         return snapName;
@@ -102,8 +112,8 @@ public class MyApp extends KyApp {
         initAllData();
         insertTxtMotor();
         mInstance = MyApp.this;
-        CrashHandler crashHandler = CrashHandler.getInstance();
-        crashHandler.init(this);
+//        CrashHandler crashHandler = CrashHandler.getInstance();
+//        crashHandler.init(this);
         Bugly.init(getApplicationContext(), "d6df5275c0", false);
     }
 
@@ -170,7 +180,7 @@ public class MyApp extends KyApp {
     }
 
     public static double[] recalculate(double power, double elec, int jishu) {
-        double[] res =new double[2];
+        double[] res = new double[2];
 
         double jishugonglv;
         double jishudianliu;
@@ -200,12 +210,11 @@ public class MyApp extends KyApp {
                 break;
         }
 
-        res[0] =(double) power * jishugonglv;
-        res[1] =(double) elec * jishudianliu;
+        res[0] = (double) power * jishugonglv;
+        res[1] = (double) elec * jishudianliu;
         return res;
 
     }
-
 
 
 }

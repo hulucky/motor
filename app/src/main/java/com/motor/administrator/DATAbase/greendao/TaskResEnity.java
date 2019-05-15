@@ -1,6 +1,6 @@
 package com.motor.administrator.DATAbase.greendao;
 
-import com.greendao.manager.motorData;
+import com.greendao.manager.MotorData;
 
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;

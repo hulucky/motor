@@ -48,7 +48,7 @@ dependencies {
     implementation 'org.greenrobot:greendao:3.2.2'
     // add library
 //    implementation 'com.github.yknn:PublicFunction:v2.7.4'
-    implementation 'com.gitee.xzkydz:PublicUI:v2.0.2'
+    implementation 'com.gitee.xzkydz:PublicUI:v2.0.9'
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     // 设置沉浸式菜单栏

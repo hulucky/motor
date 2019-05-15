@@ -17,7 +17,7 @@ import android.widget.TextView;
 
 import com.greendao.manager.DataTFJ;
 import com.greendao.manager.TaskResEnityDao;
-import com.greendao.manager.motorData;
+import com.greendao.manager.MotorData;
 import com.motor.Adapter.TestDataDetailAdapter;
 import com.motor.administrator.DATAbase.R;
 import com.motor.administrator.DATAbase.greendao.TaskEntity;
@@ -236,7 +236,7 @@ public class DataDetailfragment extends Fragment implements TestDataDetailAdapte
         try {
             myApp = MyApp.getInstance();
 
-            mdata.setMotordata(new motorData());
+            mdata.setMotordata(new MotorData());
             mdata.SetResOnly(mres);
             mdata.Refresh();
             refresh(mdata);
@@ -265,7 +265,7 @@ public class DataDetailfragment extends Fragment implements TestDataDetailAdapte
 
     public void refresh(DataTFJ mmdata) {
 
-        motorData mData = mmdata.getMotordata();
+        MotorData mData = mmdata.getMotordata();
         try {
             etDatatestEddy.setText(df2.format(mData.getEddy()));
             etDatatestEddl.setText(df2.format(mData.getEddl()));
@@ -416,7 +416,7 @@ public class DataDetailfragment extends Fragment implements TestDataDetailAdapte
 
 
     private void ReCalMotor(float changei, float changeu) {
-        motorData mmotordata = mdata.getMotordata();
+        MotorData mmotordata = mdata.getMotordata();
         changeu = (float) (changeu / (Math.sqrt(3)));
         float Ua = (float) (mmotordata.getUA() + changeu);
         float Ia = (float) mmotordata.getIA() + changei;

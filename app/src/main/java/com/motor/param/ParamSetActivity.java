@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.format.Time;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -25,6 +26,7 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.greendao.dbUtils.GreateTaskUtils;
 import com.jaeger.library.StatusBarUtil;
@@ -45,7 +47,7 @@ import es.dmoral.toasty.Toasty;
 import static android.text.TextUtils.isEmpty;
 import static com.motor.Tools.Method.IsEmpty;
 
-//参数设置activity,也即创建任务界面
+//参数设置activity,即创建任务界面
 public class ParamSetActivity extends AppCompatActivity {
 
     @BindView(R.id.toolbar)
@@ -62,33 +64,8 @@ public class ParamSetActivity extends AppCompatActivity {
     EditText etNumber;
     @BindView(R.id.et_people_name)
     EditText etPeopleName;
-    //    @BindView(R.id.task_inf_ll)
-//    LinearLayout taskInfLl;
-//    @BindView(R.id.tv_param_djxl1)
-//    TextView tvParamDjxl1;
-//    @BindView(R.id.tv_param_qblc1)
-//    TextView tvParamQblc1;
-//    @BindView(R.id.sp_input_param_qblc1)
-//    Spinner spInputParamQblc1;
-//    @BindView(R.id.tv_param_motor_csff1)
-//    TextView tvParamMotorCsff1;
-//    @BindView(R.id.sp_input_param_motor_csff1)
-//    Spinner spInputParamMotorCsff1;
-//    @BindView(R.id.et_param_dybb1)
-//    EditText etParamDybb1;
-//    @BindView(R.id.et_param_dybb2)
-//    EditText etParamDybb2;
-//    @BindView(R.id.tv_param_dybb)
-//    TextView tvParamDybb;
-//    @BindView(R.id.et_param_dlbb1)
-//    EditText etParamDlbb1;
-//    @BindView(R.id.et_param_dlbb2)
-//    EditText etParamDlbb2;
-//    @BindView(R.id.tv_param_dlbb)
-//    TextView tvParamDlbb;
     @BindView(R.id.imageView3)
     ImageView imageView3;
-
     @BindView(R.id.et_param_set_eddy)
     EditText etParamSetEddy;
     @BindView(R.id.et_param_set_eddl)
@@ -107,43 +84,20 @@ public class ParamSetActivity extends AppCompatActivity {
     EditText etParamSetWgjjdl;
     @BindView(R.id.ly_param_set)
     LinearLayout lyParamSet;
-    //    @BindView(R.id.nestedScrollView)
-//    NestedScrollView nestedScrollView;
     @BindView(R.id.fab)
     FloatingActionButton fab;
     @BindView(R.id.btn_go_test)
     Button btnGoTest;
-    private MyApp myApp;
-    private int openlimit = 0; //任务信息 展开、关闭设位置
-    TaskEntity mTask;
-    private boolean ParamIsSet = false;//设定参数是否展开
-    private boolean canSaveedxl = false;
-    private boolean canSavedjxl2 = false;
-    private boolean canSavesd = false;
-    private boolean newTask = true;
-
-
-    //    @BindView(R.id.toolbar_layout)
-//    CollapsingToolbarLayout toolbarLayout;
-//
-//
     @BindView(R.id.task_inf_ll)
     LinearLayout llTittle;
-    //
-//
     @BindView(R.id.sp_input_param_motor_csff1)
     Spinner spmcsff1;
     @BindView(R.id.sp_input_param_qblc1)
     Spinner spqblc1;
-    //
-//
-//    @BindView(R.id.ly_param_set)
-//    LinearLayout lyset;
     @BindView(R.id.tv_param_dlbb)
     TextView tvdlbb;
     @BindView(R.id.tv_param_dybb)
     TextView tvdybb;
-
     @BindView(R.id.et_param_dlbb1)
     EditText etdlbb1;
     @BindView(R.id.et_param_dybb1)
@@ -152,21 +106,23 @@ public class ParamSetActivity extends AppCompatActivity {
     EditText etdlbb2;
     @BindView(R.id.et_param_dybb2)
     EditText etdybb2;
-    //
-//
-//
-//
     @BindView(R.id.nestedScrollView)
     NestedScrollView nestedscrollview;
-    //    @BindView(R.id.imageview)
-//    ImageView imageView;
-//
     @BindView(R.id.tv_param_djxl1)
     TextView tvdjxl1;
 
+    private MyApp myApp;
+    private int openlimit = 0; //任务信息 展开、关闭设位置
+    TaskEntity mTask;
+    private boolean ParamIsSet = false;//设定参数是否展开
+    private boolean canSaveedxl = false;
+    private boolean canSavedjxl2 = false;
+    private boolean canSavesd = false;
+    private boolean newTask = true;
     private boolean canSaveptg;
     private Animation mShakeAnim;
     private String errstr = "";
+    private boolean isFromActivityResult;//是否从选择点击库界面过来
 
 
     @Override
@@ -195,12 +151,9 @@ public class ParamSetActivity extends AppCompatActivity {
     @Override
     protected void onPostResume() {
         super.onPostResume();
-
-
     }
 
     private void initView() {
-
         TextChangeDLBB textChangedl = new TextChangeDLBB();
         TextChangeDYBB textChangedy = new TextChangeDYBB();
         etdybb1.addTextChangedListener(textChangedy);
@@ -240,9 +193,7 @@ public class ParamSetActivity extends AppCompatActivity {
                         etParamSetEdxl.setTextColor(Color.RED);
                     }
                 } catch (
-                        NumberFormatException e)
-
-                {
+                        NumberFormatException e) {
                     e.printStackTrace();
                 }
             }
@@ -257,38 +208,29 @@ public class ParamSetActivity extends AppCompatActivity {
             }
 
         });
-        TextChange textChange = new TextChange();
-        etParamSetEdgl.addTextChangedListener(textChange);
-        etParamSetEddl.addTextChangedListener(textChange);
-        etParamSetJs.addTextChangedListener(textChange);
-
-
+//        TextChange textChange = new TextChange();
+//        etParamSetEdgl.addTextChangedListener(textChange);
+//        etParamSetEddl.addTextChangedListener(textChange);
+//        etParamSetJs.addTextChangedListener(textChange);
     }
-//
 
     private Boolean CanSave() {
         boolean res = true;
         errstr = "";
         try {
-
-
             if (isEmpty(mTask.getDjk1())) {
                 res = res & false;
                 tvdjxl1.startAnimation(mShakeAnim);
-
                 errstr = errstr + "\n" + "未选择电机1";
             }
-
             if (isEmpty(tvdybb.getText().toString())) {
                 res = res & false;
                 tvdybb.startAnimation(mShakeAnim);
-
                 errstr = errstr + "\n" + "电压变比设置不正确";
             }
             if (isEmpty(tvdlbb.getText().toString())) {
                 res = res & false;
                 tvdlbb.startAnimation(mShakeAnim);
-
                 errstr = errstr + "\n" + "电流变比设置不正确";
             }
             if (IsEmpty(etParamSetEddy)) {
@@ -364,7 +306,6 @@ public class ParamSetActivity extends AppCompatActivity {
                 errstr = errstr + "\n" + "无功经济当量：0.02～0.1";
             }
 
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -375,7 +316,6 @@ public class ParamSetActivity extends AppCompatActivity {
         nestedscrollview.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
-
                 if (motionEvent.getAction() == KeyEvent.ACTION_UP) {
                     appBar.setExpanded((openlimit > -170 ? true : false), true);
                     if (openlimit > -170 ? true : false) {
@@ -386,7 +326,6 @@ public class ParamSetActivity extends AppCompatActivity {
                     }
                     return true;
                 }
-
                 return false;
             }
         });
@@ -416,7 +355,7 @@ public class ParamSetActivity extends AppCompatActivity {
                 intent.setClass(ParamSetActivity.this, HistoryTaskSearchActivity.class);
                 startActivityForResult(intent, ConstantData.HistoryTask_resultCode);
                 break;
-            case R.id.btn_go_test:
+            case R.id.btn_go_test://开始测试点击事件
                 // 参数合理性检测
                 if (CanSave()) {
                     SaveTask();
@@ -436,13 +375,10 @@ public class ParamSetActivity extends AppCompatActivity {
                 intent.setClass(ParamSetActivity.this, MotorSelectorActivity.class);
                 startActivityForResult(intent, ConstantData.Motor_requestCode);
                 break;
-
-
         }
     }
 
     private void SaveTask() {
-
         try {
             if (!etTaskName.getText().toString().equals("")) {
                 mTask.setUnitName(etTaskName.getText().toString());
@@ -459,8 +395,6 @@ public class ParamSetActivity extends AppCompatActivity {
             } else {
                 mTask.setPeopleName("未设定人员");
             }
-
-
             if (!isEmpty(etdybb1.getText())) {
                 mTask.setDybb1(etdybb1.getText().toString());
             }
@@ -473,25 +407,20 @@ public class ParamSetActivity extends AppCompatActivity {
             if (!isEmpty(etdlbb2.getText())) {
                 mTask.setDlbb2(etdlbb2.getText().toString());
             }
-
             mTask.setDjqblc1(spqblc1.getSelectedItem().toString());
-
             mTask.setDjcsff1(spmcsff1.getSelectedItem().toString());
             mTask.setCsff(spmcsff1.getSelectedItem().toString());
             mTask.setDjeddy1(etParamSetEddy.getText().toString());
             mTask.setDjeddl1(etParamSetEddl.getText().toString());
             mTask.setDjedgl1(etParamSetEdgl.getText().toString());
-                mTask.setDjedxl1(etParamSetEdxl.getText().toString());
+            mTask.setDjedxl1(etParamSetEdxl.getText().toString());
             mTask.setDjkzgl1(etParamSetKzgl.getText().toString());
             mTask.setDjkzdl1(etParamSetKzdl.getText().toString());
             mTask.setDjjs1(etParamSetJs.getText().toString());
             mTask.setDjwgjjdl1(etParamSetWgjjdl.getText().toString());
 
-
             if (!mTask.get_IsCompleteTask()) {
-
                 mTask.setGreateTaskTime(DateUtil.getGreatedTaskTime());
-
             }
             mTask.setBy1("0.95");
             new GreateTaskUtils().insert(mTask);
@@ -500,12 +429,10 @@ public class ParamSetActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-
     }
 
-    //EditText的监听器
+    //EditText的监听器--电压变比
     class TextChangeDYBB implements TextWatcher {
-
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -519,7 +446,6 @@ public class ParamSetActivity extends AppCompatActivity {
         @Override
         public void afterTextChanged(Editable s) {
             try {
-
                 Animation mShakeAnim = AnimationUtils.loadAnimation(ParamSetActivity.this, R.anim.shake_x);
                 DecimalFormat df4 = new DecimalFormat("0.0");
                 double mDybbone, mDybbtwo;
@@ -529,32 +455,27 @@ public class ParamSetActivity extends AppCompatActivity {
                 if (mDybbtwo == 0.0f) {
                     etdybb2.startAnimation(mShakeAnim);
                     tvdybb.setText((""));
-
                 } else {
                     if (mDybbtwo > mDybbone) {
                         dybb = mDybbtwo / mDybbone;
                         etdybb1.setTextColor(Color.argb(160, 255, 140, 0));
-
                         etdybb2.setTextColor(Color.argb(160, 255, 140, 0));
                     } else {
                         dybb = mDybbone / mDybbtwo;
                         etdybb1.setTextColor(Color.BLACK);
-
                         etdybb2.setTextColor(Color.BLACK);
                     }
                     tvdybb.setText(df4.format(dybb));
                 }
-
             } catch (NumberFormatException e) {
                 e.printStackTrace();
             }
-
         }
 
-    }//EditText的监听器
+    }
 
+    //EditText的监听器--电流变比
     class TextChangeDLBB implements TextWatcher {
-
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -568,8 +489,6 @@ public class ParamSetActivity extends AppCompatActivity {
         @Override
         public void afterTextChanged(Editable s) {
             try {
-
-
                 DecimalFormat df4 = new DecimalFormat("0.0");
                 double mDlbbone, mDlbbtwo;
                 double dlbb;
@@ -582,12 +501,10 @@ public class ParamSetActivity extends AppCompatActivity {
                     if (mDlbbtwo > mDlbbone) {
                         dlbb = mDlbbtwo / mDlbbone;
                         etdlbb1.setTextColor(Color.argb(160, 255, 140, 0));
-
                         etdlbb2.setTextColor(Color.argb(160, 255, 140, 0));
                     } else {
                         dlbb = mDlbbone / mDlbbtwo;
                         etdlbb1.setTextColor(Color.BLACK);
-
                         etdlbb2.setTextColor(Color.BLACK);
                     }
                     tvdlbb.setText(df4.format(dlbb));
@@ -595,43 +512,42 @@ public class ParamSetActivity extends AppCompatActivity {
             } catch (NumberFormatException e) {
                 e.printStackTrace();
             }
-
         }
-
     }
 
     //EditText的监听器
-    class TextChange implements TextWatcher {
-
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-        }
-
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-        }
-
-        @Override
-        public void afterTextChanged(Editable s) {
-            try {
-                DecimalFormat df4 = new DecimalFormat("00.00");
-                double mCedgl, mCeddl;
-                int mCjs;
-                mCedgl = Double.parseDouble(etParamSetEdgl.getText().toString());
-                mCeddl = Double.parseDouble(etParamSetEddl.getText().toString());
-                mCjs = Integer.parseInt(etParamSetJs.getText().toString());
-                double[] res = MyApp.recalculate(mCedgl, mCeddl, mCjs);
-                etParamSetKzgl.setText(df4.format(res[0]));
-                etParamSetKzdl.setText(df4.format(res[1]));
-            } catch (NumberFormatException e) {
-                e.printStackTrace();
-            }
-
-        }
-
-    }
+//    class TextChange implements TextWatcher {
+//        @Override
+//        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//        }
+//
+//        @Override
+//        public void onTextChanged(CharSequence s, int start, int before, int count) {
+//
+//        }
+//
+//        @Override
+//        public void afterTextChanged(Editable s) {
+//            if (!isFromActivityResult) {//如果不是从点击库选择界面进入，就重新计算
+//                Log.d("1234567498", "afterTextChanged: " + isFromActivityResult);
+//                try {
+//                    isFromActivityResult = false;
+//                    DecimalFormat df2 = new DecimalFormat("00.00");
+//                    double mCedgl, mCeddl;
+//                    int mCjs;
+//                    mCedgl = Double.parseDouble(etParamSetEdgl.getText().toString());
+//                    mCeddl = Double.parseDouble(etParamSetEddl.getText().toString());
+//                    mCjs = Integer.parseInt(etParamSetJs.getText().toString());
+//                    double[] res = MyApp.recalculate(mCedgl, mCeddl, mCjs);
+//                    etParamSetKzgl.setText(df2.format(res[0]));
+//                    etParamSetKzdl.setText(df2.format(res[1]));
+//                } catch (NumberFormatException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }
+//    }
 
     /**
      * 根据值, 设置spinner默认选中:
@@ -699,10 +615,9 @@ public class ParamSetActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         int motorResultCode = ConstantData.Motor_resultCode; //
-
         switch (resultCode) {
             case 22: // 电机库返回码 ConstantData.Motor_resultCode
-
+                isFromActivityResult = true;
                 tvdjxl1.setText(data.getStringExtra(ConstantData.MotorName_resultCode));
                 mTask.setDjk1(data.getStringExtra(ConstantData.MotorName_resultCode));
                 mTask.setDjeddy1(data.getStringExtra(ConstantData.MotorEddy_resultCode));
@@ -711,7 +626,6 @@ public class ParamSetActivity extends AppCompatActivity {
                 mTask.setDjedxl1(data.getStringExtra(ConstantData.MotorEdxl_resultCode));
                 mTask.setDjkzdl1(data.getStringExtra(ConstantData.MotorKzdl_resultCode));
                 mTask.setDjkzgl1(data.getStringExtra(ConstantData.MotorKzgl_resultCode));
-
                 mTask.setDjjs1(data.getStringExtra(ConstantData.MotorJs_resultCode));
                 mTask.setDjwgjjdl1(data.getStringExtra(ConstantData.MotorWgjjdl_resultCode));
 
@@ -723,6 +637,8 @@ public class ParamSetActivity extends AppCompatActivity {
                 etParamSetKzgl.setText(data.getStringExtra(ConstantData.MotorKzgl_resultCode));
                 etParamSetJs.setText(data.getStringExtra(ConstantData.MotorJs_resultCode));
                 etParamSetWgjjdl.setText(data.getStringExtra(ConstantData.MotorWgjjdl_resultCode));
+                Log.d("1234567498", "onActivityResult: " + data.getStringExtra(ConstantData.MotorKzdl_resultCode));
+                Log.d("1234567498", "onActivityResult: " + isFromActivityResult);
 
                 break;
 
@@ -730,15 +646,12 @@ public class ParamSetActivity extends AppCompatActivity {
                 Long taskId = data.getLongExtra(ConstantData.HistoryTask_ID_resultCode, 1L);
                 GreateTaskUtils greateTaskUtils = new GreateTaskUtils();
                 // 这个只是复用参数的历史任务，参数有可能在此基础上更改，不一定就是测试任务。
-
-
                 TaskEntity mmTask = greateTaskUtils.query(taskId);
                 if (mmTask.get_IsCompleteTask() == true) {
                     mTask = new TaskEntity();
                 }
                 CopyTask(mTask, mmTask);
                 this.setParForHistoryTask(mTask);
-
                 break;
             default:
                 break;
@@ -746,7 +659,6 @@ public class ParamSetActivity extends AppCompatActivity {
     }
 
     private void CopyTask(TaskEntity mTask, TaskEntity mmTask) {
-
         mTask.setBy12(mmTask.getBy12());
         mTask.setBy11(mmTask.getBy11());
         mTask.setBy10(mmTask.getBy10());
@@ -781,7 +693,6 @@ public class ParamSetActivity extends AppCompatActivity {
 
         mTask.setCsff(mmTask.getCsff());
 
-
 //        mTask.setGreateTaskTime(mmTask.getGreateTaskTime());
 //        mTask.setTaskHaveGetData(mmTask. getTaskHaveGetData());
 //        mTask.set_IsCompleteTask(mmTask. get_IsCompleteTask());
@@ -792,8 +703,6 @@ public class ParamSetActivity extends AppCompatActivity {
     }
 
     public void setParForHistoryTask(TaskEntity taskEnity) {
-
-
         try {
             etTaskName.setText(taskEnity.getUnitName());
             etNumber.setText(taskEnity.getGasePumpNumber());
@@ -813,11 +722,8 @@ public class ParamSetActivity extends AppCompatActivity {
             etParamSetJs.setText(taskEnity.getDjjs1());
             etParamSetWgjjdl.setText(taskEnity.getDjwgjjdl1());
 
-
             setSpinnerItemSelectedByValue(spqblc1, taskEnity.getDjqblc1());
-
             setSpinnerItemSelectedByValue(spmcsff1, taskEnity.getDjcsff1());
-
 
             tvdjxl1.setText(taskEnity.getDjk1());
 
@@ -825,6 +731,11 @@ public class ParamSetActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+    }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        isFromActivityResult = false;
     }
 }

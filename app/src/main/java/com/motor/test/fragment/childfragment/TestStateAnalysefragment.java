@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.greendao.manager.motorData;
+import com.greendao.manager.MotorData;
 import com.motor.administrator.DATAbase.R;
 import com.motor.administrator.DATAbase.greendao.TaskEntity;
 import com.motor.test.TestActivity;
@@ -119,7 +119,7 @@ public class TestStateAnalysefragment extends Fragment {
     public void refresh() {
 
         try {
-            motorData mData = mActivity.mdata.getMotordata();
+            MotorData mData = mActivity.mdata.getMotordata();
             //查看数据
             Log.i("aaa", "mData=="+mData.toString());
 

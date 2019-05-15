@@ -12,7 +12,7 @@
 
         android:background="@drawable/shape_show_test_data"
         android:overScrollMode="never"
-        android:scrollbars="none"></com.motor.view.MyNoScrollViewPager>
+        android:scrollbars="none"/>
 
 
     <LinearLayout
