@@ -39,7 +39,15 @@ public class MyApp extends KyApp {
     public static ComBean comBeanMotor;//电机实体类
     public static MotorrBean motorBean;//电机实体类
 
+    public static ComBean comBeanUI_Sensor;//电压电流实体类
+    public static ComBean comBeanHAM_Sensor;//谐波实体类
+    public static ComBean comBeanMotor_Sensor;//电机实体类
+    public static MotorrBean motorBean_Sensor;//电机实体类
+
     public static boolean isConnected;//传感器是否连接
+    public static boolean isConnected_Sensor;//传感器是否连接
+
+    public static boolean isFuYongCanShu;//是否是复用参数，在ParamSetActivity中开始测试时判断
 
     public static String getSnapName() {
         return snapName;

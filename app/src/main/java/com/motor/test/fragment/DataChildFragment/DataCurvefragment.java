@@ -56,9 +56,10 @@ public class DataCurvefragment extends Fragment {
     private List<TaskResEnity> mResList;
     private List<TaskEntity> mHisTasksList;
     String ChartUrl = "javascript:refreshView(";
-    DecimalFormat df4 = new DecimalFormat("####00.00");
-    DecimalFormat df2 = new DecimalFormat("####00");
-    DecimalFormat df3 = new DecimalFormat("####00.0");
+    DecimalFormat df1 = new DecimalFormat("####00.0");
+    DecimalFormat df2 = new DecimalFormat("####00.00");
+    DecimalFormat df3 = new DecimalFormat("####00.000");
+    DecimalFormat df4 = new DecimalFormat("####00.0000");
     Boolean IsRight = true;
     List<Long> ResIdLists;
     DrawView view;

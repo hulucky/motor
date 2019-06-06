@@ -49,6 +49,12 @@ public class SerialControl extends SerialHelper {
                 }
                 if (comBean.recData.length == 82) {//谐波 时刻在发送
                     MyApp.comBeanHAM = comBean;
+                    //解析传感器串口数据包，并更新motorBean的属性
+                    if (motorBean == null) {
+                        motorBean = new MotorrBean(comBean.recData);
+                    } else {
+                        motorBean.caculate(comBean.recData);
+                    }
                 }
 
                 //设置回调接口

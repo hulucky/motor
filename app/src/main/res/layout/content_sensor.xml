@@ -23,15 +23,12 @@
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
             android:layout_marginLeft="10dp"
+            android:orientation="vertical"
             app:layout_constraintBottom_toTopOf="parent"
             app:layout_constraintEnd_toStartOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
-
-
-
 
 
             <LinearLayout
@@ -61,21 +58,23 @@
                         android:id="@+id/gl1_sensor"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-android:layout_gravity="center_horizontal"
+                        android:layout_gravity="center_horizontal"
                         android:layout_marginTop="10dp"
                         android:background="@color/white"
                         app:CheckConnect="true"
                         app:CheckTime="5000"
                         app:DrawModel="variable"
                         app:SensorType="GONG_LV_XIANG" />
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
+
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="20dp"
                             android:layout_marginLeft="20dp"
+                            android:layout_marginTop="20dp"
                             android:layout_weight="1"
                             android:orientation="vertical">
 
@@ -84,49 +83,52 @@ android:layout_gravity="center_horizontal"
                                 android:layout_height="wrap_content">
 
                                 <TextView
-                                    android:text="AB线电压： "
-                                    style="@style/sensortext" />
+                                    style="@style/sensortext"
+                                    android:text="AB线电压： " />
 
                                 <TextView
                                     android:id="@+id/UAB1_sensor"
-                                    android:text=" V"
-                                    style="@style/sensorvalue" />
+                                    style="@style/sensorvalue"
+                                    android:text=" V" />
                             </LinearLayout>
+
                             <LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content">
 
                                 <TextView
-                                    android:text="BC线电压： "
-                                    style="@style/sensortext" />
+                                    style="@style/sensortext"
+                                    android:text="BC线电压： " />
 
                                 <TextView
                                     android:id="@+id/UBC1_sensor"
-                                    android:text=" V"
-                                    style="@style/sensorvalue" />
+                                    style="@style/sensorvalue"
+                                    android:text=" V" />
                             </LinearLayout>
+
                             <LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content">
 
                                 <TextView
-                                    android:text="CA线电压： "
-                                    style="@style/sensortext" />
+                                    style="@style/sensortext"
+                                    android:text="CA线电压： " />
 
                                 <TextView
                                     android:id="@+id/UCA1_sensor"
-                                    android:text=" V"
-                                    style="@style/sensorvalue" />
+                                    style="@style/sensorvalue"
+                                    android:text=" V" />
                             </LinearLayout>
 
 
                         </LinearLayout>
+
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:layout_marginTop="20dp"
                             android:layout_marginLeft="20dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_weight="1"
                             android:orientation="vertical">
 
                             <LinearLayout
@@ -134,49 +136,52 @@ android:layout_gravity="center_horizontal"
                                 android:layout_height="wrap_content">
 
                                 <TextView
-                                    android:text="A相电流："
-                                    style="@style/sensortext" />
+                                    style="@style/sensortext"
+                                    android:text="A相电流：" />
 
                                 <TextView
                                     android:id="@+id/IA1_sensor"
-                                    android:text=" A"
-                                    style="@style/sensorvalue" />
+                                    style="@style/sensorvalue"
+                                    android:text=" A" />
                             </LinearLayout>
+
                             <LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content">
 
                                 <TextView
-                                    android:text="B相电流："
-                                    style="@style/sensortext" />
+                                    style="@style/sensortext"
+                                    android:text="B相电流：" />
 
                                 <TextView
                                     android:id="@+id/IB1_sensor"
-                                    android:text=" A"
-                                    style="@style/sensorvalue" />
+                                    style="@style/sensorvalue"
+                                    android:text=" A" />
                             </LinearLayout>
+
                             <LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content">
 
                                 <TextView
-                                    android:text="C相电流："
-                                    style="@style/sensortext" />
+                                    style="@style/sensortext"
+                                    android:text="C相电流：" />
 
                                 <TextView
                                     android:id="@+id/IC1_sensor"
-                                    android:text=" A"
-                                    style="@style/sensorvalue" />
+                                    style="@style/sensorvalue"
+                                    android:text=" A" />
                             </LinearLayout>
 
 
                         </LinearLayout>
+
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
                             android:layout_marginTop="20dp"
                             android:layout_weight="1"
-                            android:layout_marginLeft="20dp"
                             android:orientation="vertical">
 
                             <LinearLayout
@@ -184,39 +189,41 @@ android:layout_gravity="center_horizontal"
                                 android:layout_height="wrap_content">
 
                                 <TextView
-                                    android:text="有功功率： "
-                                    style="@style/sensortext" />
+                                    style="@style/sensortext"
+                                    android:text="有功功率： " />
 
                                 <TextView
                                     android:id="@+id/P1_sensor"
-                                    android:text=" kW"
-                                    style="@style/sensorvalue" />
+                                    style="@style/sensorvalue"
+                                    android:text=" kW" />
                             </LinearLayout>
+
                             <LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content">
 
                                 <TextView
-                                    android:text="视在功率： "
-                                    style="@style/sensortext" />
+                                    style="@style/sensortext"
+                                    android:text="视在功率： " />
 
                                 <TextView
                                     android:id="@+id/Q1_sensor"
-                                    android:text=" kVA"
-                                    style="@style/sensorvalue" />
+                                    style="@style/sensorvalue"
+                                    android:text=" kVA" />
                             </LinearLayout>
+
                             <LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content">
 
                                 <TextView
-                                    android:text="功率因数： "
-                                    style="@style/sensortext" />
+                                    style="@style/sensortext"
+                                    android:text="功率因数： " />
 
                                 <TextView
                                     android:id="@+id/cos1_sensor"
-                                    android:text=" "
-                                    style="@style/sensorvalue" />
+                                    style="@style/sensorvalue"
+                                    android:text=" " />
                             </LinearLayout>
 
 

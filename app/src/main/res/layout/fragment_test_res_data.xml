@@ -12,7 +12,7 @@
 
         android:background="@drawable/shape_show_test_data"
         android:overScrollMode="never"
-        android:scrollbars="none"/>
+        android:scrollbars="none" />
 
 
     <LinearLayout
@@ -89,8 +89,8 @@
                 android:gravity="center"
                 android:text="效率           %"
                 android:textColor="#888888"
-                android:visibility="gone"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:visibility="gone" />
 
             <TextView
                 android:layout_width="0dp"
@@ -109,7 +109,7 @@
             android:id="@+id/lv_testdata_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:listSelector="@drawable/listviewselector"/>
+            android:listSelector="@drawable/listviewselector" />
 
     </LinearLayout>
 
@@ -128,10 +128,7 @@
             android:background="@color/orangered"
             android:text="删除"
             android:textColor="@color/white"
-            android:textSize="18sp"
-
-
-            >
+            android:textSize="18sp">
 
         </Button>
 
@@ -143,8 +140,8 @@
             android:background="#fd8607"
             android:text="打印"
             android:textColor="@color/white"
-            android:visibility="gone"
-            android:textSize="18sp">
+            android:textSize="18sp"
+            android:visibility="gone">
 
         </Button>
 
@@ -156,8 +153,8 @@
             android:background="#4990fc"
             android:text="绘制曲线"
             android:textColor="@color/white"
-            android:visibility="gone"
-            android:textSize="18sp">
+            android:textSize="18sp"
+            android:visibility="gone">
 
         </Button>
 
@@ -170,8 +167,8 @@
             android:background="#00008B"
             android:text="生成报告"
             android:textColor="@color/white"
-            android:visibility="gone"
-            android:textSize="18sp">
+            android:textSize="18sp"
+            android:visibility="gone">
 
         </Button>
 

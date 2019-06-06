@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -155,11 +156,12 @@ public class DataDetailfragment extends Fragment implements TestDataDetailAdapte
     TaskResEnity mres;
     DataTFJ mdata;
     DataFragment mDataFragment;
-    DecimalFormat df2 = new DecimalFormat("####0.00");
 
+    DecimalFormat df = new DecimalFormat("#");
+    DecimalFormat df1 = new DecimalFormat("####0.0");
+    DecimalFormat df2 = new DecimalFormat("####0.00");
     DecimalFormat df3 = new DecimalFormat("####0.000");
 
-    DecimalFormat df1 = new DecimalFormat("####0.0");
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -266,84 +268,89 @@ public class DataDetailfragment extends Fragment implements TestDataDetailAdapte
     public void refresh(DataTFJ mmdata) {
 
         MotorData mData = mmdata.getMotordata();
-        try {
-            etDatatestEddy.setText(df2.format(mData.getEddy()));
-            etDatatestEddl.setText(df2.format(mData.getEddl()));
-            etDatatestEdgl.setText(df2.format(mData.getEdgl()));
-            etDatatestEdxl.setText(df2.format(mData.getEdxl()));
-            etDatatestKzdl.setText(df2.format(mData.getKzdl()));
-            etDatatestKzgl.setText(df2.format(mData.getKzgl()));
-            etDatatestJs.setText(df2.format(mData.getJs()));
-            etDatatestWgjjdl.setText(df2.format(mData.getWgjjdl()));
+//        try {
+        Log.d("dsas", "refresh: " + mData.toString());
+        etDatatestEddy.setText(df2.format(mData.getEddy()));
+        etDatatestEddl.setText(df2.format(mData.getEddl()));
+        etDatatestEdgl.setText(df2.format(mData.getEdgl()));
+        etDatatestEdxl.setText(df2.format(mData.getEdxl()));
+        etDatatestKzdl.setText(df2.format(mData.getKzdl()));
+        etDatatestKzgl.setText(df2.format(mData.getKzgl()));
+        etDatatestJs.setText(df.format(mData.getJs()));
+        etDatatestWgjjdl.setText(df2.format(mData.getWgjjdl()));
 
 
-            etDatatestPjdy.setText(df2.format(mData.getPjxdy()));
+        etDatatestPjdy.setText(df2.format(mData.getPjxdy()));
 
-            etDatatestPjdl.setText(df2.format(mData.getPjdl()));
-            etDatatestYggl.setText(df2.format(mData.getYggl()));
-            etDatatestFzxs1.setText(df3.format(mData.getfzxs()));
-            etDatatestWggl.setText(df2.format(mData.getWggl()));
-            etDatatestDjxl.setText(df2.format(mData.getXl()));
-            etDatatestScgl.setText(df2.format(mData.getScgl()));
-            etDatatestZhxl1.setText(df2.format(mData.getZhxl()));
-            etDatatestSzgl.setText(df2.format(mData.getSzgl()));
-            etDatatestDwpl.setText(df2.format(mData.getDwpl()));
-            etDatatestGlys.setText(df3.format(mData.getGlys()));
-            etDatatestLjdl.setText(df2.format(mData.getLxdl()));
-            etDatatestYgglsh.setText(df2.format(mData.getYgglsh()));
-            etDatatestZhglsh.setText(df2.format(mData.getZhglsh()));
-            etDatatestZhxhgl.setText(df2.format(mData.getZhxhgl()));
-            etDatatestEdzhxl1.setText(df2.format(mData.getEdzhxl()));
-            etDatatestEdzhxhgl.setText(df2.format(mData.getEdzhxhgl()));
-            etDatatestFzxs.setText(df3.format(mData.getFzxs()));
-            etDatatestEdzhglsh.setText(df2.format(mData.getEdzhglsh()));
-            etDatatestEdzhxl.setText(df2.format(mData.getEdzhxl()));
-            etDatatestZhxl.setText(df2.format(mData.getZhxl()));
-            etDatatestDjyxzt.setText(mData.getstrDjyxzt());
-            double pjxdy = (mData.getPjdy()) * Math.sqrt(3);
-            etDatatestDypc.setText(df2.format(Math.abs(pjxdy - (mData.getEddy()))));
-            etDatatestKzgl.setText(df2.format(mData.getKzgl()));
-            // etDatatestDypchl.setText(df2.format(mData.getDypchl()));
-            etDatatestSxbphd.setText(df2.format(mData.getSxbphd()));
-            //  etDatatestBphdhl.setText(df2.format(mData.getBphdhl()));
+        etDatatestPjdl.setText(df2.format(mData.getPjdl()));
+        etDatatestYggl.setText(df2.format(mData.getYggl()));
+        etDatatestFzxs1.setText(df3.format(mData.getfzxs()));
+        etDatatestWggl.setText(df2.format(mData.getWggl()));
+        etDatatestDjxl.setText(df2.format(mData.getXl()));
+        etDatatestScgl.setText(df2.format(mData.getScgl()));
+        etDatatestZhxl1.setText(df2.format(mData.getZhxl()));
+        etDatatestSzgl.setText(df2.format(mData.getSzgl()));
+        etDatatestDwpl.setText(df2.format(mData.getDwpl()));
+        etDatatestGlys.setText(df3.format(mData.getGlys()));
+        etDatatestLjdl.setText(df2.format(mData.getLxdl()));
+        etDatatestYgglsh.setText(df2.format(mData.getYgglsh()));
+        etDatatestZhglsh.setText(df2.format(mData.getZhglsh()));
+        etDatatestZhxhgl.setText(df2.format(mData.getZhxhgl()));
+        etDatatestEdzhxl1.setText(df2.format(mData.getEdzhxl()));
+        etDatatestEdzhxhgl.setText(df2.format(mData.getEdzhxhgl()));
+        etDatatestFzxs.setText(df3.format(mData.getFzxs()));
+        etDatatestEdzhglsh.setText(df2.format(mData.getEdzhglsh()));
+        etDatatestEdzhxl.setText(df2.format(mData.getEdzhxl()));
+        etDatatestZhxl.setText(df2.format(mData.getZhxl()));
+        etDatatestDjyxzt.setText(mData.getstrDjyxzt());
+//            double pjxdy = (mData.getPjdy()) * Math.sqrt(3);
+//            etDatatestDypc.setText(df2.format(Math.abs(pjxdy - (mData.getEddy()))));
+        etDatatestDypc.setText(df2.format(mData.getDypc()));
+        etDatatestKzgl.setText(df2.format(mData.getKzgl()));
+        // etDatatestDypchl.setText(df2.format(mData.getDypchl()));
+        etDatatestSxbphd.setText(df2.format(mData.getSxbphd()));
+        //  etDatatestBphdhl.setText(df2.format(mData.getBphdhl()));
 
 
 //        etdypc.setText(df2.format(Math.abs(pjxdy - Double.parseDouble(mData.getEddy()))) + "");
 
-            if ((pjxdy / (mData.getEddy())) > 0.9) {
-                etDatatestDypchl.setText("合理");
-            } else {
-                etDatatestDypchl.setText("不合理");
-            }
-//        etsxbphd.setText(df2.format((mData.getSxbphd())) + "");
-            if ((mData.getSxbphd()) > 1.5) {
-                etDatatestBphdhl.setText("不合理");
-            } else {
-                etDatatestBphdhl.setText("合理");
-            }
-            etDatatestWgbcrl.setText(df2.format(mData.getWgbcrl()));
-            etDatatestWgbcdrl.setText(df2.format(mData.getWgbcdrl()));
-            etDatatestMbglys.setText(df2.format(mData.getMbglys()));
-
-            etDetailEdfzwggl.setText(df2.format(mData.getEdfzwggl() / 1000));
-            etDetailKzwggl.setText(df2.format(mData.getKzwggl() / 1000));
-            etDetailYgdn.setText(df2.format(mData.getYgdn()));
-            etDetailWgdl.setText(df2.format(mData.getWgdn()));
-            etDetailKia.setText(df2.format(mData.getKIA()));
-            etDetailKib.setText(df2.format(mData.getKIB()));
-            etDetailKic.setText(df2.format(mData.getKIC()));
-            etDetailKua.setText(df2.format(mData.getKUA()));
-            etDetailKub.setText(df2.format(mData.getKUB()));
-            etDetailKuc.setText(df2.format(mData.getKUC()));
-            etDetailThdIA.setText(df2.format(mData.getHCIA()));
-            etDetailThdIB.setText(df2.format(mData.getHCIB()));
-            etDetailThdIC.setText(df2.format(mData.getHCIC()));
-            etDetailThdUB.setText(df2.format(mData.getHCUB()));
-            etDetailThdUA.setText(df2.format(mData.getHCUA()));
-            etDetailThdUC.setText(df2.format(mData.getHCUC()));
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (mData.getDypc() > 0.9) {
+            etDatatestDypchl.setText("合理");
+        } else {
+            etDatatestDypchl.setText("不合理");
         }
+//        etsxbphd.setText(df2.format((mData.getSxbphd())) + "");
+        if ((mData.getSxbphd()) > 1.5) {
+            etDatatestBphdhl.setText("不合理");
+        } else {
+            etDatatestBphdhl.setText("合理");
+        }
+        etDatatestWgbcrl.setText(df2.format(mData.getWgbcrl()));
+        etDatatestWgbcdrl.setText(df2.format(mData.getWgbcdrl()));
+        etDatatestMbglys.setText(df2.format(mData.getMbglys()));
+
+//            etDetailEdfzwggl.setText(df2.format(mData.getEdfzwggl() / 1000));
+        etDetailEdfzwggl.setText(df2.format(mData.getEdfzwggl()));
+//            etDetailKzwggl.setText(df2.format(mData.getKzwggl() / 1000));
+        etDetailKzwggl.setText(df2.format(mData.getKzwggl()));
+        etDetailYgdn.setText(df2.format(mData.getYgdn()));
+        etDetailWgdl.setText(df2.format(mData.getWgdn()));
+        etDetailKia.setText(df2.format(mData.getKIA()));
+        etDetailKib.setText(df2.format(mData.getKIB()));
+        etDetailKic.setText(df2.format(mData.getKIC()));
+        etDetailKua.setText(df2.format(mData.getKUA()));
+        etDetailKub.setText(df2.format(mData.getKUB()));
+        etDetailKuc.setText(df2.format(mData.getKUC()));
+        etDetailThdIA.setText(df2.format(mData.getHCIA()));
+        etDetailThdIB.setText(df2.format(mData.getHCIB()));
+        etDetailThdIC.setText(df2.format(mData.getHCIC()));
+        etDetailThdUB.setText(df2.format(mData.getHCUB()));
+        etDetailThdUA.setText(df2.format(mData.getHCUA()));
+        etDetailThdUC.setText(df2.format(mData.getHCUC()));
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            Log.d("dsas", "refresh: e===" + e);
+//        }
 
     }
 

@@ -76,12 +76,14 @@ public class TestDatafragment extends Fragment {
     @BindView(R.id.gl1_test)
     SensorView sensorView;
 
+    private boolean shuaXin;
+
     TestShowAdapter adp1;
     TestActivity mActivity;
     Unbinder unbinder;
+    DecimalFormat df1 = new DecimalFormat("####0.0");
     DecimalFormat df2 = new DecimalFormat("####0.00");
     DecimalFormat df3 = new DecimalFormat("####0.000");
-    DecimalFormat df1 = new DecimalFormat("####0.0");
     private View view;
 
 
@@ -94,15 +96,9 @@ public class TestDatafragment extends Fragment {
         view.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
         adp1 = new TestShowAdapter(mActivity, mActivity.mdata, 0);
 //        sensorView = view.findViewById(R.id.gl1_test);
-
-        return view;
-    }
-
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
         //设置断开监听时间
         sensorView.setOnStatusChangeListener(new MyOnStatusChanger());
+        return view;
     }
 
     private class MyOnStatusChanger implements SensorView.OnStatusChangeListener {
@@ -120,6 +116,11 @@ public class TestDatafragment extends Fragment {
             }
         }
     }
+
+
+//    public void setShuaXin(boolean shuaXin) {
+//        this.shuaXin = shuaXin;
+//    }
 
     private void SetSensorState(SensorView msv, float mpower, float msignal, int minf) {
         SensorData svData = new SensorData();
@@ -163,10 +164,10 @@ public class TestDatafragment extends Fragment {
     public void refresh() {
         try {
             MotorData mData = mActivity.mdata.getMotordata();
-            etShowAbdy.setText(df2.format(mData.getUAB()));
+            etShowAbdy.setText(df2.format(mData.getUAB()));//AB线电压
             etShowAdl.setText(df2.format(mData.getIA()));
-//        dj2List.add(getTSGridItem("BC线电压",  mdata.getDj2csff().equals("单瓦法")?"-- V":df1.format(mdata.getUbc2())+ " V", "B相电流", !mdata.getDj2csff().equals("三瓦法")?"-- A":df1.format(mdata.getIb2())+ " A"));
-//        dj2List.add(getTSGridItem("CA线电压", mdata.getDj2csff().equals("单瓦法")?"-- V":df1.format(mdata.getUca2())+ " V", "C相电流", mdata.getDj2csff().equals("单瓦法")?"-- A":df1.format(mdata.getIc2())+ " A"));
+//        dj2List.add(getTSGridItem("BC线电压",  mdata.getDj2csff().equals("单瓦法")?"-- V":df2.format(mdata.getUbc2())+ " V", "B相电流", !mdata.getDj2csff().equals("三瓦法")?"-- A":df2.format(mdata.getIb2())+ " A"));
+//        dj2List.add(getTSGridItem("CA线电压", mdata.getDj2csff().equals("单瓦法")?"-- V":df2.format(mdata.getUca2())+ " V", "C相电流", mdata.getDj2csff().equals("单瓦法")?"-- A":df2.format(mdata.getIc2())+ " A"));
             etShowBcdy.setText(mActivity.mdata.getMff().equals("单瓦法") ? "--" : df2.format(mData.getUBC()));
             etShowBdl.setText(!mActivity.mdata.getMff().equals("三瓦法") ? "--" : df2.format(mData.getIB()));
             etShowCady.setText(mActivity.mdata.getMff().equals("单瓦法") ? "--" : df2.format(mData.getUCA()));
@@ -177,14 +178,14 @@ public class TestDatafragment extends Fragment {
             etShowPjdl.setText(df2.format(mData.getPjdl()));
             etShowYggl.setText(df2.format(mData.getYggl()));
             etShowFzxs.setText(df3.format(mData.getfzxs()));
-            etShowWggl.setText(df2.format(mData.getWggl()));
-            etShowDjxl.setText(df2.format(mData.getXl()));
+            etShowWggl.setText(df2.format(mData.getWggl()));//无功功率
+            etShowDjxl.setText(df2.format(mData.getXl()));//电机效率
             etShowScgl.setText(df2.format(mData.getScgl()));//输出功率
             etShowZhxl1.setText(df2.format(mData.getZhxl()));
             etShowSzgl.setText(df2.format(mData.getSzgl()));
             etShowDwpl.setText(df2.format(mData.getDwpl()));
             etShowGlys.setText(df3.format(mData.getGlys()));
-            etShowYxzt.setText((mData.getstrDjyxzt()));
+            etShowYxzt.setText((mData.getstrDjyxzt()));//运行状态
             etShowLxdl.setText(df2.format(mData.getLxdl()));
         } catch (Exception e) {
             e.printStackTrace();

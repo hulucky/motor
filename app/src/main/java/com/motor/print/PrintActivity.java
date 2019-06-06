@@ -30,6 +30,7 @@ public class PrintActivity extends BluetoolthPrintActivity {
     DecimalFormat df2 = new DecimalFormat("####0.00");
 
     DecimalFormat df3 = new DecimalFormat("####0.000");
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +44,7 @@ public class PrintActivity extends BluetoolthPrintActivity {
             e.printStackTrace();
         }
         try {
-            taskParInf=MyApp.getDaoInstant().getTaskEntityDao().queryBuilder().where(TaskEntityDao.Properties.Id.eq(testRes.getTaskId())).list().get(0);
+            taskParInf = MyApp.getDaoInstant().getTaskEntityDao().queryBuilder().where(TaskEntityDao.Properties.Id.eq(testRes.getTaskId())).list().get(0);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -109,7 +110,7 @@ public class PrintActivity extends BluetoolthPrintActivity {
         parS.add("空载无功功率");
         parS.add("额定负载无功功率");
         parS.add("有功功率损耗");
-        parS.add("额定负载功率损耗");
+//        parS.add("额定负载功率损耗");  //去掉
         parS.add("综合消耗功率");
         parS.add("额定综合消耗功率");
         parS.add("额定综合效率");
@@ -132,45 +133,46 @@ public class PrintActivity extends BluetoolthPrintActivity {
         datas.add(taskParInf.getPeopleName());
         datas.add(testRes.getSaveTime());
 
-        datas.add(df2.format(testRes.getPjdy())+"");
-        datas.add(df2.format(testRes.getPjdl())+"");
-        datas.add(df2.format(testRes.getYggl())+"");
-        datas.add(df2.format(testRes.getWggl())+"");
-        datas.add(df2.format(testRes.getScgl())+"");
-        datas.add(df3.format(testRes.getGlys())+"");
-        datas.add(df2.format(testRes.getYgdn())+"");
-        datas.add(df2.format(testRes.getWgdn())+"");
-        datas.add(df2.format(testRes.getDwpl())+"");
-        datas.add(df2.format(testRes.getSzgl())+"");
-        datas.add(df3.format(testRes.getFzxs())+"");
-        datas.add(df2.format(testRes.getZhxl())+"");
-        datas.add(df2.format(testRes.getUAB())+"");
-        datas.add(df2.format(testRes.getUBC())+"");
-        datas.add(df2.format(testRes.getUCA())+"");
-        datas.add(df2.format(testRes.getIA())+"");
-        datas.add(df2.format(testRes.getIB())+"");
-        datas.add(df2.format(testRes.getIC())+"");
-        datas.add(df2.format(testRes.getAyggl())+"");
-        datas.add(df2.format(testRes.getByggl())+"");
-        datas.add(df2.format(testRes.getCyggl())+"");
-        datas.add(df2.format(testRes.getAwggl())+"");
-        datas.add(df2.format(testRes.getBwggl())+"");
-        datas.add(df2.format(testRes.getCwggl())+"");
-        datas.add(df2.format(testRes.getAszgl())+"");
-        datas.add(df2.format(testRes.getBszgl())+"");
-        datas.add(df2.format(testRes.getCszgl())+"");
-        datas.add(df3.format(testRes.getAglys())+"");
-        datas.add(df3.format(testRes.getBglys())+"");
-        datas.add(df3.format(testRes.getCglys())+"");
-        datas.add(df2.format(testRes.getPhUAB())+"");
-        datas.add(df2.format(testRes.getPhUBC())+"");
-        datas.add(df2.format(testRes.getPhUCA())+"");
-        datas.add(df2.format(testRes.getPhUIA())+"");
-        datas.add(df2.format(testRes.getPhUIB())+"");
-        datas.add(df2.format(testRes.getPhUIC())+"");
-        datas.add(df2.format(testRes.getZhglsh())+"");
-        datas.add(df2.format(testRes.getKzwggl())+"");
-        datas.add(df2.format(testRes.getEdfzwggl())+"");
+//        datas.add(df2.format(testRes.getPjdy()) + "");
+        datas.add(df2.format(testRes.getPjdy() * Math.sqrt(3)) + "");
+        datas.add(df2.format(testRes.getPjdl()) + "");
+        datas.add(df2.format(testRes.getYggl()) + "");
+        datas.add(df2.format(testRes.getWggl()) + "");
+        datas.add(df2.format(testRes.getScgl()) + "");
+        datas.add(df3.format(testRes.getGlys()) + "");
+        datas.add(df2.format(testRes.getYgdn()) + "");
+        datas.add(df2.format(testRes.getWgdn()) + "");
+        datas.add(df2.format(testRes.getDwpl()) + "");
+        datas.add(df2.format(testRes.getSzgl()) + "");
+        datas.add(df3.format(testRes.getFzxs()) + "");
+        datas.add(df2.format(testRes.getZhxl()) + "");
+        datas.add(df2.format(testRes.getUAB()) + "");
+        datas.add(df2.format(testRes.getUBC()) + "");
+        datas.add(df2.format(testRes.getUCA()) + "");
+        datas.add(df2.format(testRes.getIA()) + "");
+        datas.add(df2.format(testRes.getIB()) + "");
+        datas.add(df2.format(testRes.getIC()) + "");
+        datas.add(df2.format(testRes.getAyggl() / 1000) + "");
+        datas.add(df2.format(testRes.getByggl() / 1000) + "");
+        datas.add(df2.format(testRes.getCyggl() / 1000) + "");
+        datas.add(df2.format(testRes.getAwggl() / 1000) + "");
+        datas.add(df2.format(testRes.getBwggl() / 1000) + "");
+        datas.add(df2.format(testRes.getCwggl() / 1000) + "");
+        datas.add(df2.format(testRes.getAszgl() / 1000) + "");
+        datas.add(df2.format(testRes.getBszgl() / 1000) + "");
+        datas.add(df2.format(testRes.getCszgl() / 1000) + "");
+        datas.add(df3.format(testRes.getAglys()) + "");
+        datas.add(df3.format(testRes.getBglys()) + "");
+        datas.add(df3.format(testRes.getCglys()) + "");
+        datas.add(df2.format(testRes.getPhUAB()) + "");
+        datas.add(df2.format(testRes.getPhUBC()) + "");
+        datas.add(df2.format(testRes.getPhUCA()) + "");
+        datas.add(df2.format(testRes.getPhUIA()) + "");
+        datas.add(df2.format(testRes.getPhUIB()) + "");
+        datas.add(df2.format(testRes.getPhUIC()) + "");
+        datas.add(df2.format(testRes.getZhglsh()) + "");
+        datas.add(df2.format(testRes.getKzwggl()) + "");
+        datas.add(df2.format(testRes.getEdfzwggl()) + "");
 //        parS.add("有功功率损耗");
 //        parS.add("额定负载功率损耗");
 //        parS.add("综合消耗功率");
@@ -179,13 +181,13 @@ public class PrintActivity extends BluetoolthPrintActivity {
 //        parS.add("无功补偿容量");
 //        parS.add("无功补偿电容量");
 
-        datas.add(df2.format(testRes.getYgglsh())+"");
-        datas.add(df2.format(testRes.getEdfzglsh())+"");
-        datas.add(df2.format(testRes.getZhxhgl())+"");
-        datas.add(df2.format(testRes.getEdzhxhgl())+"");
-        datas.add(df2.format(testRes.getEdzhxl())+"");
-        datas.add(df2.format(testRes.getWgbcrl())+"");
-        datas.add(df2.format(testRes.getWgbcdrl())+"");
+        datas.add(df2.format(testRes.getYgglsh()) + "");
+//        datas.add(df2.format(testRes.getEdfzglsh()) + "");//额定负载功率损耗，去掉
+        datas.add(df2.format(testRes.getZhxhgl()) + "");
+        datas.add(df2.format(testRes.getEdzhxhgl()) + "");
+        datas.add(df2.format(testRes.getEdzhxl()) + "");
+        datas.add(df2.format(testRes.getWgbcrl()) + "");
+        datas.add(df2.format(testRes.getWgbcdrl()) + "");
 
         String strres = "";
         if (testRes.getZhxl() > testRes.getEdzhxl()) {
@@ -211,9 +213,9 @@ public class PrintActivity extends BluetoolthPrintActivity {
         units.add("kW");
         units.add("kvar");
         units.add("kW");
-        units.add("GBK");
-        units.add("GBK");
-        units.add("GBK");
+        units.add(" ");//功率因数
+        units.add("kW·h");//有功电能
+        units.add("kVar·h");//无功电能
         units.add("Hz");
         units.add("kVA");
         units.add(" ");
@@ -246,7 +248,7 @@ public class PrintActivity extends BluetoolthPrintActivity {
         units.add("kvar");
         units.add("kvar");
         units.add("kW");
-        units.add("kW");
+//        units.add("kW"); //额定负载功率损耗，去掉
         units.add("kW");
         units.add("kW");
         units.add("%");

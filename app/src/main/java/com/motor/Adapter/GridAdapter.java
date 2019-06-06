@@ -48,37 +48,25 @@ public class GridAdapter extends BaseAdapter {
                 taskInfList.add(getGridItem("受检单位", taskParInf.getUnitName(), "电机编号", taskParInf.getNumber()));
                 taskInfList.add(getGridItem("测试人员", taskParInf.getPeopleName(), "测试方法", taskParInf.getTestFunction()));
                 taskInfList.add(getGridItem("创建日期", taskParInf.getGreateTaskTime(), "", ""));
-//                taskInfList.add(getGridItem("电压变比", taskParInf.getDybb1() + ":" + taskParInf.getDybb2(), "电流变比", taskParInf.getDlbb1() + ":" + taskParInf.getDlbb2()));
                 this.list = taskInfList;
                 break;
 
             case 1: // 电机参数
                 List<GridBean> djInfList = new ArrayList<>();
-                djInfList.add(getGridItem("电机型号", taskParInf.getDjk1(), "", ""));
+                djInfList.add(getGridItem("电机型号", taskParInf.getDjk1(), "", ""));//电机库
                 djInfList.add(getGridItem("钳表量程", taskParInf.getDjqblc1(), "测试方法", taskParInf.getDjcsff1()));
-
                 this.list = djInfList;
                 break;
 
             case 3: // 输入的参数
                 List<GridBean> inputInfList = new ArrayList<>();
-//                String fsStr = taskParInf.getSdfs() ? taskParInf.getFs() : "--";
-//                String wdStr = taskParInf.getSdwd() ? taskParInf.getWd() : "--";
-//                String jyStr = taskParInf.getSdjy() ? taskParInf.getJy() : "--";
-//                String sdStr = taskParInf.getSdsd() ? taskParInf.getSd() : "--";
-//                String cyStr = taskParInf.getSdcy() ? taskParInf.getCy() : "--";
-//                String dqyStr = taskParInf.getSddqy() ? taskParInf.getDqy() : "--";
-//                String dj1glStr = taskParInf.getSddj1gl() ? taskParInf.getDj1gl() : "--";
-//                String dj2glStr = taskParInf.getSddj2gl() ? taskParInf.getDj2gl() : "--";
-//                String dj1xlStr = taskParInf.getSddj1xl() ? taskParInf.getDj1xl() : "--";
-//                String dj2xlStr = taskParInf.getSddj2xl() ? taskParInf.getDj2xl() : "--";
 
                 inputInfList.add(getGridItem("电压变比", taskParInf.getDybb1() + ":" + taskParInf.getDybb2(), "电流变比", taskParInf.getDlbb1() + ":" + taskParInf.getDlbb2()));
                 inputInfList.add(getGridItem("额定电压", taskParInf.getDjeddy1() + " V", "额定电流", taskParInf.getDjeddl1() + " A"));
                 inputInfList.add(getGridItem("额定功率", taskParInf.getDjedgl1() + " kW", "额定效率", taskParInf.getDjedxl1() + " %"));
                 inputInfList.add(getGridItem("空载功率", taskParInf.getDjkzgl1() + " kW", "空载电流", taskParInf.getDjkzdl1() + " A"));
                 inputInfList.add(getGridItem("级       数", taskParInf.getDjjs1() + " ", "无功\n经济当量", taskParInf.getDjwgjjdl1() + " "));
-                inputInfList.add(getGridItem("目标\n功率因数", taskParInf.getBy1() + " ", "", ""));
+                inputInfList.add(getGridItem("目标\n功率因数", taskParInf.getDjmbglys() + " ", "", ""));
                 this.list = inputInfList;
                 break;
 
@@ -196,7 +184,7 @@ public class GridAdapter extends BaseAdapter {
                                 dialog("级      数", taskParInf.getDjjs1(), " ", 341);
                                 break;
                             case 5: //目标功率因数
-                                dialog("目标功率因数", taskParInf.getBy1(), " ", 351);
+                                dialog("目标功率因数", taskParInf.getDjmbglys(), " ", 351);
                                 break;
                         }
                         break;
@@ -298,22 +286,6 @@ public class GridAdapter extends BaseAdapter {
                         boolean notNull = inputStr.length() > 0 ? true : false;
                         float inputData = notNull ? Float.parseFloat(inputStr) : -100f;
                         switch (parType) {
-//                            case 301: //风速
-//                                if (notNull && inputData >= 0 && inputData <= 50) {
-//                                    taskParInf.setSdfs(true);
-//                                    taskParInf.setFs(inputStr + "");
-//                                } else {
-//                                    Toasty.error(mContext, "输入了错误的参数" + "\n" + "0 ～ 50 m/s", 5).show();
-//                                }
-//                                break;
-//                            case 303: //温度
-//                                if (notNull && inputData > 0 && inputData >= -40 && inputData <= 100) {
-//                                    taskParInf.setSdwd(true);
-//                                    taskParInf.setWd(inputStr + "");
-//                                } else {
-//                                    Toasty.error(mContext, "输入了错误的参数" + "\n" + "-40 ～ 100 ℃", 5).show();
-//                                }
-//                                break;
                             case 311: //额定电压
                                 if (notNull && inputData >= 0 && inputData <= 10000) {
 
@@ -381,7 +353,7 @@ public class GridAdapter extends BaseAdapter {
                             case 351: //目标功率因数
                                 if (notNull && inputData >= 0 && inputData <= 1) {
 
-                                    taskParInf.setBy1(inputStr + "");
+                                    taskParInf.setDjmbglys(inputStr + "");
                                 } else {
                                     Toasty.error(mContext, "输入了错误的参数" + "\n" + "0 ～ 1 ", 5).show();
                                 }
@@ -480,8 +452,8 @@ public class GridAdapter extends BaseAdapter {
     String[] items = new String[]{};
 
     private void showSingleChoiceDialog(String itemStr, final int typePar) {
+        final String[] qblchItems = {"500A", "20A"};
         final String[] cshffItems = {"单瓦法", "双瓦法", "三瓦法"};
-        final String[] qblchItems = {"500 A", "20 A"};
         final String[] chdfshItems = {"1", "0.99", "0.98", "0.97", "0.96", "0.95", "0.94", "0.93", "0.92", "0.91", "0.90", "0.89", "0.88", "0.87"};
         switch (typePar) {
             case 203: //钳表量程
@@ -490,14 +462,12 @@ public class GridAdapter extends BaseAdapter {
             case 103:
                 items = qblchItems;
                 break;
-
             case 211://电机测试方法
                 items = cshffItems;
                 break;
             case 111:
                 items = cshffItems;
                 break;
-
             case 213://传动方式
                 items = chdfshItems;
                 break;
@@ -511,7 +481,7 @@ public class GridAdapter extends BaseAdapter {
         // 第二个参数是默认选项，此处设置为0
         int indexPostion = 0;
         for (int i = 0; i < items.length; i++) {
-            if (itemStr.equals(items[i])) {
+            if (itemStr.equals(items[i])) {//taskParInf.getDjqblc1()
                 indexPostion = i;
             }
         }
@@ -544,8 +514,6 @@ public class GridAdapter extends BaseAdapter {
                                     taskParInf.setDjcsff1(itemStr);
                                     taskParInf.setCsff(itemStr);
                                     break;
-
-
                             }
                         }
                         GreateTaskUtils.update(taskParInf);

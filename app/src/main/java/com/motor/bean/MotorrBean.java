@@ -21,8 +21,14 @@ public class MotorrBean implements ISensorInf {
     public void caculate(byte[] bRec) {
         this.bRec = bRec;
         time = System.currentTimeMillis();
-        powerVel = MyFunc.twoBytesToInt(bRec, 100);
-        assiVel = MyFunc.HexToInt(MyFunc.Byte2Hex(bRec[102]));
+        if(bRec.length==82){
+            powerVel = MyFunc.twoBytesToInt(bRec, 78);
+            assiVel = MyFunc.HexToInt(MyFunc.Byte2Hex(bRec[80]));
+        }
+        if(bRec.length==104){
+            powerVel = MyFunc.twoBytesToInt(bRec, 100);
+            assiVel = MyFunc.HexToInt(MyFunc.Byte2Hex(bRec[102]));
+        }
     }
 
     public float getPowerVel() {

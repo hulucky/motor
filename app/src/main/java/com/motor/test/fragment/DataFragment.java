@@ -84,6 +84,9 @@ public class DataFragment extends Fragment {
     Button btnprint;
     @BindView(R.id.lv_testdata_list)
     ListView lv_list;
+    @BindView(R.id.ll_bottom)
+    LinearLayout llBottom;
+
 
     List<ListBean> mbeanlist;
     List<TaskResEnity> mreslist;
@@ -94,19 +97,17 @@ public class DataFragment extends Fragment {
     TaskEntity mTask;
     MyApp myApp;
     Unbinder unbinder;
-    DecimalFormat df4 = new DecimalFormat("####00.00");
+    DecimalFormat df1 = new DecimalFormat("####0.0");
     DecimalFormat df2 = new DecimalFormat("####0.00");
     DecimalFormat df3 = new DecimalFormat("####0.000");
-    @BindView(R.id.ll_bottom)
-    LinearLayout llBottom;
+    DecimalFormat df4 = new DecimalFormat("####00.00");
+
     private FileService fileService;
     long SystemTime = 0;
     List<Long> Res_id;
 
     private Map<Integer, Integer> selected;
 
-
-    DecimalFormat df1 = new DecimalFormat("####0.0");
     TestDataListAdapter mAdapter;
     private boolean IsShowCurve = false;
     private ArrayList<DataTFJ> mData;
@@ -176,11 +177,10 @@ public class DataFragment extends Fragment {
         for (TaskResEnity mres : mreslist) {
             ListBean mbean = new ListBean();
             mbean.setId(mres.getId());
-            mbean.setStr0(df1.format(mres.getPjxdy()));
-
-            mbean.setStr1(df1.format(mres.getPjdl()));
-            mbean.setStr2(df1.format(mres.getYggl()));
-            mbean.setStr3(df1.format(mres.getXl()));
+            mbean.setStr0(df2.format(mres.getPjxdy()));
+            mbean.setStr1(df2.format(mres.getPjdl()));
+            mbean.setStr2(df2.format(mres.getYggl()));
+            mbean.setStr3(df2.format(mres.getXl()));
             mbean.setStr4("");
             mbean.setStr5(mres.getSaveTime().replace(" ", "\n"));
             mbeanlist.add(mbean);
@@ -193,6 +193,7 @@ public class DataFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //
                 mDataDetailfragment.RefreshByRes(mreslist.get(position));
+                Log.d("dsas", "onItemClick: " + mreslist.get(position).toString());
                 flmain.setCurrentItem(0);
                 IsShowCurve = false;
             }

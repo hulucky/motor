@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
@@ -20,8 +21,10 @@ import android.widget.Toast;
 import com.greendao.manager.DataTFJ;
 import com.greendao.manager.MotorData;
 import com.jaeger.library.StatusBarUtil;
+import com.motor.Listener.ISensorInf;
 import com.motor.Tools.SerialControlMy;
 import com.sensor.SensorData;
+import com.sensor.SensorInf;
 import com.sensor.view.SensorView;
 import com.motor.Tools.MyFunction;
 import com.motor.Tools.SerialControl;
@@ -43,12 +46,13 @@ import butterknife.BindViews;
 import butterknife.ButterKnife;
 import es.dmoral.toasty.Toasty;
 
+
 public class SensorActivity extends AppCompatActivity {
 
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
- 
+
     @BindView(R.id.gl1_sensor)
     SensorView gl1Sensor;
     @BindView(R.id.UAB1_sensor)
@@ -93,6 +97,9 @@ public class SensorActivity extends AppCompatActivity {
     private MotorData mData;
     private int mpower;
     private int msingal;
+    private DecimalFormat df1 = new DecimalFormat("0.00");
+    private DecimalFormat df2 = new DecimalFormat("0.00");
+    private DecimalFormat df3 = new DecimalFormat("0.000");
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -114,18 +121,29 @@ public class SensorActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);  //决定左上角的图标是否可以点击
         StatusBarUtil.setColor(this, getResources().getColor(R.color.tittleBar), 0);
         mdata = new DataTFJ();
-        mData=new MotorData();
+        mData = new MotorData();
         handler = new Handler();
 
         mFsList = new float[16];
         shuaXin = true;
-
-     
-
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onBackPressed();
+            }
+        });
+        gl1Sensor.setOnStatusChangeListener(new SensorView.OnStatusChangeListener() {
+            @Override
+            public void status(View view, int previousStatus, int thisStatus) {
+                int id = view.getId();
+                if (thisStatus == SensorInf.SEARCHING) {
+                    switch (id) {
+                        case R.id.gl1_sensor:
+                            MyApp.isConnected_Sensor = false;
+                            Toast.makeText(SensorActivity.this, "功率箱断开！", Toast.LENGTH_SHORT).show();
+                            break;
+                    }
+                }
             }
         });
     }
@@ -139,64 +157,79 @@ public class SensorActivity extends AppCompatActivity {
         ComA.setiDelay(100);  // 设置读取串口的时间间隔
         ComControl.OpenComPort(ComA); // 打开串口
         // 定义刷新UI线程，从SerialControl 类中读取需要刷新的数据。
-        DispQueueThread DispQueue = new DispQueueThread();
-        DispQueue.start();
-        if (IsStart == false) {
-            handler.postDelayed(runnable, 1000);
-            IsStart = true;
-        }
+//        DispQueueThread DispQueue = new DispQueueThread();
+//        DispQueue.start();
+//        if (IsStart == false) {
         SendforData();
+        ComA.setOnReceivedSensorListener(new SerialControlMy.OnReceivedSensorData() {
+            @Override
+            public void getData(final ISensorInf sensorInf) {
+                switch (sensorInf.getSensorType()) {
+                    case 1://功率箱
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                //sensorData 用于设置传感器信息（电量、信号、状态、图片）
+                                SensorData sensorData = new SensorData(sensorInf.getPower(), sensorInf.getSignal(),
+                                        SensorInf.NORMAL, System.currentTimeMillis());
+                                gl1Sensor.setData(sensorData);
+                            }
+                        });
+                        break;
+                }
+            }
+        });
+        handler.postDelayed(runnable, 1000);
+//            IsStart = true;
+//        }
     }
 
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        MyApp.isConnected_Sensor = false;
         ComControl.CloseComPort(ComA);
         handler.removeCallbacksAndMessages(null);
     }
 
     //----------------------------------------------------刷新显示线程
-    private class DispQueueThread extends Thread {
-        @Override
-        public void run() {
-            super.run();
-            while (!isInterrupted()) {
-                final ComBean ComData;
+//    private class DispQueueThread extends Thread {
+//        @Override
+//        public void run() {
+//            super.run();
+//            while (!isInterrupted()) {
+//                final ComBean ComData;
+//
+//                try {
+//                    while ((ComData = ComA.QueueList.poll()) != null) {
+//                        try {
+//                            getData(ComData);
+//                        } catch (Exception e) {
+//                            e.printStackTrace();
+//                        }
+//                        try {
+//                            Thread.sleep(100);//显示性能高的话，可以把此数值调小。
+//                        } catch (Exception e) {
+//                            e.printStackTrace();
+//                        }
+//                        break;
+//                    }
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }
+//    }
 
-                try {
-                    while ((ComData = ComA.QueueList.poll()) != null) {
-                        try {
-                            getData(ComData);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                        try {
-                            Thread.sleep(100);//显示性能高的话，可以把此数值调小。
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                        break;
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
 
 
-    DecimalFormat df2 = new DecimalFormat("####0.00");
-    DecimalFormat df3 = new DecimalFormat("####0.000");
 
     Runnable runnable = new Runnable() {
         @Override
         public void run() {
-
-          
-            // gonglv1
-            if (TimeBetween(IsTx[3]) > TxDelay * 1000) {
-
+//            if (TimeBetween(IsTx[3]) > TxDelay * 1000) {
+            if (!MyApp.isConnected_Sensor) {//如果没连接上
                 UAB1Sensor.setText("-- V");
                 UBC1Sensor.setText("-- V");
                 UCA1Sensor.setText("-- V");
@@ -206,23 +239,27 @@ public class SensorActivity extends AppCompatActivity {
                 P1Sensor.setText("-- kW");
                 Q1Sensor.setText("-- kVA");
                 cos1Sensor.setText("--");
-
-            }else{
-                UAB1Sensor.setText(df2.format(mData.getUAB())+" V");
-                UBC1Sensor.setText(df2.format(mData.getUBC())+" V");
-                UCA1Sensor.setText(df2.format(mData.getUCA())+" V");
-                IA1Sensor.setText(df2.format(mData.getIA())+" A");
-                IB1Sensor.setText(df2.format(mData.getIB())+" A");
-                IC1Sensor.setText(df2.format(mData.getIC())+" A");
-                P1Sensor.setText(df2.format(mData.getYggl())+" kW");
-                Q1Sensor.setText(df2.format(mData.getSzgl())+" kVA");
-                cos1Sensor.setText(df3.format(mData.getGlys())+" ");
-                if(TimeBetween(IsTx[3])<1000)
-            {
-                SetSensorState(gl1Sensor,mpower,msingal,1);
-            }}
-         
-
+            } else {//如果连接上了,就发送信号，让其变为电机类型数据
+                int Leixing = Math.abs((int) MyApp.comBeanMotor_Sensor.recData[9]);
+                if (Leixing == 128 && MyApp.comBeanMotor_Sensor.recData.length == 36) {//普通数据包，则重新发送命令使其变为电机模式
+                    sendPortData(ComA, "4B590B8001000101FF8001000101F4"); // 发送命令获取功率数据
+                }
+                if (MyApp.comBeanUI_Sensor != null) {
+                    getUIData(MyApp.comBeanUI_Sensor);
+                }
+                UAB1Sensor.setText(df2.format(mData.getUAB()) + " V");
+                UBC1Sensor.setText(df2.format(mData.getUBC()) + " V");
+                UCA1Sensor.setText(df2.format(mData.getUCA()) + " V");
+                IA1Sensor.setText(df2.format(mData.getIA()) + " A");
+                IB1Sensor.setText(df2.format(mData.getIB()) + " A");
+                IC1Sensor.setText(df2.format(mData.getIC()) + " A");
+                P1Sensor.setText(df2.format(mData.getYggl() / 1000) + " kW");//有功功率
+                Q1Sensor.setText(df2.format(mData.getSzgl() / 1000) + " kVA");//视在功率
+                cos1Sensor.setText(df3.format(mData.getGlys()) + " ");
+//                if (TimeBetween(IsTx[3]) < 1000) {
+//                    SetSensorState(gl1Sensor, mpower, msingal, 1);
+//                }
+            }
             handler.postDelayed(this, 1000);
         }
     };
@@ -247,21 +284,21 @@ public class SensorActivity extends AppCompatActivity {
         msv.setData(svData);
     }
 
-    private void getData(ComBean comData) {
-        int mspan;
-
-        switch (comData.recData[2]) {
-
-            case 100:
-                getUIData(comData);
-                SetFiveOne(3);
-                break;
-            case 78:
-                getHamData(comData);
-                SetFiveOne(3);
-                break;
-        }
-    }
+//    private void getData(ComBean comData) {
+//        int mspan;
+//
+//        switch (comData.recData[2]) {
+//
+//            case 100:
+//                getUIData(comData);
+//                SetFiveOne(3);
+//                break;
+//            case 78:
+//                getHamData(comData);
+//                SetFiveOne(3);
+//                break;
+//        }
+//    }
 
     private void getHamData(ComBean comData) {
         double[] mham = new double[32];
@@ -300,21 +337,17 @@ public class SensorActivity extends AppCompatActivity {
         double QblcI = 500d;
         double Dybb = 1;
         double Dlbb = 1;
-
         try {
-          
-
-            
-          
             Dybb = 1;
-            Dlbb =1;
+            Dlbb = 1;
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }
         double exU = QblcU * Dybb;
         double exI = QblcI * Dlbb;
         int i = 14;
-        mData.setSxbphd((float) ((MyFunction.twoBytesToInt(comData.recData, i) / 10000) * 100));
+//        mData.setSxbphd((float) ((MyFunction.twoBytesToInt(comData.recData, i) / 10000) * 100));
+        mData.setSxbphd((float) ((MyFunction.twoBytesToInt(comData.recData, i) / 10000)));
         i += 2;
         mData.setUA((float) ((MyFunction.twoByte2int(comData.recData, i) * exU / 10000)));
         i += 2;
@@ -322,17 +355,22 @@ public class SensorActivity extends AppCompatActivity {
         i += 2;
         mData.setUC((float) ((MyFunction.twoBytesToInt(comData.recData, i) * exU / 10000)));
         i += 2;
-        mData.setUAB((float) ((MyFunction.twoByte2int(comData.recData, i) * exU / 10000)));
+//        mData.setUAB((float) ((MyFunction.twoByte2int(comData.recData, i) * exU / 10000)));
+        if (mData.getMethod() == 0) {//单瓦法
+            mData.setUAB(Float.parseFloat(df2.format((float) (Math.sqrt(3) * (MyFunction.twoByte2int(comData.recData, i) * exU / 10000)))));
+        } else {
+            mData.setUAB(Float.parseFloat(df2.format((float) (MyFunction.twoByte2int(comData.recData, i) * exU / 10000))));
+        }
         i += 2;
-        mData.setUBC((float) ((MyFunction.twoBytesToInt(comData.recData, i) * exU / 10000)));
+        mData.setUBC(Float.parseFloat(df2.format((float) (MyFunction.twoBytesToInt(comData.recData, i) * exU / 10000))));
         i += 2;
-        mData.setUCA((float) ((MyFunction.twoBytesToInt(comData.recData, i) * exU / 10000)));
+        mData.setUCA(Float.parseFloat(df2.format((float) (MyFunction.twoBytesToInt(comData.recData, i) * exU / 10000))));
         i += 2;
-        mData.setIA((float) ((MyFunction.twoByte2int(comData.recData, i) * exI / 10000)));
+        mData.setIA(Float.parseFloat(df2.format((float) (MyFunction.twoByte2int(comData.recData, i) * exI / 10000))));
         i += 2;
-        mData.setIB((float) ((MyFunction.twoBytesToInt(comData.recData, i) * exI / 10000)));
+        mData.setIB(Float.parseFloat(df2.format((float) (MyFunction.twoBytesToInt(comData.recData, i) * exI / 10000))));
         i += 2;
-        mData.setIC((float) ((MyFunction.twoBytesToInt(comData.recData, i) * exI / 10000)));
+        mData.setIC(Float.parseFloat(df2.format((float) (MyFunction.twoBytesToInt(comData.recData, i) * exI / 10000))));
         i += 2;
         mData.setLxdl((float) ((MyFunction.twoBytesToInt(comData.recData, i) * exI / 10000)));
         i += 2;
@@ -394,46 +432,47 @@ public class SensorActivity extends AppCompatActivity {
         i += 2;
         mData.setHCIC((float) ((MyFunction.twoBytesToInt(comData.recData, i) / 100)));
         i += 2;
-        mData.setPhUAB((float) MyFunction.HexToInt(MyFunction.ByteArrToHex(
-                comData.recData, i, i + 1)) / 100);
 
-        i += 1;
-        mData.setPhUBC((float) MyFunction.HexToInt(MyFunction.ByteArrToHex(
-                comData.recData, i, i + 1)) / 100);
-        i += 1;
-        mData.setPhUCA((float) MyFunction.HexToInt(MyFunction.ByteArrToHex(
-                comData.recData, i, i + 1)) / 100);
-        i += 1;
-        mData.setPhUIA((float) MyFunction.HexToInt(MyFunction.ByteArrToHex(
-                comData.recData, i, i + 1)) / 100);
-        i += 1;
-        mData.setPhUIB((float) MyFunction.HexToInt(MyFunction.ByteArrToHex(
-                comData.recData, i, i + 1)) / 100);
-        i += 1;
-        mData.setPhUIC((float) MyFunction.HexToInt(MyFunction.ByteArrToHex(
-                comData.recData, i, i + 1)) / 100);
-        i += 1;
 
-        //640-800
-        //  electricquantity = ((MyFunction.twoBytesToInt(comData.recData, i) / 100));
+        //AB项电压相位角
+        double phUAB = (double) (MyFunction.HexToInt(MyFunction.ByteArrToHex(
+                comData.recData, i, i + 1)) / 100f * 180f / Math.PI);
+        mData.setPhUAB(phUAB);
+        i += 1;
+        //BC项电压相位角
+        double phUBC = (float) MyFunction.HexToInt(MyFunction.ByteArrToHex(
+                comData.recData, i, i + 1)) / 100f * 180f / Math.PI;
+        mData.setPhUBC(phUBC);
+        i += 1;
+        //CA项电压相位角
+        double phUCA = (float) MyFunction.HexToInt(MyFunction.ByteArrToHex(
+                comData.recData, i, i + 1)) / 100f * 180f / Math.PI;
+        mData.setPhUCA(phUCA);
+        i += 1;
+        //A项电压电流相位角
+        double phUIA = (float) MyFunction.HexToInt(MyFunction.ByteArrToHex(
+                comData.recData, i, i + 1)) / 100f * 180f / Math.PI;
+        mData.setPhUIA(phUIA);
+        i += 1;
+        //B项电压电流相位角
+        double phUIB = (float) MyFunction.HexToInt(MyFunction.ByteArrToHex(
+                comData.recData, i, i + 1)) / 100f * 180f / Math.PI;
+        mData.setPhUIB(phUIB);
+        i += 1;
+        //C项电压电流相位角
+        double phUIC = (float) MyFunction.HexToInt(MyFunction.ByteArrToHex(
+                comData.recData, i, i + 1)) / 100f * 180f / Math.PI;
+        mData.setPhUIC(phUIC);
+
 
         mpower = MyFunction.twoBytesToInt(comData.recData, 100);
         msingal = comData.recData[102] < 0 ? 256 + comData.recData[102] : comData.recData[102];
 
-//        if(energyTime!=null)
-//        {
-//          energy=energy+  TimeBetween(energyTime)/1000*mData.getYggl();
-//        }
-//        else{
-//            energyTime=System.currentTimeMillis();
-//        }
     }
 
     private void SendforData() {
         //4B590B8001000101FF8001000101F4
         //4B590B8001000101FF8001000100F5
-
-
         new Handler().postDelayed(new Runnable() {
             public void run() {
                 sendPortData(ComA, "4B590B8001000101FF8001000101F4"); // 发送命令获取功率数据

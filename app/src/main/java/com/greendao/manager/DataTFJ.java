@@ -163,7 +163,8 @@ public class DataTFJ {
         mmdata.setKzgl(Double.parseDouble(mtask.getDjkzgl1()));
         mmdata.setJs(Integer.parseInt(mtask.getDjjs1()));
         mmdata.setWgjjdl(Double.parseDouble(mtask.getDjwgjjdl1()));
-        mmdata.setMbglys(0.95d);
+//        mmdata.setMbglys(0.95d);
+        mmdata.setMbglys(Double.parseDouble(mtask.getDjmbglys()));
 
         mmdata.setMethods(mtask.getCsff());
 
@@ -286,7 +287,7 @@ public class DataTFJ {
         mmdata.setHCIA(mres.getHCIA());
         mmdata.setHCIB(mres.getHCIB());
         mmdata.setHCIC(mres.getHCIC());
-        mmdata.setBy1(mres.getBy1());
+//        mmdata.setBy1(mres.getBy1());
         mmdata.setBy2(mres.getBy2());
         mmdata.setBy3(mres.getBy3());
         mmdata.setBy4(mres.getBy4());
@@ -295,7 +296,7 @@ public class DataTFJ {
         mmdata.setBy7(mres.getBy7());
         mmdata.setBy8(mres.getBy8());
         mmdata.setBy9(mres.getBy9());
-        mmdata.setBy10(mres.getBy10());
+//        mmdata.setBy10(mres.getBy10());
         mmdata.setDybb(mres.getDybb());
         mmdata.setDlbb(mres.getDlbb());
         mmdata.setMethod(mres.getMethod());
@@ -585,7 +586,7 @@ public class DataTFJ {
         mRes.setHCIA(mmdata.getHCIA());
         mRes.setHCIB(mmdata.getHCIB());
         mRes.setHCIC(mmdata.getHCIC());
-        mRes.setBy1(mmdata.getBy1());
+//        mRes.setBy1(mmdata.getBy1());
         mRes.setBy2(mmdata.getBy2());
         mRes.setBy3(mmdata.getBy3());
         mRes.setBy4(mmdata.getBy4());

@@ -6,6 +6,7 @@ import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +30,7 @@ import com.motor.test.fragment.childfragment.TestStateAnalysefragment;
 import com.motor.view.MyNoScrollViewPager;
 import com.sensor.SensorData;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,6 +62,7 @@ public class TestFragment extends Fragment {
 
 
     static Button btnTestSave;
+    private CountDownTimer timer;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -111,10 +114,11 @@ public class TestFragment extends Fragment {
                 break;
         }
 
-
+        //锁定按钮的点击事件
         ckLock.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                //选中时isChecked为true，那么设置刷新为false，不允许刷新
                 mActivity.setShuaXin(!isChecked);
             }
         });
@@ -125,6 +129,34 @@ public class TestFragment extends Fragment {
     public void onPause() {
         super.onPause();
 
+    }
+
+    //Fragment依托于Activity，其内部的OnResume和OnPause方法真正归属于其依托的Activity，在Activity可见性变化的时候，
+    // 才会调用这两个方法；如果在Activity中包含一个ViewPager + 多个Fragment的结构，在Fragment的切换过程中，
+    // 因为Activity一直显示，所以Fragment切换是不会调用OnResume和OnPause方法的，当然第一次创建Fragment的时候是会调用的。
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        /**
+         * isVisibleToUser
+         * true：相当于Fragment的onResume，为true时，Fragment已经可见
+         * false：相当于Fragment的onPause，为false时，Fragment不可见
+         */
+        if (isVisibleToUser) {
+            MotorData mData = mActivity.mdata.getMotordata();
+            Log.d("llk", "onResume: " + mData.getMethod());
+            switch (mData.getMethod()) {
+                case 0:
+                    gifImageView.setBackgroundResource(R.drawable.gif_fb);
+                    break;
+                case 1:
+                    gifImageView.setBackgroundResource(R.drawable.gif_cy);
+                    break;
+                case 2:
+                    gifImageView.setBackgroundResource(R.drawable.gif_jyc);
+                    break;
+            }
+        }
     }
 
     public void refresh() {
@@ -179,8 +211,9 @@ public class TestFragment extends Fragment {
                     flmain.setCurrentItem(4, false);
                     break;
                 case R.id.btn_test_save://保存
-                    btnTestSave.setEnabled(false);
-                    CountDownTimer timer = new CountDownTimer(3000 + 500, 1000) {
+                    btnTestSave.setEnabled(false);//禁用控件
+                    //非空判断
+                    timer = new CountDownTimer(3000 + 500, 1000) {
                         @Override
                         public void onTick(long millisUntilFinished) {
                             if (getActivity() != null && !getActivity().isFinishing()) {
@@ -188,6 +221,7 @@ public class TestFragment extends Fragment {
                                 btnTestSave.setText(String.valueOf(millisUntilFinished / 1000));
                             }
                         }
+
                         @Override
                         public void onFinish() {
                             //非空判断
@@ -199,7 +233,7 @@ public class TestFragment extends Fragment {
                     }.start();
                     if (mActivity.SaveData()) {
                         Toasty.success(mActivity, "已保存一组数据！", Toast.LENGTH_SHORT, true).show();
-                    } else {
+                    } else {//false
                         Toasty.error(mActivity, "数据保存失败！", Toast.LENGTH_SHORT, true).show();
                     }
                     break;
@@ -218,8 +252,6 @@ public class TestFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
-
-
     }
 
 
@@ -247,5 +279,13 @@ public class TestFragment extends Fragment {
     public void refreshdisconnect() {
         manalysefragment.refreshdis();
         mdatafragment.refreshdis();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (timer != null) {
+            timer.cancel();
+        }
     }
 }

@@ -50,18 +50,19 @@ public class TaskEntityDao extends AbstractDao<TaskEntity, Long> {
         public final static Property Djkzgl1 = new Property(23, String.class, "djkzgl1", false, "DJKZGL1");
         public final static Property Djjs1 = new Property(24, String.class, "djjs1", false, "DJJS1");
         public final static Property Djwgjjdl1 = new Property(25, String.class, "djwgjjdl1", false, "DJWGJJDL1");
-        public final static Property By1 = new Property(26, String.class, "by1", false, "BY1");
-        public final static Property By2 = new Property(27, String.class, "by2", false, "BY2");
-        public final static Property By3 = new Property(28, String.class, "by3", false, "BY3");
-        public final static Property By4 = new Property(29, String.class, "by4", false, "BY4");
-        public final static Property By5 = new Property(30, String.class, "by5", false, "BY5");
-        public final static Property By6 = new Property(31, String.class, "by6", false, "BY6");
-        public final static Property By7 = new Property(32, String.class, "by7", false, "BY7");
-        public final static Property By8 = new Property(33, String.class, "by8", false, "BY8");
-        public final static Property By9 = new Property(34, String.class, "by9", false, "BY9");
-        public final static Property By10 = new Property(35, String.class, "by10", false, "BY10");
-        public final static Property By11 = new Property(36, String.class, "by11", false, "BY11");
-        public final static Property By12 = new Property(37, String.class, "by12", false, "BY12");
+        public final static Property Djmbglys = new Property(26, String.class, "djmbglys", false, "DJMBGLYS");
+        public final static Property By1 = new Property(27, String.class, "by1", false, "BY1");
+        public final static Property By2 = new Property(28, String.class, "by2", false, "BY2");
+        public final static Property By3 = new Property(29, String.class, "by3", false, "BY3");
+        public final static Property By4 = new Property(30, String.class, "by4", false, "BY4");
+        public final static Property By5 = new Property(31, String.class, "by5", false, "BY5");
+        public final static Property By6 = new Property(32, String.class, "by6", false, "BY6");
+        public final static Property By7 = new Property(33, String.class, "by7", false, "BY7");
+        public final static Property By8 = new Property(34, String.class, "by8", false, "BY8");
+        public final static Property By9 = new Property(35, String.class, "by9", false, "BY9");
+        public final static Property By10 = new Property(36, String.class, "by10", false, "BY10");
+        public final static Property By11 = new Property(37, String.class, "by11", false, "BY11");
+        public final static Property By12 = new Property(38, String.class, "by12", false, "BY12");
     }
 
 
@@ -103,18 +104,19 @@ public class TaskEntityDao extends AbstractDao<TaskEntity, Long> {
                 "\"DJKZGL1\" TEXT," + // 23: djkzgl1
                 "\"DJJS1\" TEXT," + // 24: djjs1
                 "\"DJWGJJDL1\" TEXT," + // 25: djwgjjdl1
-                "\"BY1\" TEXT," + // 26: by1
-                "\"BY2\" TEXT," + // 27: by2
-                "\"BY3\" TEXT," + // 28: by3
-                "\"BY4\" TEXT," + // 29: by4
-                "\"BY5\" TEXT," + // 30: by5
-                "\"BY6\" TEXT," + // 31: by6
-                "\"BY7\" TEXT," + // 32: by7
-                "\"BY8\" TEXT," + // 33: by8
-                "\"BY9\" TEXT," + // 34: by9
-                "\"BY10\" TEXT," + // 35: by10
-                "\"BY11\" TEXT," + // 36: by11
-                "\"BY12\" TEXT);"); // 37: by12
+                "\"DJMBGLYS\" TEXT," + // 26: djmbglys
+                "\"BY1\" TEXT," + // 27: by1
+                "\"BY2\" TEXT," + // 28: by2
+                "\"BY3\" TEXT," + // 29: by3
+                "\"BY4\" TEXT," + // 30: by4
+                "\"BY5\" TEXT," + // 31: by5
+                "\"BY6\" TEXT," + // 32: by6
+                "\"BY7\" TEXT," + // 33: by7
+                "\"BY8\" TEXT," + // 34: by8
+                "\"BY9\" TEXT," + // 35: by9
+                "\"BY10\" TEXT," + // 36: by10
+                "\"BY11\" TEXT," + // 37: by11
+                "\"BY12\" TEXT);"); // 38: by12
     }
 
     /** Drops the underlying database table. */
@@ -245,64 +247,69 @@ public class TaskEntityDao extends AbstractDao<TaskEntity, Long> {
             stmt.bindString(26, djwgjjdl1);
         }
  
+        String djmbglys = entity.getDjmbglys();
+        if (djmbglys != null) {
+            stmt.bindString(27, djmbglys);
+        }
+ 
         String by1 = entity.getBy1();
         if (by1 != null) {
-            stmt.bindString(27, by1);
+            stmt.bindString(28, by1);
         }
  
         String by2 = entity.getBy2();
         if (by2 != null) {
-            stmt.bindString(28, by2);
+            stmt.bindString(29, by2);
         }
  
         String by3 = entity.getBy3();
         if (by3 != null) {
-            stmt.bindString(29, by3);
+            stmt.bindString(30, by3);
         }
  
         String by4 = entity.getBy4();
         if (by4 != null) {
-            stmt.bindString(30, by4);
+            stmt.bindString(31, by4);
         }
  
         String by5 = entity.getBy5();
         if (by5 != null) {
-            stmt.bindString(31, by5);
+            stmt.bindString(32, by5);
         }
  
         String by6 = entity.getBy6();
         if (by6 != null) {
-            stmt.bindString(32, by6);
+            stmt.bindString(33, by6);
         }
  
         String by7 = entity.getBy7();
         if (by7 != null) {
-            stmt.bindString(33, by7);
+            stmt.bindString(34, by7);
         }
  
         String by8 = entity.getBy8();
         if (by8 != null) {
-            stmt.bindString(34, by8);
+            stmt.bindString(35, by8);
         }
  
         String by9 = entity.getBy9();
         if (by9 != null) {
-            stmt.bindString(35, by9);
+            stmt.bindString(36, by9);
         }
  
         String by10 = entity.getBy10();
         if (by10 != null) {
-            stmt.bindString(36, by10);
+            stmt.bindString(37, by10);
         }
  
         String by11 = entity.getBy11();
         if (by11 != null) {
-            stmt.bindString(37, by11);
+            stmt.bindString(38, by11);
         }
  
         String by12 = entity.getBy12();
         if (by12 != null) {
-            stmt.bindString(38, by12);
+            stmt.bindString(39, by12);
         }
     }
 
@@ -428,64 +435,69 @@ public class TaskEntityDao extends AbstractDao<TaskEntity, Long> {
             stmt.bindString(26, djwgjjdl1);
         }
  
+        String djmbglys = entity.getDjmbglys();
+        if (djmbglys != null) {
+            stmt.bindString(27, djmbglys);
+        }
+ 
         String by1 = entity.getBy1();
         if (by1 != null) {
-            stmt.bindString(27, by1);
+            stmt.bindString(28, by1);
         }
  
         String by2 = entity.getBy2();
         if (by2 != null) {
-            stmt.bindString(28, by2);
+            stmt.bindString(29, by2);
         }
  
         String by3 = entity.getBy3();
         if (by3 != null) {
-            stmt.bindString(29, by3);
+            stmt.bindString(30, by3);
         }
  
         String by4 = entity.getBy4();
         if (by4 != null) {
-            stmt.bindString(30, by4);
+            stmt.bindString(31, by4);
         }
  
         String by5 = entity.getBy5();
         if (by5 != null) {
-            stmt.bindString(31, by5);
+            stmt.bindString(32, by5);
         }
  
         String by6 = entity.getBy6();
         if (by6 != null) {
-            stmt.bindString(32, by6);
+            stmt.bindString(33, by6);
         }
  
         String by7 = entity.getBy7();
         if (by7 != null) {
-            stmt.bindString(33, by7);
+            stmt.bindString(34, by7);
         }
  
         String by8 = entity.getBy8();
         if (by8 != null) {
-            stmt.bindString(34, by8);
+            stmt.bindString(35, by8);
         }
  
         String by9 = entity.getBy9();
         if (by9 != null) {
-            stmt.bindString(35, by9);
+            stmt.bindString(36, by9);
         }
  
         String by10 = entity.getBy10();
         if (by10 != null) {
-            stmt.bindString(36, by10);
+            stmt.bindString(37, by10);
         }
  
         String by11 = entity.getBy11();
         if (by11 != null) {
-            stmt.bindString(37, by11);
+            stmt.bindString(38, by11);
         }
  
         String by12 = entity.getBy12();
         if (by12 != null) {
-            stmt.bindString(38, by12);
+            stmt.bindString(39, by12);
         }
     }
 
@@ -523,18 +535,19 @@ public class TaskEntityDao extends AbstractDao<TaskEntity, Long> {
             cursor.isNull(offset + 23) ? null : cursor.getString(offset + 23), // djkzgl1
             cursor.isNull(offset + 24) ? null : cursor.getString(offset + 24), // djjs1
             cursor.isNull(offset + 25) ? null : cursor.getString(offset + 25), // djwgjjdl1
-            cursor.isNull(offset + 26) ? null : cursor.getString(offset + 26), // by1
-            cursor.isNull(offset + 27) ? null : cursor.getString(offset + 27), // by2
-            cursor.isNull(offset + 28) ? null : cursor.getString(offset + 28), // by3
-            cursor.isNull(offset + 29) ? null : cursor.getString(offset + 29), // by4
-            cursor.isNull(offset + 30) ? null : cursor.getString(offset + 30), // by5
-            cursor.isNull(offset + 31) ? null : cursor.getString(offset + 31), // by6
-            cursor.isNull(offset + 32) ? null : cursor.getString(offset + 32), // by7
-            cursor.isNull(offset + 33) ? null : cursor.getString(offset + 33), // by8
-            cursor.isNull(offset + 34) ? null : cursor.getString(offset + 34), // by9
-            cursor.isNull(offset + 35) ? null : cursor.getString(offset + 35), // by10
-            cursor.isNull(offset + 36) ? null : cursor.getString(offset + 36), // by11
-            cursor.isNull(offset + 37) ? null : cursor.getString(offset + 37) // by12
+            cursor.isNull(offset + 26) ? null : cursor.getString(offset + 26), // djmbglys
+            cursor.isNull(offset + 27) ? null : cursor.getString(offset + 27), // by1
+            cursor.isNull(offset + 28) ? null : cursor.getString(offset + 28), // by2
+            cursor.isNull(offset + 29) ? null : cursor.getString(offset + 29), // by3
+            cursor.isNull(offset + 30) ? null : cursor.getString(offset + 30), // by4
+            cursor.isNull(offset + 31) ? null : cursor.getString(offset + 31), // by5
+            cursor.isNull(offset + 32) ? null : cursor.getString(offset + 32), // by6
+            cursor.isNull(offset + 33) ? null : cursor.getString(offset + 33), // by7
+            cursor.isNull(offset + 34) ? null : cursor.getString(offset + 34), // by8
+            cursor.isNull(offset + 35) ? null : cursor.getString(offset + 35), // by9
+            cursor.isNull(offset + 36) ? null : cursor.getString(offset + 36), // by10
+            cursor.isNull(offset + 37) ? null : cursor.getString(offset + 37), // by11
+            cursor.isNull(offset + 38) ? null : cursor.getString(offset + 38) // by12
         );
         return entity;
     }
@@ -567,18 +580,19 @@ public class TaskEntityDao extends AbstractDao<TaskEntity, Long> {
         entity.setDjkzgl1(cursor.isNull(offset + 23) ? null : cursor.getString(offset + 23));
         entity.setDjjs1(cursor.isNull(offset + 24) ? null : cursor.getString(offset + 24));
         entity.setDjwgjjdl1(cursor.isNull(offset + 25) ? null : cursor.getString(offset + 25));
-        entity.setBy1(cursor.isNull(offset + 26) ? null : cursor.getString(offset + 26));
-        entity.setBy2(cursor.isNull(offset + 27) ? null : cursor.getString(offset + 27));
-        entity.setBy3(cursor.isNull(offset + 28) ? null : cursor.getString(offset + 28));
-        entity.setBy4(cursor.isNull(offset + 29) ? null : cursor.getString(offset + 29));
-        entity.setBy5(cursor.isNull(offset + 30) ? null : cursor.getString(offset + 30));
-        entity.setBy6(cursor.isNull(offset + 31) ? null : cursor.getString(offset + 31));
-        entity.setBy7(cursor.isNull(offset + 32) ? null : cursor.getString(offset + 32));
-        entity.setBy8(cursor.isNull(offset + 33) ? null : cursor.getString(offset + 33));
-        entity.setBy9(cursor.isNull(offset + 34) ? null : cursor.getString(offset + 34));
-        entity.setBy10(cursor.isNull(offset + 35) ? null : cursor.getString(offset + 35));
-        entity.setBy11(cursor.isNull(offset + 36) ? null : cursor.getString(offset + 36));
-        entity.setBy12(cursor.isNull(offset + 37) ? null : cursor.getString(offset + 37));
+        entity.setDjmbglys(cursor.isNull(offset + 26) ? null : cursor.getString(offset + 26));
+        entity.setBy1(cursor.isNull(offset + 27) ? null : cursor.getString(offset + 27));
+        entity.setBy2(cursor.isNull(offset + 28) ? null : cursor.getString(offset + 28));
+        entity.setBy3(cursor.isNull(offset + 29) ? null : cursor.getString(offset + 29));
+        entity.setBy4(cursor.isNull(offset + 30) ? null : cursor.getString(offset + 30));
+        entity.setBy5(cursor.isNull(offset + 31) ? null : cursor.getString(offset + 31));
+        entity.setBy6(cursor.isNull(offset + 32) ? null : cursor.getString(offset + 32));
+        entity.setBy7(cursor.isNull(offset + 33) ? null : cursor.getString(offset + 33));
+        entity.setBy8(cursor.isNull(offset + 34) ? null : cursor.getString(offset + 34));
+        entity.setBy9(cursor.isNull(offset + 35) ? null : cursor.getString(offset + 35));
+        entity.setBy10(cursor.isNull(offset + 36) ? null : cursor.getString(offset + 36));
+        entity.setBy11(cursor.isNull(offset + 37) ? null : cursor.getString(offset + 37));
+        entity.setBy12(cursor.isNull(offset + 38) ? null : cursor.getString(offset + 38));
      }
     
     @Override

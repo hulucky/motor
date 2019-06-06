@@ -110,6 +110,8 @@ public class ParamSetActivity extends AppCompatActivity {
     NestedScrollView nestedscrollview;
     @BindView(R.id.tv_param_djxl1)
     TextView tvdjxl1;
+    @BindView(R.id.et_param_set_mbglys)
+    EditText etMbglys;
 
     private MyApp myApp;
     private int openlimit = 0; //任务信息 展开、关闭设位置
@@ -122,7 +124,7 @@ public class ParamSetActivity extends AppCompatActivity {
     private boolean canSaveptg;
     private Animation mShakeAnim;
     private String errstr = "";
-    private boolean isFromActivityResult;//是否从选择点击库界面过来
+    private boolean isFromActivityResult;//是否从选择电机库界面过来
 
 
     @Override
@@ -305,6 +307,15 @@ public class ParamSetActivity extends AppCompatActivity {
                 res = res & false;
                 errstr = errstr + "\n" + "无功经济当量：0.02～0.1";
             }
+            if (IsEmpty(etMbglys)) {
+                res = res & false;
+                etMbglys.startAnimation(mShakeAnim);
+                errstr = errstr + "\n" + "未输入目标功率因数";
+            } else if (Float.parseFloat(etMbglys.getText().toString()) > 1 || Float.parseFloat(etMbglys.getText().toString()) < 0) {
+                etMbglys.startAnimation(mShakeAnim);
+                res = res & false;
+                errstr = errstr + "\n" + "目标功率因数：0 ～ 1";
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -350,14 +361,18 @@ public class ParamSetActivity extends AppCompatActivity {
     @OnClick({R.id.fab, R.id.btn_go_test, R.id.tv_param_djxl1})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.fab:
+            case R.id.fab://floatactionbutton按钮点击事件
                 Intent intent = new Intent();
                 intent.setClass(ParamSetActivity.this, HistoryTaskSearchActivity.class);
                 startActivityForResult(intent, ConstantData.HistoryTask_resultCode);
                 break;
             case R.id.btn_go_test://开始测试点击事件
                 // 参数合理性检测
-                if (CanSave()) {
+                if (CanSave()) {//校验数据是否在范围内
+                    if (!MyApp.isFuYongCanShu) {//如果不是复用参数就新建任务
+                        Log.d("kkl", "不是复用参数:new TaskEntity(); ");
+                        mTask = new TaskEntity();
+                    }
                     SaveTask();
                     Intent intent1 = new Intent();
                     myApp.getInstance().setTaskEnity(mTask);
@@ -369,7 +384,7 @@ public class ParamSetActivity extends AppCompatActivity {
                 }
                 break;
 
-            case R.id.tv_param_djxl1:
+            case R.id.tv_param_djxl1://电机型号
                 myApp.getInstance().setIsSetMotor1(true);
                 intent = new Intent();
                 intent.setClass(ParamSetActivity.this, MotorSelectorActivity.class);
@@ -418,11 +433,13 @@ public class ParamSetActivity extends AppCompatActivity {
             mTask.setDjkzdl1(etParamSetKzdl.getText().toString());
             mTask.setDjjs1(etParamSetJs.getText().toString());
             mTask.setDjwgjjdl1(etParamSetWgjjdl.getText().toString());
+            mTask.setDjmbglys(etMbglys.getText().toString());
+            mTask.setDjk1(tvdjxl1.getText().toString());
 
             if (!mTask.get_IsCompleteTask()) {
                 mTask.setGreateTaskTime(DateUtil.getGreatedTaskTime());
             }
-            mTask.setBy1("0.95");
+//            mTask.setBy1("0.95");
             new GreateTaskUtils().insert(mTask);
             MyApp.getInstance().setTaskEnity(mTask);
         } catch (Exception e) {
@@ -489,7 +506,7 @@ public class ParamSetActivity extends AppCompatActivity {
         @Override
         public void afterTextChanged(Editable s) {
             try {
-                DecimalFormat df4 = new DecimalFormat("0.0");
+                DecimalFormat df1 = new DecimalFormat("0.0");
                 double mDlbbone, mDlbbtwo;
                 double dlbb;
                 mDlbbone = Double.parseDouble(etdlbb1.getText().toString());
@@ -507,47 +524,13 @@ public class ParamSetActivity extends AppCompatActivity {
                         etdlbb1.setTextColor(Color.BLACK);
                         etdlbb2.setTextColor(Color.BLACK);
                     }
-                    tvdlbb.setText(df4.format(dlbb));
+                    tvdlbb.setText(df1.format(dlbb));
                 }
             } catch (NumberFormatException e) {
                 e.printStackTrace();
             }
         }
     }
-
-    //EditText的监听器
-//    class TextChange implements TextWatcher {
-//        @Override
-//        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//
-//        }
-//
-//        @Override
-//        public void onTextChanged(CharSequence s, int start, int before, int count) {
-//
-//        }
-//
-//        @Override
-//        public void afterTextChanged(Editable s) {
-//            if (!isFromActivityResult) {//如果不是从点击库选择界面进入，就重新计算
-//                Log.d("1234567498", "afterTextChanged: " + isFromActivityResult);
-//                try {
-//                    isFromActivityResult = false;
-//                    DecimalFormat df2 = new DecimalFormat("00.00");
-//                    double mCedgl, mCeddl;
-//                    int mCjs;
-//                    mCedgl = Double.parseDouble(etParamSetEdgl.getText().toString());
-//                    mCeddl = Double.parseDouble(etParamSetEddl.getText().toString());
-//                    mCjs = Integer.parseInt(etParamSetJs.getText().toString());
-//                    double[] res = MyApp.recalculate(mCedgl, mCeddl, mCjs);
-//                    etParamSetKzgl.setText(df2.format(res[0]));
-//                    etParamSetKzdl.setText(df2.format(res[1]));
-//                } catch (NumberFormatException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        }
-//    }
 
     /**
      * 根据值, 设置spinner默认选中:
@@ -628,6 +611,7 @@ public class ParamSetActivity extends AppCompatActivity {
                 mTask.setDjkzgl1(data.getStringExtra(ConstantData.MotorKzgl_resultCode));
                 mTask.setDjjs1(data.getStringExtra(ConstantData.MotorJs_resultCode));
                 mTask.setDjwgjjdl1(data.getStringExtra(ConstantData.MotorWgjjdl_resultCode));
+                mTask.setDjmbglys(0.9 + "");//目标功率因数给个默认值0.9
 
                 etParamSetEddy.setText(data.getStringExtra(ConstantData.MotorEddy_resultCode));
                 etParamSetEddl.setText(data.getStringExtra(ConstantData.MotorEddl_resultCode));
@@ -637,6 +621,8 @@ public class ParamSetActivity extends AppCompatActivity {
                 etParamSetKzgl.setText(data.getStringExtra(ConstantData.MotorKzgl_resultCode));
                 etParamSetJs.setText(data.getStringExtra(ConstantData.MotorJs_resultCode));
                 etParamSetWgjjdl.setText(data.getStringExtra(ConstantData.MotorWgjjdl_resultCode));
+                etMbglys.setText(0.9 + "");
+
                 Log.d("1234567498", "onActivityResult: " + data.getStringExtra(ConstantData.MotorKzdl_resultCode));
                 Log.d("1234567498", "onActivityResult: " + isFromActivityResult);
 
@@ -644,13 +630,15 @@ public class ParamSetActivity extends AppCompatActivity {
 
             case 55: // 历史任务返回码  ConstantData.HistoryTask_resultCode
                 Long taskId = data.getLongExtra(ConstantData.HistoryTask_ID_resultCode, 1L);
+                MyApp.isFuYongCanShu = true;//在开始测试之前标记此时是复用参数
                 GreateTaskUtils greateTaskUtils = new GreateTaskUtils();
                 // 这个只是复用参数的历史任务，参数有可能在此基础上更改，不一定就是测试任务。
                 TaskEntity mmTask = greateTaskUtils.query(taskId);
-                if (mmTask.get_IsCompleteTask() == true) {
+                Log.d("kkl", "onActivityResult; " + mmTask.getDjk1());
+                if (mmTask.get_IsCompleteTask()) {
                     mTask = new TaskEntity();
                 }
-                CopyTask(mTask, mmTask);
+                CopyTask(mTask, mmTask);//把后面的赋给前面的
                 this.setParForHistoryTask(mTask);
                 break;
             default:
@@ -670,7 +658,7 @@ public class ParamSetActivity extends AppCompatActivity {
         mTask.setBy4(mmTask.getBy4());
         mTask.setBy3(mmTask.getBy3());
         mTask.setBy2(mmTask.getBy2());
-        mTask.setBy1(mmTask.getBy1());
+        mTask.setDjmbglys(mmTask.getDjmbglys());
 
         mTask.setDjwgjjdl1(mmTask.getDjwgjjdl1());
         mTask.setDjjs1(mmTask.getDjjs1());
@@ -721,6 +709,7 @@ public class ParamSetActivity extends AppCompatActivity {
             etParamSetKzgl.setText(taskEnity.getDjkzgl1());
             etParamSetJs.setText(taskEnity.getDjjs1());
             etParamSetWgjjdl.setText(taskEnity.getDjwgjjdl1());
+            etMbglys.setText(taskEnity.getDjmbglys());
 
             setSpinnerItemSelectedByValue(spqblc1, taskEnity.getDjqblc1());
             setSpinnerItemSelectedByValue(spmcsff1, taskEnity.getDjcsff1());

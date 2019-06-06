@@ -65,11 +65,11 @@ public class TestStateAnalysefragment extends Fragment {
     private TestActivity mActivity;
     Unbinder unbinder;
     public int fragflag;
-    DecimalFormat df2 = new DecimalFormat("####0.00");
-
-    DecimalFormat df3 = new DecimalFormat("####0.000");
 
     DecimalFormat df1 = new DecimalFormat("####0.0");
+    DecimalFormat df2 = new DecimalFormat("####0.00");
+    DecimalFormat df3 = new DecimalFormat("####0.000");
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -138,17 +138,17 @@ public class TestStateAnalysefragment extends Fragment {
             etDetailEdzhxl.setText(df2.format(mData.getEdzhxl()));
             etDetailZhxl.setText(df2.format(mData.getZhxl()));
             etDetailDjyxzt.setText(mData.getstrDjyxzt());
-//            etDetailDypc.setText(df2.format(mData.getDypc()));//电源电压与额定电压偏差
-            etDetailDypc.setText(df2.format(Math.abs(mData.getPjxdy()-mData.getEddy())));//电源电压与额定电压偏差
+//            etDetailDypc.setText(df2.format(Math.abs(mData.getPjxdy()-mData.getEddy())));//电源电压与额定电压偏差
+            etDetailDypc.setText(df2.format(mData.getDypc()));//电源电压与额定电压偏差
             // etDetailDypchl.setText(df2.format(mData.getDypchl()));
             etDetailSxbphd.setText(df2.format(mData.getSxbphd()));
             //  etDetailBphdhl.setText(df2.format(mData.getBphdhl()));
-            double pjxdy = (mData.getPjdy()) * Math.sqrt(3);
+//            double pjxdy = (mData.getPjdy()) * Math.sqrt(3);
 
 //        etdypc.setText(df2.format(Math.abs(pjxdy - Double.parseDouble(mData.getEddy()))) + "");
 
-            if ((pjxdy / (mData.getEddy())) > 0.9) {
-                etDetailDypchl.setText("合理");
+            if ((mData.getPjxdy() / (mData.getEddy())) > 0.9) {
+                etDetailDypchl.setText("合理");//电压偏差
             } else {
                 etDetailDypchl.setText("不合理");
             }

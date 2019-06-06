@@ -56,11 +56,11 @@ public class TestOtherFragment extends Fragment {
     private TestActivity mActivity;
     Unbinder unbinder;
     public int fragflag;
-    DecimalFormat df2 = new DecimalFormat("####0.00");
-
-    DecimalFormat df3 = new DecimalFormat("####0.000");
 
     DecimalFormat df1 = new DecimalFormat("####0.0");
+    DecimalFormat df2 = new DecimalFormat("####0.00");
+    DecimalFormat df3 = new DecimalFormat("####0.000");
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

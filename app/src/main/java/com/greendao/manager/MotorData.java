@@ -22,7 +22,7 @@ public class MotorData {
     private double yggl = 0.0d;//有功功率
     private double wggl = 0.0d;//无功功率
     private double scgl = 0.0d;//输出功率
-    private double glys = 0.0d;//功率因数
+    private double glys = 0.0d;//功率因数---指的是实测功率因数
     private double ygdn = 0.0d;//有功电能
     private double wgdn = 0.0d;//无功电能
     private double dwpl = 0.0d;//电网频率
@@ -127,6 +127,7 @@ public class MotorData {
     private String method = "";//测试方法 0=单瓦，1=双瓦，2=三瓦
 
     public void Calculate() {
+        DecimalFormat df1 = new DecimalFormat("#.0");
         DecimalFormat df2 = new DecimalFormat("#.00");
         DecimalFormat df3 = new DecimalFormat("#.000");
         DecimalFormat df4 = new DecimalFormat("#.0000");
@@ -134,24 +135,23 @@ public class MotorData {
         DecimalFormat df6 = new DecimalFormat("#.000000");
         //
         if (method.equals("单瓦法")) {
-            pjdy = Math.max(UA, Math.max(UB, UC));
-            pjdl = Math.max(IA, Math.max(IB, IC));
-            pjxdy = Math.max(UAB, Math.max(UBC, UCA));
+            pjdy = Double.parseDouble(df2.format(Math.max(UA, Math.max(UB, UC))));
+            pjdl = Double.parseDouble(df2.format(Math.max(IA, Math.max(IB, IC))));
+            pjxdy = Double.parseDouble(df2.format(Math.max(UAB, Math.max(UBC, UCA))));
             szgl = Float.parseFloat(df2.format(pjdy * pjdl * 3));
             yggl = Float.parseFloat(df2.format(szgl * glys));
             wggl = Float.parseFloat(df2.format(Math.sqrt(Math.pow(szgl, 2) - Math.pow(yggl, 2))));
         } else if (method.equals("双瓦法")) {
-            pjdy = (UA + UB + UC) / 3;
-            pjdl = (IA + IC) / 2;
-            pjxdy = (UAB + UBC + UCA) / 3;
+            pjdy = Double.parseDouble(df2.format((UA + UB + UC) / 3));
+            pjdl = Double.parseDouble(df2.format((IA + IC) / 2));
+            pjxdy = Double.parseDouble(df2.format((UAB + UBC + UCA) / 3));
             szgl = Float.parseFloat(df2.format((UA * IA + UC * IC) * 1.5));
             yggl = Float.parseFloat(df2.format(szgl * glys));
             wggl = Float.parseFloat(df2.format(Math.sqrt(Math.pow(szgl, 2) - Math.pow(yggl, 2))));
         } else if (method.equals("三瓦法")) {
-            pjdy = (UA + UB + UC) / 3;
-            pjdl = (IA + IB + IC) / 3;
-
-            pjxdy = (UAB + UBC + UCA) / 3;
+            pjdy = Double.parseDouble(df2.format((UA + UB + UC) / 3));
+            pjdl = Double.parseDouble(df2.format((IA + IB + IC) / 3));
+            pjxdy = Double.parseDouble(df2.format((UAB + UBC + UCA) / 3));
             szgl = Float.parseFloat(df2.format(UA * IA + UB * IB + UC * IC));
             yggl = Float.parseFloat(df2.format(szgl * glys));
             wggl = Float.parseFloat(df2.format(Math.sqrt(Math.pow(szgl, 2) - Math.pow(yggl, 2))));
@@ -160,34 +160,42 @@ public class MotorData {
         yggl = yggl / 1000;
         wggl = wggl / 1000;
 
+        szgl = Float.parseFloat(df2.format(szgl));
+        yggl = Float.parseFloat(df2.format(yggl));
+        wggl = Float.parseFloat(df2.format(wggl));
 
-        double tmpA = Double.parseDouble(df2.format((1 / (edxl / 100) - 1) * edgl - kzgl));
-        double tmpB = Double.parseDouble(df2.format(tmpA * (yggl - kzgl)));
-        double tmpC = Double.parseDouble(df2.format(pow(edgl, 2) / 4 + tmpB));
+
+//        double tmpA = Double.parseDouble(df2.format((1 / (edxl / 100) - 1) * edgl - kzgl));
+//        double tmpB = Double.parseDouble(df2.format(tmpA * (yggl - kzgl)));
+//        double tmpC = Double.parseDouble(df2.format(pow(edgl, 2) / 4 + tmpB));
+        double tmpA = (1 / (edxl / 100) - 1) * edgl - kzgl;
+        double tmpB = tmpA * (yggl - kzgl);
+        double tmpC = (pow(edgl, 2) / 4 + tmpB);
+
         //负载系数
         if (edxl == 0 || tmpA == 0 || tmpC < 0) {
-            fzxs = 0;
+            fzxs = Double.parseDouble(df3.format(0));
         } else {
-            fzxs = Double.parseDouble(df6.format((sqrt(tmpC) - edgl / 2) / tmpA));
+            fzxs = Double.parseDouble(df3.format((sqrt(tmpC) - edgl / 2) / tmpA));
         }
         Log.i("ddf", "edxl: " + edxl + "  edgl" + edgl + "  kzgl" + kzgl + "  yggl" + yggl + "  fzxs" + fzxs);
         //输出功率
-        scgl = Double.parseDouble(df4.format(fzxs * edgl));
+        scgl = Double.parseDouble(df2.format(fzxs * edgl));
         Log.i("ggh", "输出功率: " + scgl + "  负载系数：" + fzxs + "  额定功率：" + edgl);
         //有功损耗
         if (edxl == 0) {
-            ygglsh = 0.00f;
+            ygglsh = 0.0f;
         } else {
             ygglsh = Double.parseDouble(df2.format(kzgl + fzxs * fzxs * tmpA));
         }
         //效率
         if (yggl == 0) {
-            xl = 0.00f;
+            xl = 0.000f;
         } else {
-            xl = Double.parseDouble(df4.format(scgl / (yggl)));
+            xl = Double.parseDouble(df3.format(scgl / (yggl)));
         }
         xl = xl * 100;
-
+        xl = Double.parseDouble(df2.format(xl));
         //  Q1空载无功功率
         // if ((3 * ArrData[5] * ArrData[5] * kzdl * kzdl / 1000000 - kzgl * kzgl) > 0)
         //{
@@ -195,39 +203,40 @@ public class MotorData {
 
         //}
         if ((3 * eddy * eddy * kzdl * kzdl / 1000000 - kzgl * kzgl) > 0) {
-            kzwggl = Double.parseDouble(df2.format(sqrt((3 * eddy * eddy * kzdl * kzdl / 1000000 - kzgl * kzgl))));
+            kzwggl = Double.parseDouble(df2.format(sqrt(3 * eddy * eddy * kzdl * kzdl / 1000000 - kzgl * kzgl)));
             Log.i("dda", "kzwggl: " + kzwggl);
         } else {
-            kzwggl = 0.00f;
+            kzwggl = 0.0f;
         }
         // Q2额定负载无功功率
         if (edxl == 0) {
             //|| edglys == 0 || (1 - pow(edglys, 2)) < 0) {
-            edfzwggl = 0.00f;
+            edfzwggl = 0.0f;
         } else {
             //edfzwggl = Math.round(edgl / (edxl / 100) * (Math.sqrt(1 - edglys * edglys) / edglys), 2);
             edfzwggl = Double.parseDouble(df6.format(edgl / (edxl / 100000) / sqrt(3) / eddl / eddy));
-            edfzwggl = Double.parseDouble(df4.format(acos(edfzwggl)));
+            edfzwggl = Double.parseDouble(df6.format(acos(edfzwggl)));
             edfzwggl = Double.parseDouble(df2.format(edgl / (edxl / 100) * (tan(edfzwggl))));
         }
         //综合功率损耗
-        zhglsh = Double.parseDouble(df4.format(kzgl + fzxs * fzxs * tmpA + wgjjdl * (kzwggl + (fzxs * fzxs) * (edfzwggl - kzwggl))));
+        zhglsh = Double.parseDouble(df2.format(kzgl + fzxs * fzxs * tmpA + wgjjdl * (kzwggl + (fzxs * fzxs) * (edfzwggl - kzwggl))));
         //额定综合功率损耗
-        edzhglsh = (1 / (edxl / 100) - 1) * edgl + edfzwggl * wgjjdl;
+        edzhglsh = Double.parseDouble(df2.format((1 / (edxl / 100) - 1) * edgl + edfzwggl * wgjjdl));
 
         //综合效率
         if ((zhglsh + scgl) == 0) {
-            zhxl = 0.00f;
+            zhxl = 0.0f;
         } else {
-            zhxl = Double.parseDouble(df5.format(scgl / (zhglsh + scgl)));
+            zhxl = Double.parseDouble(df3.format(scgl / (zhglsh + scgl)));
         }
 
         zhxl = zhxl * 100;
+        zhxl = Double.parseDouble(df2.format(zhxl));
         if (xl > 100 || xl < 0) {
-            xl = 0.00f;
+            xl = 0.0f;
         }
         if (zhxl > 100 || zhxl < 0) {
-            zhxl = 0.00f;
+            zhxl = 0.0f;
         }
 //        if (Double.isNaN(zhxl) || Double.isInfinite(zhxl)) {
 //            zhxl = 0;
@@ -237,7 +246,7 @@ public class MotorData {
         ////额定综合消耗功率=额定功率+（1/额定效率-1）*额定功率+额定负载时的无功功率*无功经济当量
         edzhxhgl = Double.parseDouble(df2.format(edgl + ((1 / (edxl / 100)) - 1) * edgl + edfzwggl * wgjjdl));
         ////额定综合效率=（额定功率/(额定功率+（1/额定效率-1）*额定功率+额定负载时的无功功率*无功经济当量）*100%)
-        edzhxl = Double.parseDouble(df2.format((edgl / edzhxhgl) * 100));
+        edzhxl = Double.parseDouble(df2.format(edgl / edzhxhgl * 100));
 //        fzxs = fzxs * 100;
 
 
@@ -245,15 +254,18 @@ public class MotorData {
         //            无功补偿容量=视在功率*(SQRT(1/功率因数/功率因数-1)-SQRT(1/目标功率因数/目标功率因数-1))
         //无功补偿电容量=无功补偿容量*1000000000/2/PI/电网频率/额定电压/额定电压
         if (glys != 0 && mbglys != 0) {
-            wgbcrl = Math.round(szgl / 1000 * (Math.sqrt(1 / glys / glys - 1) - Math.sqrt(1 / mbglys / mbglys - 1)));
-        } else {
-            wgbcrl = 0.00f;
+//            wgbcrl = Math.round(szgl * (Math.sqrt(1 / glys / glys - 1) - Math.sqrt(1 / mbglys / mbglys - 1)));
+            wgbcrl = Double.parseDouble(df2.format(szgl * (Math.sqrt(1 / glys / glys - 1) - Math.sqrt(1 / mbglys / mbglys - 1))));
+        } else {//Math.round四舍五入
+            wgbcrl = 0.0f;
         }
         if (dwpl != 0) {//电网频率
-            wgbcdrl = Math.round(wgbcrl * 1000000000 / 2 / Math.PI / dwpl / eddy / eddy);
+//            wgbcdrl = Math.round(wgbcrl * 1000000000 / 2 / Math.PI / dwpl / eddy / eddy);
+            wgbcdrl = Double.parseDouble(df2.format(wgbcrl * 1000000000 / 2 / Math.PI / dwpl / eddy / eddy));
         } else {
             wgbcdrl = 0.00f;
         }
+        dypc = Double.parseDouble(df2.format(Math.abs(pjxdy - eddy)));//电源电压与额定电压偏差
     }
 
     public double getPjxdy() {
@@ -264,7 +276,7 @@ public class MotorData {
         this.pjxdy = pjxdy;
     }
 
-    private double xl = 0.0d;//效率
+    private double xl = 0.0d;//效率(电机效率)
 
     public double getDybb() {
         return dybb;

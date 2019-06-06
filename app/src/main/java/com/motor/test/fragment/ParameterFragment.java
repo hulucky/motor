@@ -53,13 +53,16 @@ public class ParameterFragment extends Fragment implements GridAdapter.Callback{
      * description:初始化界面
      */
     private void initListView(){
+        //第一段listview
         GridAdapter taskInfAdapter = new GridAdapter(mActivity ,getTaskEntity(),0,this);
+        //第二段listview
         GridAdapter djInfAdapter = new GridAdapter(mActivity,getTaskEntity(),1,this);
-
+        //第三段listview
         GridAdapter inputInfAdapter = new GridAdapter(mActivity,getTaskEntity(),3,this);
 
+        //第一段listview
         lvTaskInf.setAdapter(taskInfAdapter);
-
+        //第二段listView
         lvDjInf.setAdapter(djInfAdapter);
         //第三段listView
         lvInputInf.setAdapter(inputInfAdapter);
