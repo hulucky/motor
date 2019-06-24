@@ -11,8 +11,8 @@ android {
         applicationId "com.motor"
         minSdkVersion 19
         targetSdkVersion 27
-        versionCode 1 // Apk版本号 ：正整数，且新APK必须大于旧版APK才可以覆盖安装。
-        versionName "V2.19.05.15.0001" //APK版本名称：V2.18.08.23.0001 ，用于区分APK的版本。
+        versionCode 2 // Apk版本号 ：正整数，且新APK必须大于旧版APK才可以覆盖安装。
+        versionName "V1.190621.0001" //APK版本名称：V2.18.08.23.0001 ，用于区分APK的版本。
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

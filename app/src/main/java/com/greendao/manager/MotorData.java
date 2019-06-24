@@ -126,6 +126,9 @@ public class MotorData {
     private double dlbb = 1d;//电流变比\
     private String method = "";//测试方法 0=单瓦，1=双瓦，2=三瓦
 
+    private double xl = 0.0d;//效率(电机效率)
+
+    //根号3取1.732计算
     public void Calculate() {
         DecimalFormat df1 = new DecimalFormat("#.0");
         DecimalFormat df2 = new DecimalFormat("#.00");
@@ -138,31 +141,42 @@ public class MotorData {
             pjdy = Double.parseDouble(df2.format(Math.max(UA, Math.max(UB, UC))));
             pjdl = Double.parseDouble(df2.format(Math.max(IA, Math.max(IB, IC))));
             pjxdy = Double.parseDouble(df2.format(Math.max(UAB, Math.max(UBC, UCA))));
-            szgl = Float.parseFloat(df2.format(pjdy * pjdl * 3));
+
+//            szgl = Float.parseFloat(df2.format(pjdy * pjdl * 3));
+            szgl = Float.parseFloat(df2.format(pjxdy * pjdl * 1.732d / 1000d));
+
             yggl = Float.parseFloat(df2.format(szgl * glys));
             wggl = Float.parseFloat(df2.format(Math.sqrt(Math.pow(szgl, 2) - Math.pow(yggl, 2))));
         } else if (method.equals("双瓦法")) {
             pjdy = Double.parseDouble(df2.format((UA + UB + UC) / 3));
             pjdl = Double.parseDouble(df2.format((IA + IC) / 2));
             pjxdy = Double.parseDouble(df2.format((UAB + UBC + UCA) / 3));
-            szgl = Float.parseFloat(df2.format((UA * IA + UC * IC) * 1.5));
+
+            //修改前      szgl = Float.parseFloat(df2.format((UA * IA + UC * IC) * 1.5));
+            szgl = Float.parseFloat(df2.format(pjxdy * pjdl * 1.732d / 1000d));
+
             yggl = Float.parseFloat(df2.format(szgl * glys));
             wggl = Float.parseFloat(df2.format(Math.sqrt(Math.pow(szgl, 2) - Math.pow(yggl, 2))));
         } else if (method.equals("三瓦法")) {
             pjdy = Double.parseDouble(df2.format((UA + UB + UC) / 3));
             pjdl = Double.parseDouble(df2.format((IA + IB + IC) / 3));
             pjxdy = Double.parseDouble(df2.format((UAB + UBC + UCA) / 3));
-            szgl = Float.parseFloat(df2.format(UA * IA + UB * IB + UC * IC));
+
+//            szgl = Float.parseFloat(df2.format(UA * IA + UB * IB + UC * IC));
+            szgl = Float.parseFloat(df2.format(pjxdy * pjdl * 1.732d / 1000d));
+
             yggl = Float.parseFloat(df2.format(szgl * glys));
             wggl = Float.parseFloat(df2.format(Math.sqrt(Math.pow(szgl, 2) - Math.pow(yggl, 2))));
         }
-        szgl = szgl / 1000;
-        yggl = yggl / 1000;
-        wggl = wggl / 1000;
+        //修改前
+//        szgl = szgl / 1000;
+//        yggl = yggl / 1000;
+//        wggl = wggl / 1000;
 
-        szgl = Float.parseFloat(df2.format(szgl));
-        yggl = Float.parseFloat(df2.format(yggl));
-        wggl = Float.parseFloat(df2.format(wggl));
+//        szgl = Float.parseFloat(df2.format(szgl));
+//        yggl = Float.parseFloat(df2.format(yggl));
+//        wggl = Float.parseFloat(df2.format(wggl));
+        //修改后全部注释掉，不添加任何代码
 
 
 //        double tmpA = Double.parseDouble(df2.format((1 / (edxl / 100) - 1) * edgl - kzgl));
@@ -188,14 +202,21 @@ public class MotorData {
         } else {
             ygglsh = Double.parseDouble(df2.format(kzgl + fzxs * fzxs * tmpA));
         }
-        //效率
+        //效率(电机效率)
         if (yggl == 0) {
             xl = 0.000f;
         } else {
-            xl = Double.parseDouble(df3.format(scgl / (yggl)));
+
+//            xl = Double.parseDouble(df3.format(scgl / yggl));
+            xl = Double.parseDouble(df2.format(scgl / yggl * 100));
+
         }
-        xl = xl * 100;
-        xl = Double.parseDouble(df2.format(xl));
+        //修改前
+//        xl = xl * 100;
+//        xl = Double.parseDouble(df2.format(xl));
+        //修改后
+
+
         //  Q1空载无功功率
         // if ((3 * ArrData[5] * ArrData[5] * kzdl * kzdl / 1000000 - kzgl * kzgl) > 0)
         //{
@@ -227,11 +248,17 @@ public class MotorData {
         if ((zhglsh + scgl) == 0) {
             zhxl = 0.0f;
         } else {
-            zhxl = Double.parseDouble(df3.format(scgl / (zhglsh + scgl)));
-        }
 
-        zhxl = zhxl * 100;
-        zhxl = Double.parseDouble(df2.format(zhxl));
+//            zhxl = Double.parseDouble(df3.format(scgl / (zhglsh + scgl)));
+            zhxl = Double.parseDouble(df2.format(scgl / (zhglsh + scgl) * 100));
+
+        }
+        //修改前
+//        zhxl = zhxl * 100;
+//        zhxl = Double.parseDouble(df2.format(zhxl));
+        //    修改后
+
+
         if (xl > 100 || xl < 0) {
             xl = 0.0f;
         }
@@ -276,7 +303,6 @@ public class MotorData {
         this.pjxdy = pjxdy;
     }
 
-    private double xl = 0.0d;//效率(电机效率)
 
     public double getDybb() {
         return dybb;

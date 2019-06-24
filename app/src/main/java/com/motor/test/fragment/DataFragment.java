@@ -323,13 +323,11 @@ public class DataFragment extends Fragment {
                     startActivity(intent1);
                 }
                 break;
-            case R.id.btn_testdetail_report:
-
+            case R.id.btn_testdetail_report://生成报告
                 Res_id = new ArrayList<Long>();
                 for (Map.Entry<Integer, Integer> entry : selected.entrySet()) {
                     Res_id.add(mreslist.get(entry.getValue()).getId());
                 }
-
                 if (Res_id.size() == 0) {
                     Toasty.error(mActivity, "请先勾选生成报告的数据！", Toast.LENGTH_SHORT, true).show();
                 } else {
@@ -492,9 +490,8 @@ public class DataFragment extends Fragment {
 
             // Workbook workbook = Workbook.getWorkbook(new
             // File(Environment.getExternalStorageDirectory().getAbsolutePath()+"/ͨ����ۺϲ�����/.SystemFiles/SystemFiles/flow(��ֹɾ��).ky"));
-            Workbook workbook = Workbook.getWorkbook(new File(Environment
-                    .getExternalStorageDirectory().getAbsolutePath()
-                    + "/CDZ11W矿用电机无线多参数测试仪/.报告模板/电机报告.xls"));
+            Workbook workbook = Workbook.getWorkbook(new File(Environment.getExternalStorageDirectory()
+                    .getAbsolutePath() + "/CDZ11W矿用电机无线多参数测试仪/.报告模板/电机报告.xls"));
 
             WritableWorkbook writableWorkbook = Workbook.createWorkbook(
                     new File(Environment.getExternalStorageDirectory()

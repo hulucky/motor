@@ -382,7 +382,7 @@ public class SensorActivity extends AppCompatActivity {
         i += 2;
         mData.setGlys((float) ((MyFunction.twoByte2double_(comData.recData, i) / 10000)));
         i += 2;
-        mData.setDwpl((float) ((MyFunction.twoBytesToInt(comData.recData, i) / 100)));
+        mData.setDwpl((float) ((MyFunction.twoByte2double_(comData.recData, i) / 100)));
         i += 2;
         mData.setAyggl((float) ((MyFunction.twoByte2double_(comData.recData, i) * exU * exI / 10000)));
         i += 2;

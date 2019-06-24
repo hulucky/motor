@@ -225,15 +225,25 @@ public class ParamSetActivity extends AppCompatActivity {
                 tvdjxl1.startAnimation(mShakeAnim);
                 errstr = errstr + "\n" + "未选择电机1";
             }
-            if (isEmpty(tvdybb.getText().toString())) {
+            if (isEmpty(etdybb1.getText().toString())) {
                 res = res & false;
-                tvdybb.startAnimation(mShakeAnim);
-                errstr = errstr + "\n" + "电压变比设置不正确";
+                etdybb1.startAnimation(mShakeAnim);
+                errstr = errstr + "\n" + "电压变比1设置不正确";
             }
-            if (isEmpty(tvdlbb.getText().toString())) {
+            if (isEmpty(etdybb2.getText().toString())) {
                 res = res & false;
-                tvdlbb.startAnimation(mShakeAnim);
-                errstr = errstr + "\n" + "电流变比设置不正确";
+                etdybb2.startAnimation(mShakeAnim);
+                errstr = errstr + "\n" + "电压变比2设置不正确";
+            }
+            if (isEmpty(etdlbb1.getText().toString())) {
+                res = res & false;
+                etdlbb1.startAnimation(mShakeAnim);
+                errstr = errstr + "\n" + "电流变比1设置不正确";
+            }
+            if (isEmpty(etdlbb2.getText().toString())) {
+                res = res & false;
+                etdlbb2.startAnimation(mShakeAnim);
+                errstr = errstr + "\n" + "电流变比2设置不正确";
             }
             if (IsEmpty(etParamSetEddy)) {
                 res = res & false;

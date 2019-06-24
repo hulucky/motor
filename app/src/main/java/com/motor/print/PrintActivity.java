@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 
 import com.greendao.manager.TaskEntityDao;
@@ -117,6 +118,7 @@ public class PrintActivity extends BluetoolthPrintActivity {
         parS.add("无功补偿容量");
         parS.add("无功补偿电容量");
         parS.add("运行状态");
+        parS.add("电机效率");
 
 
         return parS;
@@ -199,6 +201,8 @@ public class PrintActivity extends BluetoolthPrintActivity {
             strres = "非经济运行";
         }
         datas.add(strres);
+        Log.d("hhj", "setParametersData:xl== " + testRes.getXl());
+        datas.add(df2.format(testRes.getXl()) + "");//电机效率
 
         return datas;
 
@@ -255,6 +259,7 @@ public class PrintActivity extends BluetoolthPrintActivity {
         units.add("kvar");
         units.add("uf");
         units.add(" ");
+        units.add("%");
 
 
         return units;
