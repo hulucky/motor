@@ -429,14 +429,14 @@ public class TestActivity extends AppCompatActivity {
         TaskResEnity mres = new TaskResEnity();
         mdata.CopyRes(mres);
 //        try {
-            double a = mres.getGlys();
-            if (a == 0d) {
-                mres.setGlys(1d);
-            }
-            mres.setSaveTime(getSysTime());
-            MyApp.getDaoInstant().getTaskResEnityDao().insert(mres);
-            isSave = true;
-            SetCaiji();
+        double a = mres.getGlys();
+        if (a == 0d) {
+            mres.setGlys(1d);
+        }
+        mres.setSaveTime(getSysTime());
+        MyApp.getDaoInstant().getTaskResEnityDao().insert(mres);
+        isSave = true;
+        SetCaiji();
 //        } catch (Exception e) {
 //            isSave = false;
 //            e.printStackTrace();
@@ -599,7 +599,7 @@ public class TestActivity extends AppCompatActivity {
             i += 2;
             mDataMotor.setSzgl((float) ((MyFunction.twoByte2double_(comData.recData, i) * exU * exI * 3 / 10000)));
             i += 2;
-            mDataMotor.setGlys((float) ((MyFunction.twoByte2double_(comData.recData, i) / 10000)));//功率因数
+            mDataMotor.setGlys(Float.parseFloat(df3.format(MyFunction.twoByte2double_(comData.recData, i) / 10000)));//功率因数
             i += 2;
             mDataMotor.setDwpl((float) ((MyFunction.twoByte2double_(comData.recData, i) / 100)));//电网频率 44位
             i += 2;

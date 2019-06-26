@@ -16,6 +16,7 @@ import java.io.InputStream;
 public class Splash extends SplashActivity {
     String filePath = android.os.Environment.getExternalStorageDirectory()
             + "/CDZ11W矿用电机无线多参数测试仪/.报告模板";
+
     // 需要跳转的主界面
     @Override
     public Class<?> getNavigationActivity() {
@@ -42,6 +43,7 @@ public class Splash extends SplashActivity {
         // 设置闪屏页的背景,参数直接传入图片id即可
         setBgImag(R.drawable.splash);
     }
+
     public void WriteToSD(Context context) {
         // 创建文件夹
         new Thread() {
@@ -83,14 +85,14 @@ public class Splash extends SplashActivity {
         String filePath1;
         filePath1 = Environment.getExternalStorageDirectory() + "/CDZ11W矿用电机无线多参数测试仪/软件";
 
-               File file3 = new File(filePath1 + to3);
+        File file3 = new File(filePath1 + to3);
         File file4 = new File(filePath1 + to4);
 
         if (!file3.exists()) {
             write(from3, to3, context, filePath1);
         }
         if (!file4.exists()) {
-           write(from4, to4, context, filePath1);
+            write(from4, to4, context, filePath1);
         }
 
 

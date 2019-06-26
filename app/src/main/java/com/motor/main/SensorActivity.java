@@ -223,8 +223,6 @@ public class SensorActivity extends AppCompatActivity {
 //    }
 
 
-
-
     Runnable runnable = new Runnable() {
         @Override
         public void run() {
@@ -380,7 +378,7 @@ public class SensorActivity extends AppCompatActivity {
         i += 2;
         mData.setSzgl((float) ((MyFunction.twoByte2double_(comData.recData, i) * exU * exI * 3 / 10000)));
         i += 2;
-        mData.setGlys((float) ((MyFunction.twoByte2double_(comData.recData, i) / 10000)));
+        mData.setGlys(Float.parseFloat(df3.format(MyFunction.twoByte2double_(comData.recData, i) / 10000)));//功率因数
         i += 2;
         mData.setDwpl((float) ((MyFunction.twoByte2double_(comData.recData, i) / 100)));
         i += 2;

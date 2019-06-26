@@ -136,7 +136,7 @@ public class PrintActivity extends BluetoolthPrintActivity {
         datas.add(testRes.getSaveTime());
 
 //        datas.add(df2.format(testRes.getPjdy()) + "");
-        datas.add(df2.format(testRes.getPjdy() * Math.sqrt(3)) + "");
+        datas.add(df2.format(testRes.getPjxdy()) + "");
         datas.add(df2.format(testRes.getPjdl()) + "");
         datas.add(df2.format(testRes.getYggl()) + "");
         datas.add(df2.format(testRes.getWggl()) + "");
@@ -152,8 +152,16 @@ public class PrintActivity extends BluetoolthPrintActivity {
         datas.add(df2.format(testRes.getUBC()) + "");
         datas.add(df2.format(testRes.getUCA()) + "");
         datas.add(df2.format(testRes.getIA()) + "");
-        datas.add(df2.format(testRes.getIB()) + "");
-        datas.add(df2.format(testRes.getIC()) + "");
+        if(testRes.getCsff().equals("单瓦法")){
+            datas.add("--");//B项电流
+            datas.add("--");//C项电流
+        }else if(testRes.getCsff().equals("双瓦法")){
+            datas.add("--");//B项电流
+            datas.add(df2.format(testRes.getIC()) + "");//C项电流
+        }else {//三瓦法
+            datas.add(df2.format(testRes.getIB()) + "");
+            datas.add(df2.format(testRes.getIC()) + "");
+        }
         datas.add(df2.format(testRes.getAyggl() / 1000) + "");
         datas.add(df2.format(testRes.getByggl() / 1000) + "");
         datas.add(df2.format(testRes.getCyggl() / 1000) + "");

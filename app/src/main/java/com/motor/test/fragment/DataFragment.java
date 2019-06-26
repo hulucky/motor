@@ -538,18 +538,30 @@ public class DataFragment extends Fragment {
             wc = ws4.getWritableCell(5, 11);
             l = (Label) wc;
             l.setString(df2.format(mData.getEdzhxl() * 0.6));
-            wc = ws4.getWritableCell(5, 12);
+            wc = ws4.getWritableCell(5, 12);//功率因数
             l = (Label) wc;
-            l.setString(df2.format(mData.getEdglys()));
-            wc = ws4.getWritableCell(5, 13);
+            l.setString(df2.format(mData.getGlys()));//功率因数
+            wc = ws4.getWritableCell(5, 13);//A相电压
             l = (Label) wc;
             l.setString(df2.format(mData.getUA()));
-            wc = ws4.getWritableCell(5, 14);
+            wc = ws4.getWritableCell(5, 14);//B相电压
             l = (Label) wc;
-            l.setString(df2.format(mData.getUB()));
-            wc = ws4.getWritableCell(5, 15);
-            l = (Label) wc;
-            l.setString(df2.format(mData.getUC()));
+            if (mData.getMethod() == 0) {//单瓦法
+                l.setString("-");//B相电压
+                wc = ws4.getWritableCell(5, 15);//C相电压
+                l = (Label) wc;
+                l.setString("-");
+            } else if (mData.getMethod() == 1) {//双瓦法
+                l.setString(df2.format(mData.getUB()));//B相电压
+                wc = ws4.getWritableCell(5, 15);//C相电压
+                l = (Label) wc;
+                l.setString(df2.format(mData.getUC()));
+            } else {//三瓦法
+                l.setString(df2.format(mData.getUB()));//B相电压
+                wc = ws4.getWritableCell(5, 15);//C相电压
+                l = (Label) wc;
+                l.setString(df2.format(mData.getUC()));
+            }
             wc = ws4.getWritableCell(5, 16);
             l = (Label) wc;
             l.setString(df2.format(mData.getPjdy()));
@@ -559,57 +571,104 @@ public class DataFragment extends Fragment {
             wc = ws4.getWritableCell(5, 18);
             l = (Label) wc;
             l.setString(df2.format(mData.getIA()));
-            wc = ws4.getWritableCell(5, 19);
-            l = (Label) wc;
-            l.setString(df2.format(mData.getIB()));
-            wc = ws4.getWritableCell(5, 20);
-            l = (Label) wc;
-            l.setString(df2.format(mData.getIC()));
+            if (mData.getMethod() == 0) {//单瓦法
+                wc = ws4.getWritableCell(5, 19);//B项电流
+                l = (Label) wc;
+                l.setString("-");
+                wc = ws4.getWritableCell(5, 20);//C项电流
+                l = (Label) wc;
+                l.setString("-");
+            } else if (mData.getMethod() == 1) {//双瓦法
+                wc = ws4.getWritableCell(5, 19);//B项电流
+                l = (Label) wc;
+                l.setString("-");
+                wc = ws4.getWritableCell(5, 20);//C项电流
+                l = (Label) wc;
+                l.setString(df2.format(mData.getIC()));
+            } else {//三瓦法
+                wc = ws4.getWritableCell(5, 19);//B项电流
+                l = (Label) wc;
+                l.setString(df2.format(mData.getIB()));
+                wc = ws4.getWritableCell(5, 20);//C项电流
+                l = (Label) wc;
+                l.setString(df2.format(mData.getIC()));
+            }
             wc = ws4.getWritableCell(5, 21);
             l = (Label) wc;
-            l.setString(df2.format(mData.getPjdl()));
+            l.setString(df2.format(mData.getPjdl()));//平均电流
+
+
             wc = ws4.getWritableCell(5, 22);
             l = (Label) wc;
             l.setString(df2.format(mData.getAyggl() / 1000));
-            wc = ws4.getWritableCell(5, 23);
+            wc = ws4.getWritableCell(5, 23);//功率B
             l = (Label) wc;
-            l.setString(df2.format(mData.getByggl() / 1000));
-            wc = ws4.getWritableCell(5, 24);
-            l = (Label) wc;
-            l.setString(df2.format(mData.getCyggl() / 1000));
+            if (mData.getMethod() == 0) {
+                l.setString("-");//功率B
+                wc = ws4.getWritableCell(5, 24);
+                l = (Label) wc;
+                l.setString("-");
+            } else if (mData.getMethod() == 1) {//双瓦法
+                l.setString("-");//功率B
+                wc = ws4.getWritableCell(5, 24);
+                l = (Label) wc;
+                l.setString(df2.format(mData.getCyggl() / 1000));
+            } else {//三瓦法
+                l.setString(df2.format(mData.getByggl() / 1000));//功率B
+                wc = ws4.getWritableCell(5, 24);
+                l = (Label) wc;
+                l.setString(df2.format(mData.getCyggl() / 1000));
+            }
+
+
             wc = ws4.getWritableCell(5, 25);
             l = (Label) wc;
             l.setString(df2.format(mData.getUAB()));
             wc = ws4.getWritableCell(5, 26);
             l = (Label) wc;
-            l.setString(df2.format(mData.getUBC()));
-            wc = ws4.getWritableCell(5, 27);
+            if (mData.getMethod() == 0) {//单瓦法
+                l.setString("-");//UBC
+                wc = ws4.getWritableCell(5, 27);
+                l = (Label) wc;
+                l.setString("-");//UCA
+            } else if (mData.getMethod() == 1) {//双瓦法
+                l.setString(df2.format(mData.getUBC()));
+                wc = ws4.getWritableCell(5, 27);
+                l = (Label) wc;
+                l.setString(df2.format(mData.getUCA()));
+            } else {//三瓦法
+                l.setString(df2.format(mData.getUBC()));
+                wc = ws4.getWritableCell(5, 27);
+                l = (Label) wc;
+                l.setString(df2.format(mData.getUCA()));
+            }
+            wc = ws4.getWritableCell(5, 28);//平均线电压
             l = (Label) wc;
-            l.setString(df2.format(mData.getUCA()));
-            wc = ws4.getWritableCell(5, 28);
-            l = (Label) wc;
-            l.setString(df2.format(mData.getYggl()));
+            l.setString(df2.format(mData.getPjxdy()));
+
+
+
             wc = ws4.getWritableCell(5, 29);
             l = (Label) wc;
-            l.setString(df2.format(mData.getWggl()));
+            l.setString(df2.format(mData.getYggl()));
             wc = ws4.getWritableCell(5, 30);
             l = (Label) wc;
-            l.setString(df2.format(mData.getSzgl()));
+            l.setString(df2.format(mData.getWggl()));
             wc = ws4.getWritableCell(5, 31);
             l = (Label) wc;
-            l.setString(df2.format(mData.getScgl()));
+            l.setString(df2.format(mData.getSzgl()));
             wc = ws4.getWritableCell(5, 32);
             l = (Label) wc;
-            l.setString(df2.format(mData.getXl()));
+            l.setString(df2.format(mData.getScgl()));
             wc = ws4.getWritableCell(5, 33);
             l = (Label) wc;
-            l.setString(df2.format(mData.getZhxl()));
+            l.setString(df2.format(mData.getXl()));
             wc = ws4.getWritableCell(5, 34);
             l = (Label) wc;
-            l.setString(df3.format(mData.getFzxs()));
+            l.setString(df2.format(mData.getZhxl()));
             wc = ws4.getWritableCell(5, 35);
             l = (Label) wc;
-            l.setString(df3.format(mData.getGlys()));
+            l.setString(df3.format(mData.getFzxs()));
 
 
             // ���ͼƬ
